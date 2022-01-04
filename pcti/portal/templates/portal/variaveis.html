@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+    <div class="offset-1 col-10 list-div">
+        <h1>Lista de Variáveis</h1>
+        <div class="col-2 add-div">
+            <i class="fas fa-plus"></i> Adicionar dados
+        </div>
+        <div class="col-9 search-div">
+            <input class="form-control" type="text" id="search" name="search" placeholder="Digite variável">
+            <i class="fas fa-search"></i>
+        </div>
+        <ul class="ano-list">
+            {% for variavel in variaveis %}
+            <li class="ano-item">
+                <span><a href="respostas/{{ variavel.id }}">{{ variavel.id_variavel }}</span>
+                <span><i class="fas fa-trash"></i></span>
+                <span><i class="fas fa-edit"></i></span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
