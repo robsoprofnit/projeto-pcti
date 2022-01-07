@@ -12,7 +12,7 @@
         </a>
         <div class="col-9 search-div">
             <form method="GET" id="search-form">
-                <input class="form-control" type="text" id="search" name="search" placeholder="Digite o ano do relatório para buscar...">
+                <input class="form-control" type="text" id="search" name="search" placeholder="Digite o ano do relatório para buscar..." value="{{ request.GET.search }}">
                 <i class="fas fa-search" id="search-btn"></i>
             </form>
         </div>
@@ -39,10 +39,11 @@
                 {% if relatorios.has_previous %}
                     <a href="?page={{ relatorios.previous_page_number }}"><i class="fas fa-arrow-left"></i></a>
                 {% endif %}
-
-                <span class="current">
-                    {{ relatorios.number }} de {{ relatorios.paginator.num_pages }}
-                </span>
+                {% if relatorios.paginator.num_pages %}
+                    <span class="current">
+                        {{ relatorios.number }} de {{ relatorios.paginator.num_pages }}
+                    </span>
+                {% endif %}
                 {% if relatorios.has_next %}
                     <a href="?page={{ relatorios.next_page_number }}"><i class="fas fa-arrow-right"></i></a>
                 {% endif %}

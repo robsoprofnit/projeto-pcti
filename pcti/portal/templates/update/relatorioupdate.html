@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block title %} Editar Relatório {% endblock %}
 
 {% block content %}
@@ -7,7 +9,7 @@
         <h1>Editar um relatório: '{{ relatorio.id_ano }} - {{ relatorio.id_instituicao }} - {{ relatorio.id_dimensao }}'</h1>
         <form method="POST">
             {% csrf_token %}
-            {{ form.as_p }}
+            {{ form|crispy }}
             <input type="submit" class="btn btn-success" value="Editar Relatório">
         </form>
     </div>

@@ -18,10 +18,14 @@ def respostas_view(request, id):
 
 
 def relatorios_read(request):
-    relatorios_list = Relatorios.objects.all().order_by('-id_ano')
-    paginator = Paginator(relatorios_list, 3)
-    page = request.GET.get('page')
-    relatorios = paginator.get_page(page)
+    search = request.GET.get('search')
+    if search:
+        relatorios = Relatorios.objects.filter(id_dimensao__nome__icontains=search)
+    else:
+        relatorios_list = Relatorios.objects.all().order_by('-id_ano')
+        paginator = Paginator(relatorios_list, 3)
+        page = request.GET.get('page')
+        relatorios = paginator.get_page(page)
     return render(request, 'portal/home.html', {'relatorios': relatorios})
 
 
