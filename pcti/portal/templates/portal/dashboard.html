@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %} Dashboard {% endblock %}
+
+{% block content %}
+ <div class="offset-1 col-10 list-div">
+     <h1>Relatórios Anual</h1>
+     <div class="container dashboard">
+         <div class="col-4 dashboard-box" id="dashboard-cureent-receita">
+             <h4>Receita Corrente do Estado</h4>
+             <span>{{ curremtIncome.resposta }}</span>
+         </div>
+         <div class="col-4 dashboard-box" id="dashboard-graphic2">
+             <h4>Gráfico 2</h4>
+             <span>{{ last_year }}</span>
+         </div>
+         <div class="col-4 dashboard-box" id="dashboard-graphic3">
+             <h4>Gráfico 3</h4>
+             <span>0</span>
+         </div>
+     </div>
+ </div>
+{% endblock %}

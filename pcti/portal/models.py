@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.contrib.auth import get_user_model
 
 
 # Create your models here.
@@ -134,6 +135,7 @@ class Relatorios(models.Model):
     id_instituicao = models.ForeignKey(Pessoa, on_delete=models.CASCADE)
     id_ano = models.ForeignKey(Ano_base, on_delete=models.CASCADE)
     id_dimensao = models.ForeignKey(Dimensoes, on_delete=models.CASCADE)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     _delete = models.BooleanField()
 
     def __str__(self):

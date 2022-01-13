@@ -8,4 +8,5 @@ urlpatterns = [
     path('create/', views.relatorio_create, name='relatorio-create'),
     path('update/<int:id>', views.relatorio_update, name='relatorio-update'),
     path('delete/<int:id>', views.relatorio_delete, name='relatorio-delete'),
+    path('dashboard/', views.dashboard, name='dashboard-view'),
 ]
