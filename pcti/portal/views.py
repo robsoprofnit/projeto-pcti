@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from .models import Relatorios
 from .models import Respostas
-from .forms import RelatorioForm
+from .forms import RelatorioForm, RespostaForm
 from django.contrib import messages
 import datetime
 
@@ -50,6 +50,22 @@ def relatorio_create(request):
     else:
         form = RelatorioForm()
         return render(request, 'create/relatoriocreate.html', {'form': form})
+
+
+@login_required
+def resposta_create(request):
+    if request.method == 'POST':
+        form = RespostaForm(request.POST)
+        if form.is_valid():
+            resposta = form.save(commit=False)
+            resposta._delete = False
+            resposta.save()
+            messages.info(request, 'Resposta cadastrada com sucesso.')
+            return redirect('/variavel')
+    else:
+        form = RelatorioForm()
+        return render(request, 'create/respostacreate.html', {'form': form})
+
 
 
 @login_required
