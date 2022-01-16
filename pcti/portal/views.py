@@ -12,8 +12,12 @@ import datetime
 
 # Create your views here.
 @login_required
-def variaveis_list(request):
-    variaveis = Respostas.objects.all()
+def variaveis_list(request, id):
+    search = request.GET.get('search')
+    if search:
+        variaveis = Respostas.objects.filter(id_variavel__nome__icontains=search)
+    else:
+        variaveis = Respostas.objects.all().filter(id_relatorio_id=id)
     return render(request, 'portal/variaveis.html', {'variaveis': variaveis})
 
 
@@ -61,11 +65,10 @@ def resposta_create(request):
             resposta._delete = False
             resposta.save()
             messages.info(request, 'Resposta cadastrada com sucesso.')
-            return redirect('/variavel')
+            return redirect('/variaveis/')
     else:
-        form = RelatorioForm()
+        form = RespostaForm()
         return render(request, 'create/respostacreate.html', {'form': form})
-
 
 
 @login_required
@@ -85,11 +88,35 @@ def relatorio_update(request, id):
 
 
 @login_required
+def resposta_update(request, id):
+    resposta = get_object_or_404(Respostas, pk=id)
+    form = RespostaForm(instance=resposta)
+    if request.method == 'POST':
+        form = RespostaForm(request.POST, instance=resposta)
+        if form.is_valid():
+            resposta.save()
+            messages.info(request, 'Resposta alterada com sucesso.')
+            return redirect('/variaveis/')
+        else:
+            return render(request, 'update/respostaupdate.html', {'form': form, 'resposta': resposta})
+    else:
+        return render(request, 'update/respostaupdate.html', {'form': form, 'resposta': resposta})
+
+
+@login_required
 def relatorio_delete(request, id):
     relatorio = get_object_or_404(Relatorios, pk=id)
     relatorio.delete()
-    messages.info(request, 'Relatório deletado com sucesso.')
+    messages.info(request, 'Dados deletados com sucesso.')
     return redirect('/')
+
+
+@login_required
+def resposta_delete(request, id):
+    resposta = get_object_or_404(Respostas, pk=id)
+    resposta.delete()
+    messages.info(request, 'Dados deletados com sucesso.')
+    return redirect('/variaveis/')
 
 
 def dashboard(request):

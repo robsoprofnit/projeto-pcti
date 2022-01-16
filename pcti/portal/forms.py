@@ -21,4 +21,3 @@ class RespostaForm(forms.ModelForm):
                   'id_variavel',
                   'id_relatorio',
                   'id_respondido_por',)
-
