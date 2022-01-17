@@ -11,7 +11,7 @@ $( document ).ready(function() {
         e.preventDefault();
 
         var delLink = $(this).attr('href');
-        var result = confirm('Deseja deletar este item?');
+        var result = confirm('Todos itens relacioandos a este serão excluídos. Deseja realmente excluir?');
 
         if(result) {
             window.location.href = delLink;

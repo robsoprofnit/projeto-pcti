@@ -172,11 +172,13 @@ class Sub_indicadores(models.Model):
 class Relatorios(models.Model):
     class Meta:
         verbose_name_plural = "Relatórios"
+    _delete = models.BooleanField()
+
     id_instituicao = models.ForeignKey(PJ, on_delete=models.PROTECT, verbose_name='Instituição')
     id_ano = models.ForeignKey(Ano_base, on_delete=models.PROTECT, verbose_name='Ano')
     id_dimensao = models.ForeignKey(Dimensoes, on_delete=models.PROTECT, verbose_name='Dimensão')
     user = models.ForeignKey(get_user_model(), on_delete=models.PROTECT)
-    _delete = models.BooleanField()
+
 
     def __str__(self):
         return '{} - {} - {}'.format(self.id_instituicao, self.id_ano, self.id_dimensao)
@@ -190,12 +192,13 @@ class Respostas(models.Model):
     data_resposta = models.DateTimeField(auto_now_add=True, verbose_name='Data de cadastro')
     data_atualizacao = models.DateTimeField(auto_now=True, null=True, verbose_name='Ultima alteração')
     tag = models.CharField(max_length=50, verbose_name='#TAG')
-    id_ano_base = models.ForeignKey(Ano_base, on_delete=models.PROTECT, verbose_name='Ano')
-    id_instituicao = models.ForeignKey(PJ, related_name='instituicao', on_delete=models.PROTECT, verbose_name='Instituição')
-    id_respondido_por = models.ForeignKey(PF, related_name='responsavel', on_delete=models.PROTECT, verbose_name='Responsável')
-    id_variavel = models.ForeignKey(Variavel, on_delete=models.PROTECT, verbose_name='Variável')
-    id_relatorio = models.ForeignKey(Relatorios, on_delete=models.PROTECT, verbose_name='Relatório')
     _delete = models.BooleanField()
+
+    id_ano_base = models.ForeignKey(Ano_base, on_delete=models.CASCADE, verbose_name='Ano')
+    id_instituicao = models.ForeignKey(PJ, related_name='instituicao', on_delete=models.CASCADE, verbose_name='Instituição')
+    id_respondido_por = models.ForeignKey(PF, related_name='responsavel', on_delete=models.CASCADE, verbose_name='Responsável')
+    id_variavel = models.ForeignKey(Variavel, on_delete=models.CASCADE, verbose_name='Variável')
+    id_relatorio = models.ForeignKey(Relatorios, on_delete=models.CASCADE, verbose_name='Relatório')
 
     def __str__(self):
         return '{} ({} - {})'.format(self.resposta, self.tag, self.id_ano_base)

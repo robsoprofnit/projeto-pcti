@@ -34,7 +34,7 @@ def relatorios_read(request):
         relatorios = Relatorios.objects.filter(id_dimensao__nome__icontains=search, user=request.user)
     else:
         relatorios_list = Relatorios.objects.all().order_by('-id_ano').filter(user=request.user)
-        paginator = Paginator(relatorios_list, 3)
+        paginator = Paginator(relatorios_list, 1000)
         page = request.GET.get('page')
         relatorios = paginator.get_page(page)
     return render(request, 'portal/home.html', {'relatorios': relatorios})
@@ -65,7 +65,7 @@ def resposta_create(request):
             resposta._delete = False
             resposta.save()
             messages.info(request, 'Resposta cadastrada com sucesso.')
-            return redirect('/variaveis/')
+            return redirect('/')
     else:
         form = RespostaForm()
         return render(request, 'create/respostacreate.html', {'form': form})
