@@ -12,13 +12,160 @@
              <span>{{ curremtIncome.resposta }}</span>
          </div>
          <div class="col-4 dashboard-box" id="dashboard-graphic2">
-             <h4>Gráfico 2</h4>
+             <h4>Amapá</h4>
              <span>{{ last_year }}</span>
          </div>
          <div class="col-4 dashboard-box" id="dashboard-graphic3">
-             <h4>Gráfico 3</h4>
-             <span>0</span>
+             <h4>Recursos Humanos</h4>
+             <span>20.450,67</span>
          </div>
      </div>
  </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="row col-10 list-div">
+    <div class="container dashboard2">
+        <div class="col-4 dashboard-chart1">
+            <canvas id="myChart1" width="300" height="200"></canvas>
+        </div>
+        <div class="col-4 dashboard-chart2">
+            <canvas id="myChart2" width="300" height="200"></canvas>
+        </div>
+        <div class="col-4 dashboard-chart3">
+            <canvas id="myChart3" width="300" height="200"></canvas>
+        </div>
+        <div class="col-4 dashboard-chart4">
+            <canvas id="myChart7" width="300" height="200"></canvas>
+        </div>
+    </div>
+</div>
+
+<script>
+    var labels = [
+        'Janeiro',
+        'Fevereiro',
+        'Março',
+        'Abril',
+        'Maio',
+        'Junho',
+        'Julho'
+    ];
+    var data = {
+        labels: labels,
+        datasets: [{
+            label: 'Gráfico progressão',
+            data: [0, 10, 5, 2, 20, 30, 45,],
+            fill: false,
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1
+        }]
+    };
+
+    var config = {
+        type: 'line',
+        data: data,
+    };
+</script>
+<script>
+    var myChart = new Chart(
+        document.getElementById('myChart1'),
+        config
+    );
+</script>
+
+
+<script>
+    var ctx = document.getElementById('myChart2');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+            datasets: [{
+                label: 'Patentes 2021',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
+
+<script>
+    var ctx = document.getElementById('myChart3');
+    var myChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Humanas', 'Exatas', 'Saúde'],
+            datasets: [{
+                label: 'Produção Científica',
+                data: [300, 50, 100],
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
+
+
+<script>
+    var ctx = document.getElementById('myChart7');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Investimentos',
+                data: [65, 59, 80, 81, 56, 55, 40],
+                fill: false,
+                borderColor: 'rgb(192,75,75)',
+                tension: 0.1
+            }]
+        },
+    });
+</script>
+
 {% endblock %}

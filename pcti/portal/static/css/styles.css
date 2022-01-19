@@ -187,9 +187,32 @@ background: #3476e2;
 }
 
 #dashboard-graphic2 {
-background: #13c43f;
+background: #FFCE56FF;
 }
 
 #dashboard-graphic3 {
-background: #db1e47;
+background: #18a970;
+}
+
+
+
+.dashboard2 {
+    padding: 0;
+    width: 100%;
+    display: block;
+    margin-bottom: 160px;
+}
+
+.dashboard-chart1 {
+    float: left;
+}
+.dashboard-chart2 {
+    float: right;
+}
+
+.dashboard-chart3 {
+    float: left;
+}
+.dashboard-chart4 {
+    float: right;
 }
