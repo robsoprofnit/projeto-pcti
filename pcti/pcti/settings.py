@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'portal',
     'usuarios',
     'crispy_forms',
-    #'accounts',
+    'accounts',
 ]
 
 # DECIMAL_SEPARATOR = '.'
