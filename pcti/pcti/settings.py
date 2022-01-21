@@ -39,9 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'paginas',
     'portal',
-    'users',
+    'usuarios',
     'crispy_forms',
-    'accounts',
+    #'accounts',
 ]
 
 # DECIMAL_SEPARATOR = '.'
