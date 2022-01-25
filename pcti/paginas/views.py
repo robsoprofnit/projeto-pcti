@@ -6,5 +6,9 @@ class PaginaInicial(TemplateView):
     template_name = 'index.html'
 
 
+class PaginaInicial2(TemplateView):
+    template_name = 'modelo2.html'
+
+
 class SobreView(TemplateView):
     template_name = 'sobre.html'
