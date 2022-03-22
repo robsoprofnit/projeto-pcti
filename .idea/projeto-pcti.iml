@@ -26,6 +26,7 @@
     <option name="TEMPLATE_FOLDERS">
       <list>
         <option value="$MODULE_DIR$/pcti/paginas/templates" />
+        <option value="$MODULE_DIR$/pcti/usuarios/templates" />
       </list>
     </option>
   </component>
