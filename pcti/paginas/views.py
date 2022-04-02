@@ -12,3 +12,7 @@ class PaginaInicial2(TemplateView):
 
 class SobreView(TemplateView):
     template_name = 'sobre.html'
+
+
+class DashboardView(TemplateView):
+    template_name = 'dashboard.html'

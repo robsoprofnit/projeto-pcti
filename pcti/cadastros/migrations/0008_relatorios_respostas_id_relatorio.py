@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('portal', '0007_alter_responsavel_instituicao_id_instituicao_and_more'),
+        ('cadastros', '0007_alter_responsavel_instituicao_id_instituicao_and_more'),
     ]
 
     operations = [
@@ -16,13 +16,13 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('_delete', models.BooleanField()),
-                ('id_ano', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='portal.ano_base')),
-                ('id_instituicao', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='portal.pessoa')),
+                ('id_ano', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cadastros.ano_base')),
+                ('id_instituicao', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cadastros.pessoa')),
             ],
         ),
         migrations.AddField(
             model_name='respostas',
             name='id_relatorio',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='portal.relatorios'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='cadastros.relatorios'),
         ),
     ]

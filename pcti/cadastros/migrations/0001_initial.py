@@ -70,7 +70,7 @@ class Migration(migrations.Migration):
                 ('descricao', models.TextField()),
                 ('tag', models.CharField(max_length=50)),
                 ('_delete', models.BooleanField()),
-                ('id_dimensao', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='portal.dimensoes')),
+                ('id_dimensao', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cadastros.dimensoes')),
             ],
         ),
         migrations.CreateModel(
@@ -80,7 +80,7 @@ class Migration(migrations.Migration):
                 ('nome', models.CharField(max_length=50)),
                 ('sigla', models.CharField(max_length=2)),
                 ('_delete', models.BooleanField()),
-                ('id_regiao', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='portal.regiao')),
+                ('id_regiao', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cadastros.regiao')),
             ],
         ),
         migrations.CreateModel(
@@ -90,7 +90,7 @@ class Migration(migrations.Migration):
                 ('nome', models.CharField(max_length=50)),
                 ('descricao', models.TextField()),
                 ('_delete', models.BooleanField()),
-                ('id_dimensao', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='portal.dimensoes')),
+                ('id_dimensao', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cadastros.dimensoes')),
             ],
         ),
         migrations.CreateModel(
@@ -104,8 +104,8 @@ class Migration(migrations.Migration):
                 ('id_instituicao', models.IntegerField()),
                 ('id_respondido_por', models.IntegerField()),
                 ('_delete', models.BooleanField()),
-                ('id_ano_base', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='portal.ano_base')),
-                ('id_variavel', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='portal.variavel')),
+                ('id_ano_base', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cadastros.ano_base')),
+                ('id_variavel', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cadastros.variavel')),
             ],
         ),
         migrations.CreateModel(
@@ -118,8 +118,8 @@ class Migration(migrations.Migration):
                 ('nome_social', models.CharField(max_length=256)),
                 ('id_email', models.EmailField(max_length=254)),
                 ('_delete', models.BooleanField()),
-                ('id_tipo_pessoa', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='portal.tipo_pessoa')),
-                ('id_uf', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='portal.uf')),
+                ('id_tipo_pessoa', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cadastros.tipo_pessoa')),
+                ('id_uf', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cadastros.uf')),
             ],
         ),
         migrations.CreateModel(
@@ -128,7 +128,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('nome', models.CharField(max_length=50)),
                 ('_delete', models.BooleanField()),
-                ('id_uf', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='portal.uf')),
+                ('id_uf', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cadastros.uf')),
             ],
         ),
     ]

@@ -7,13 +7,13 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('portal', '0003_user_pessoa'),
+        ('cadastros', '0003_user_pessoa'),
     ]
 
     operations = [
         migrations.AlterField(
             model_name='pessoa',
             name='id_email',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='portal.email'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cadastros.email'),
         ),
     ]

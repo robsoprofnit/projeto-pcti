@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('portal', '0002_alter_respostas_data_atualizacao'),
+        ('cadastros', '0002_alter_respostas_data_atualizacao'),
     ]
 
     operations = [

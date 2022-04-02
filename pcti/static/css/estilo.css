@@ -599,3 +599,12 @@ body
     color: var(--white);
   }
 }
+.rodape {
+    clear: both;
+    border-top: 4px solid var(--white);
+    position: fixed;
+    line-height: 2em;
+    color: var(--white);
+    text-align: center;
+    background: var(--blue);
+}

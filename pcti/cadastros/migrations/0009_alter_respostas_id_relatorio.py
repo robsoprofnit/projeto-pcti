@@ -7,13 +7,13 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('portal', '0008_relatorios_respostas_id_relatorio'),
+        ('cadastros', '0008_relatorios_respostas_id_relatorio'),
     ]
 
     operations = [
         migrations.AlterField(
             model_name='respostas',
             name='id_relatorio',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='portal.relatorios'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cadastros.relatorios'),
         ),
     ]

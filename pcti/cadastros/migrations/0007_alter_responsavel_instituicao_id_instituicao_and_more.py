@@ -8,34 +8,34 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('auth', '0012_alter_user_first_name_max_length'),
-        ('portal', '0006_alter_responsavel_instituicao_id_instituicao_and_more'),
+        ('cadastros', '0006_alter_responsavel_instituicao_id_instituicao_and_more'),
     ]
 
     operations = [
         migrations.AlterField(
             model_name='responsavel_instituicao',
             name='id_instituicao',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='instituicao1', to='portal.pessoa'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='instituicao1', to='cadastros.pessoa'),
         ),
         migrations.AlterField(
             model_name='responsavel_instituicao',
             name='id_responsavel',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='responsavel1', to='portal.pessoa'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='responsavel1', to='cadastros.pessoa'),
         ),
         migrations.AlterField(
             model_name='respostas',
             name='id_instituicao',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='instituicao', to='portal.pessoa'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='instituicao', to='cadastros.pessoa'),
         ),
         migrations.AlterField(
             model_name='respostas',
             name='id_respondido_por',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='responsavel', to='portal.pessoa'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='responsavel', to='cadastros.pessoa'),
         ),
         migrations.AlterField(
             model_name='user_pessoa',
             name='id_pessoa',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='portal.pessoa'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cadastros.pessoa'),
         ),
         migrations.AlterField(
             model_name='user_pessoa',
