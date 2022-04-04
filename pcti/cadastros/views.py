@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.list import ListView
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
@@ -11,7 +12,12 @@ import datetime
 
 
 # Create your views here.
-class Ano_baseCreate(CreateView):
+
+
+###################### CREATE VIEWS ######################
+
+
+class AnoBaseCreate(CreateView):
     model = Ano_base
     fields = ['ano', '_delete']
     template_name = 'cadastros/form.html'
@@ -21,9 +27,15 @@ class Ano_baseCreate(CreateView):
 class RegiaoCreate(CreateView):
     model = Regiao
     fields = ['nome', '_delete']
-
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('inicio')
+
+
+class RelatorioCreate(CreateView):
+    model = Relatorios
+    fields = ['id_instituicao', 'id_ano', 'id_dimensao', 'user']
+    template_name = 'cadastros/form.html'
+    success_url = reverse_lazy('relatorios')
 
 
 @login_required
@@ -139,3 +151,66 @@ def dashboard(request):
     last_year = today.year - 1
     curremtIncome = get_object_or_404(Respostas, id_variavel__descricao__icontains='Receita', id_ano_base__ano=2017)
     return render(request, 'cadastros/dashboard.html', {'curremtIncome': curremtIncome, 'last_year': last_year})
+
+
+###################### UPDATE VIEWS ######################
+
+
+class AnoBaseUpdate(UpdateView):
+    model = Ano_base
+    fields = ['ano', '_delete']
+    template_name = 'cadastros/form.html'
+    success_url = reverse_lazy('inicio')
+
+
+class RegiaoUpdate(UpdateView):
+    model = Regiao
+    fields = ['nome', '_delete']
+    template_name = 'cadastros/form.html'
+    success_url = reverse_lazy('inicio')
+
+
+class RelatorioUpdate(UpdateView):
+    model = Relatorios
+    fields = ['id_instituicao', 'id_ano', 'id_dimensao', 'user']
+    template_name = 'cadastros/form.html'
+    success_url = reverse_lazy('relatorios')
+
+
+###################### DELETE VIEWS ######################
+
+
+class AnoBaseDelete(DeleteView):
+    model = Ano_base
+    template_name = 'cadastros/form-delete.html'
+    success_url = reverse_lazy('inicio')
+
+
+class RegiaoDelete(DeleteView):
+    model = Regiao
+    template_name = 'cadastros/form-delete.html'
+    success_url = reverse_lazy('inicio')
+
+
+class RelatorioDelete(DeleteView):
+    model = Relatorios
+    template_name = 'cadastros/form-delete.html'
+    success_url = reverse_lazy('relatorios')
+
+
+###################### LISTA ######################
+
+
+class AnoBaseList(ListView):
+    model = Ano_base
+    template_name = 'cadastros/lista/ano.html'
+
+
+class RegiaoList(ListView):
+    model = Regiao
+    template_name = 'cadastros/lista/regiao.html'
+
+class RelatorioList(ListView):
+    model = Relatorios
+    template_name = 'cadastros/lista/relatorios.html'
+
