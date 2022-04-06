@@ -2,11 +2,6 @@
 
 {% load static %}
 
-
-{% block menutopo %}
-{% endblock %}
-
-
 {% block titulo %}
     <title>Relatórios Anuais</title>
 {% endblock %}
@@ -14,17 +9,18 @@
 {% block conteudo %}
     <div class="offset-1 col-10 list-div">
         <h1>Lista de Relatórios Anuais</h1>
-        <a id="add-link" href="{% url 'cadastrar-relatorio' %}">
-            <div class="col-2 add-div">
-                <i class="fas fa-plus"></i>Adicionar Relatório
-            </div>
-        </a>
+
         <div class="col-9 search-div">
             <form method="GET" id="search-form">
                 <input class="form-control" type="text" id="search" name="search" placeholder="Digite o ano do relatório para buscar..." value="{{ request.GET.search }}">
                 <i class="fas fa-search" id="search-btn"></i>
             </form>
         </div>
+        <a id="add-link" href="{% url 'cadastrar-relatorio' %}">
+            <div class="col-2 add-div">
+                <i class="fas fa-plus"></i>Adicionar Relatório
+            </div>
+        </a>
 
         {% if messages %}
             <ul class="message">
@@ -33,6 +29,34 @@
                 {% endfor %}
             </ul>
         {% endif %}
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <tr>
+                    <th>ID</th>
+                    <th>ANO</th>
+                    <th>INSTITUIÇÃO</th>
+                    <th>DIMENSÃO</th>
+                    <th>OPÇÕES</th>
+                </tr>
+                {% for relatorios in object_list %}
+                    <tr>
+                        <td>{{ relatorios.pk }}</td>
+                        <td>{{ relatorios.id_ano }}</td>
+                        <td>{{ relatorios.id_instituicao }}</td>
+                        <td>{{ relatorios.id_dimensao }}</td>
+                        <td>
+                            <a href="{% url 'editar-relatorio' relatorios.pk %}" class="btn btn-warning btn-sm" title="Editar">Editar</a>
+                            <a href="{% url 'excluir-relatorio' relatorios.pk %}" class="btn btn-danger btn-sm" title="Excluir">Excluir</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="3">Nenhum registro encontrado.</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
         <ul class="ano-list">
             {% for relatorio in relatorios %}
             <li class="ano-item">

@@ -1,0 +1,56 @@
+{% extends 'modelo.html' %}
+
+{% load static %}
+
+{% block titulo %}
+    <title>Respostas</title>
+{% endblock %}
+
+{% block conteudo %}
+    <h1>Lista de Respostas</h1>
+
+    <div class="col-9 search-div">
+        <form method="GET" id="search-form">
+            <input class="form-control" type="text" id="search" name="search" placeholder="Buscar..." value="{{ request.GET.search }}">
+            <i class="fas fa-search"></i>
+        </form>
+        <a id="add-link" href="{% url 'cadastrar-resposta' %}">
+            <div class="col-2 add-div">
+                <i class="fas fa-plus"></i> Cadastrar resposta
+            </div>
+        </a>
+    </div>
+    {% if messages %}
+        <ul class="message">
+            {% for message in messages %}
+                <li {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <tr>
+                <th>RESPOSTA</th>
+                <th>TAG</th>
+                <th>VARIÁVEL</th>
+                <th>RELATORIO</th>
+            </tr>
+            {% for resposta in object_list %}
+                <tr>
+                    <td>{{ resposta.resposta }}</td>
+                    <td>{{ resposta.tag }}</td>
+                    <td>{{ resposta.id_variavel }}</td>
+                    <td>{{ resposta.id_relatorio }}</td>
+                    <td>
+                        <a href="{% url 'editar-resposta' resposta.pk %}" class="btn btn-warning btn-sm" title="Editar">Editar</a>
+                        <a href="{% url 'excluir-resposta' resposta.pk %}" class="btn btn-danger btn-sm" title="Excluir">Excluir</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="3">Nenhum registro encontrado.</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

@@ -4,7 +4,7 @@ from django.views.generic.list import ListView
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from .models import Relatorios, Ano_base, Regiao
+from .models import Relatorios, Ano_base, Regiao, Variavel
 from .models import Respostas
 from .forms import RelatorioForm, RespostaForm
 from django.contrib import messages
@@ -12,31 +12,6 @@ import datetime
 
 
 # Create your views here.
-
-
-###################### CREATE VIEWS ######################
-
-
-class AnoBaseCreate(CreateView):
-    model = Ano_base
-    fields = ['ano', '_delete']
-    template_name = 'cadastros/form.html'
-    success_url = reverse_lazy('inicio')
-
-
-class RegiaoCreate(CreateView):
-    model = Regiao
-    fields = ['nome', '_delete']
-    template_name = 'cadastros/form.html'
-    success_url = reverse_lazy('inicio')
-
-
-class RelatorioCreate(CreateView):
-    model = Relatorios
-    fields = ['id_instituicao', 'id_ano', 'id_dimensao', 'user']
-    template_name = 'cadastros/form.html'
-    success_url = reverse_lazy('relatorios')
-
 
 @login_required
 def variaveis_list(request, id):
@@ -153,6 +128,45 @@ def dashboard(request):
     return render(request, 'cadastros/dashboard.html', {'curremtIncome': curremtIncome, 'last_year': last_year})
 
 
+###################### CREATE VIEWS ######################
+
+
+class AnoBaseCreate(CreateView):
+    model = Ano_base
+    fields = ['ano', '_delete']
+    template_name = 'cadastros/form.html'
+    success_url = reverse_lazy('listar-ano')
+
+
+class RegiaoCreate(CreateView):
+    model = Regiao
+    fields = ['nome', '_delete']
+    template_name = 'cadastros/form.html'
+    success_url = reverse_lazy('listar-regiao')
+
+
+class RelatorioCreate(CreateView):
+    model = Relatorios
+    fields = ['id_instituicao', 'id_ano', 'id_dimensao', 'user']
+    template_name = 'cadastros/form.html'
+    success_url = reverse_lazy('listar-relatorio')
+
+
+class VariavelCreate(CreateView):
+    model = Variavel
+    fields = ['nome', 'descricao', 'tag', 'id_dimensao', '_delete']
+    template_name = 'cadastros/form.html'
+    success_url = reverse_lazy('listar-variavel')
+
+
+class RespostaCreate(CreateView):
+    model = Respostas
+    fields = ['resposta', 'tag', 'id_ano_base', 'id_instituicao',
+              'id_respondido_por', 'id_variavel', 'id_relatorio', '_delete']
+    template_name = 'cadastros/form.html'
+    success_url = reverse_lazy('listar-resposta')
+
+
 ###################### UPDATE VIEWS ######################
 
 
@@ -160,21 +174,36 @@ class AnoBaseUpdate(UpdateView):
     model = Ano_base
     fields = ['ano', '_delete']
     template_name = 'cadastros/form.html'
-    success_url = reverse_lazy('inicio')
+    success_url = reverse_lazy('listar-ano')
 
 
 class RegiaoUpdate(UpdateView):
     model = Regiao
     fields = ['nome', '_delete']
     template_name = 'cadastros/form.html'
-    success_url = reverse_lazy('inicio')
+    success_url = reverse_lazy('listar-regiao')
 
 
 class RelatorioUpdate(UpdateView):
     model = Relatorios
     fields = ['id_instituicao', 'id_ano', 'id_dimensao', 'user']
     template_name = 'cadastros/form.html'
-    success_url = reverse_lazy('relatorios')
+    success_url = reverse_lazy('listar-relatorio')
+
+
+class VariavelUpdate(UpdateView):
+    model = Variavel
+    fields = ['nome', 'descricao', 'tag', 'id_dimensao', '_delete']
+    template_name = 'cadastros/form.html'
+    success_url = reverse_lazy('listar-variavel')
+
+
+class RespostaUpdate(UpdateView):
+    model = Respostas
+    fields = ['resposta', 'tag', 'id_ano_base', 'id_instituicao',
+              'id_respondido_por', 'id_variavel', 'id_relatorio', '_delete']
+    template_name = 'cadastros/form.html'
+    success_url = reverse_lazy('listar-resposta')
 
 
 ###################### DELETE VIEWS ######################
@@ -183,19 +212,31 @@ class RelatorioUpdate(UpdateView):
 class AnoBaseDelete(DeleteView):
     model = Ano_base
     template_name = 'cadastros/form-delete.html'
-    success_url = reverse_lazy('inicio')
+    success_url = reverse_lazy('listar-ano')
 
 
 class RegiaoDelete(DeleteView):
     model = Regiao
     template_name = 'cadastros/form-delete.html'
-    success_url = reverse_lazy('inicio')
+    success_url = reverse_lazy('listar-regiao')
 
 
 class RelatorioDelete(DeleteView):
     model = Relatorios
     template_name = 'cadastros/form-delete.html'
-    success_url = reverse_lazy('relatorios')
+    success_url = reverse_lazy('listar-relatorio')
+
+
+class VariavelDelete(DeleteView):
+    model = Variavel
+    template_name = 'cadastros/form-delete.html'
+    success_url = reverse_lazy('listar-variavel')
+
+
+class RespostaDelete(DeleteView):
+    model = Respostas
+    template_name = 'cadastros/form-delete.html'
+    success_url = reverse_lazy('listar-resposta')
 
 
 ###################### LISTA ######################
@@ -203,14 +244,25 @@ class RelatorioDelete(DeleteView):
 
 class AnoBaseList(ListView):
     model = Ano_base
-    template_name = 'cadastros/lista/ano.html'
+    template_name = 'cadastros/listas/ano.html'
 
 
 class RegiaoList(ListView):
     model = Regiao
-    template_name = 'cadastros/lista/regiao.html'
+    template_name = 'cadastros/listas/regiao.html'
+
 
 class RelatorioList(ListView):
     model = Relatorios
-    template_name = 'cadastros/lista/relatorios.html'
+    template_name = 'cadastros/listas/relatorios.html'
+
+
+class VariavelList(ListView):
+    model = Variavel
+    template_name = 'cadastros/listas/variaveis.html'
+
+
+class RespostaList(ListView):
+    model = Respostas
+    template_name = 'cadastros/listas/respostas.html'
 

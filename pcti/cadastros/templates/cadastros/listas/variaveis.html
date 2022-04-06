@@ -1,0 +1,72 @@
+{% extends 'modelo.html' %}
+
+{% load static %}
+
+{% block titulo %}
+    <title>Variáveis</title>
+{% endblock %}
+
+
+{% block conteudo %}
+    <h1>Lista de Variáveis</h1>
+
+        <div class="col-9 search-div">
+            <form method="GET" id="search-form">
+                <input class="form-control" type="text" id="search" name="search" placeholder="Buscar..." value="{{ request.GET.search }}">
+                <i class="fas fa-search"></i>
+            </form>
+            <a id="add-link" href="{% url 'cadastrar-variavel' %}">
+                <div class="col-2 add-div">
+                    <i class="fas fa-plus"></i> Cadastrar dados
+                </div>
+            </a>
+        </div>
+        {% if messages %}
+            <ul class="message">
+                {% for message in messages %}
+                    <li {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <tr>
+                    <th>ID</th>
+                    <th>NOME</th>
+                    <th>DIMENSÃO</th>
+                    <th>OPÇÕES</th>
+                </tr>
+                {% for variavel in object_list %}
+                    <tr>
+                        <td>{{ variavel.pk }}</td>
+                        <td>{{ variavel.nome }}</td>
+                        <td>{{ variavel.id_dimensao }}</td>
+                        <td>
+                            <a href="{% url 'editar-variavel' variavel.pk %}" class="btn btn-warning btn-sm" title="Editar">Editar</a>
+                            <a href="{% url 'excluir-variavel' variavel.pk %}" class="btn btn-danger btn-sm" title="Excluir">Excluir</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="3">Nenhum registro encontrado.</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+{% endblock %}
+
+
+{% block content %}
+    <div class="offset-1 col-10 list-div">
+
+        <ul class="ano-list">
+            {% for variavel in variaveis %}
+            <li class="ano-item">
+                <samp><a href="respostas/{{ variavel.id }}">{{ variavel.id_variavel }} = {{ variavel.resposta }} ({{ variavel.id_relatorio }} {{ variavel.id_ano_base }})</a></samp>
+                <a href="delete/{{ variavel.id }}" class="delete-btn"><span><i class="fas fa-trash"></i></span></a>
+                <a href="update/{{ variavel.id }}"><span><i class="fas fa-edit"></i></span></a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

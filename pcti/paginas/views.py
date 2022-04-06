@@ -6,8 +6,8 @@ class PaginaInicial(TemplateView):
     template_name = 'index.html'
 
 
-class RelatoriosView(TemplateView):
-    template_name = 'relatorios.html'
+# class RelatoriosView(TemplateView):
+#    template_name = ''
 
 
 class SobreView(TemplateView):
