@@ -12,7 +12,7 @@ import datetime
 
 
 # Create your views here.
-
+'''
 @login_required
 def variaveis_list(request, id):
     search = request.GET.get('search')
@@ -127,7 +127,7 @@ def dashboard(request):
     curremtIncome = get_object_or_404(Respostas, id_variavel__descricao__icontains='Receita', id_ano_base__ano=2017)
     return render(request, 'cadastros/dashboard.html', {'curremtIncome': curremtIncome, 'last_year': last_year})
 
-
+'''
 ###################### CREATE VIEWS ######################
 
 

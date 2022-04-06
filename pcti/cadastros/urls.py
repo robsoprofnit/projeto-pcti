@@ -1,5 +1,4 @@
 from django.urls import path
-# from . import views
 from .views import AnoBaseCreate, RegiaoCreate, RelatorioCreate, VariavelCreate, RespostaCreate
 from .views import AnoBaseUpdate, RegiaoUpdate, RelatorioUpdate, VariavelUpdate, RespostaUpdate
 from .views import AnoBaseDelete, RegiaoDelete, RelatorioDelete, VariavelDelete, RespostaDelete
@@ -11,16 +10,6 @@ urlpatterns = [
     path('cadastrar/relatorio/', RelatorioCreate.as_view(), name='cadastrar-relatorio'),
     path('cadastrar/variavel/', VariavelCreate.as_view(), name='cadastrar-variavel'),
     path('cadastrar/resposta/', RespostaCreate.as_view(), name='cadastrar-resposta'),
-    # path('', views.relatorios_read, name='index'),
-    # path('variaveis/<int:id>', views.variaveis_list, name='variaveis-view'),
-    # path('variaveis/respostas/<int:id>', views.respostas_view, name='respostas-view'),
-    # path('create/', views.relatorio_create, name='relatorio-create'),
-    # path('update/<int:id>', views.relatorio_update, name='relatorio-update'),
-    # path('delete/<int:id>', views.relatorio_delete, name='relatorio-delete'),
-    # path('dashboard/', views.dashboard, name='dashboard-view'),
-    # path('variaveis/create/', views.resposta_create, name='resposta-create'),
-    # path('variaveis/update/<int:id>', views.resposta_update, name='resposta-update'),
-    # path('variaveis/delete/<int:id>', views.resposta_delete, name='resposta-delete'),
 
     path('editar/ano/<int:pk>', AnoBaseUpdate.as_view(), name='editar-ano'),
     path('editar/regiao/<int:pk>', RegiaoUpdate.as_view(), name='editar-regiao'),
