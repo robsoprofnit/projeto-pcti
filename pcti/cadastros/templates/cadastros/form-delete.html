@@ -2,6 +2,7 @@
 
 {% load static %}
 
+{% load crispy_forms_tags %}
 
 {% block conteudo %}
     <h3>Excluir registro</h3>
@@ -17,9 +18,9 @@
 
         {% csrf_token %}
 
-        {{ form.as_p }}
+        {{ form|crispy }}
 
-        <button type="submit" class="btn btn-danger">Excluir</button>
+        <button type="submit" class="btn btn-danger mt-3">Excluir</button>
 
     </form>
 {% endblock %}

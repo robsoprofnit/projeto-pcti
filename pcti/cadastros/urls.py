@@ -5,7 +5,7 @@ from .views import AnoBaseDelete, RegiaoDelete, RelatorioDelete, VariavelDelete,
 from .views import AnoBaseList, RegiaoList, RelatorioList, VariavelList, RespostaList
 
 urlpatterns = [
-    path('cadastrar/ano/', AnoBaseCreate.as_view(), name='cadastar-ano'),
+    path('cadastrar/ano/', AnoBaseCreate.as_view(), name='cadastrar-ano'),
     path('cadastrar/regiao/', RegiaoCreate.as_view(), name='cadastrar-regiao'),
     path('cadastrar/relatorio/', RelatorioCreate.as_view(), name='cadastrar-relatorio'),
     path('cadastrar/variavel/', VariavelCreate.as_view(), name='cadastrar-variavel'),

@@ -13,3 +13,7 @@ class SobreView(TemplateView):
 class DashboardView(TemplateView):
     template_name = 'dashboard.html'
 
+
+class ConfiguracoesView(TemplateView):
+    template_name = 'configuracoes.html'
+
