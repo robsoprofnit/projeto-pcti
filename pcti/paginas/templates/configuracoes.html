@@ -11,14 +11,19 @@
     <h1>Configurações</h1>
     <hr>
     Contúdo sobre o projeto PCTI
-    <a id="add-link" href="{% url 'cadastrar-ano' %}">
+    <a id="add-link" href="{% url 'listar-ano' %}">
         <div class="add-div">
             <i class="fas fa-plus"></i> Cadastrar Ano
         </div>
     </a>
-    <a id="add-link" href="{% url 'cadastrar-regiao' %}">
+    <a id="add-link" href="{% url 'listar-regiao' %}">
         <div class="add-div">
             <i class="fas fa-plus"></i> Cadastrar Regiões
+        </div>
+    </a>
+    <a id="add-link" href="{% url 'listar-variavel' %}">
+        <div class="add-div">
+            <i class="fas fa-plus"></i> Cadastrar Variavel
         </div>
     </a>
 {% endblock %}

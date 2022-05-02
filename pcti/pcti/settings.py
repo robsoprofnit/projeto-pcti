@@ -39,8 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # importando apps criados
     'paginas.apps.PaginasConfig',
-    # 'cadastros',
-    'usuarios',
+    'usuarios.apps.UsersConfig',
     'crispy_forms',
     'accounts',
     'cadastros.apps.CadastrosConfig',
