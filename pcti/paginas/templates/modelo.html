@@ -33,23 +33,28 @@
                 <a href="{% url 'inicio' %}"
                    class="list-group-item list-group-item-action bg-transparent second-text active">
                     <i class="icon fas fa-home me-2"></i><span class="title"> Início </span></a>
+            {% if request.user.is_authenticated %}
                 <a href="{% url 'listar-relatorio' %}"
                    class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                     <i class="icon fas fa-file-alt me-2"></i><span class="title"> Relatórios Anuais </span></a>
-                <a href="{% url 'dashboard' %}"
-                   class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                    <i class="fas fa-tachometer-alt me-2"></i><span class="title"> Dashboard </span></a>
                 <a href="{% url 'configuracoes' %}"
                    class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                     <i class="fas fa-cog me-2"></i><span class="title"> Configurações </span></a>
+                {% endif %}
+                <a href="{% url 'dashboard' %}"
+                   class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                    <i class="fas fa-tachometer-alt me-2"></i><span class="title"> Dashboard </span></a>
                 <a href="{% url 'sobre' %}"
                    class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                     <i class="fas fa-info me-2"></i><span class="title"> Sobre </span></a>
+
+                {% if request.user.is_authenticated %}
                 <a href="#"
                    class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                     <i class="fas fa-user me-2"></i><span class="title"> Perfil </span></a>
                 <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
                         class="fas fa-power-off me-2"></i>Logout</a>
+                {% endif %}
             </div>
         </div>
         {% endblock %}
@@ -70,17 +75,27 @@
                         </div>
                         <div class="p-2" id="navbarSupportedContent">
                             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdown"
-                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fas fa-user me-2"></i> John Doe
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item" href="#">Profile</a></li>
-                                        <li><a class="dropdown-item" href="#">Settings</a></li>
-                                        <li><a class="dropdown-item" href="#">Logout</a></li>
-                                    </ul>
-                                </li>
+
+                                {% if request.user.is_authenticated %}
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdown"
+                                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="fas fa-user me-2"></i>
+                                            <span>{{ request.user }}</span>
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <li><a class="dropdown-item" href="#">Meus Dados</a></li>
+                                            <li><a class="dropdown-item" href="#">Alterar Senha</a></li>
+                                            <li><a class="dropdown-item" href="{% url 'logout' %}">Sair</a></li>
+                                        </ul>
+                                    </li>
+                                    {% else %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'login' %}">
+                                            <i class="fas fa-sign-in-alt"></i> Login
+                                        </a>
+                                    </li>
+                                {% endif %}
                             </ul>
                         </div>
                     </div>
