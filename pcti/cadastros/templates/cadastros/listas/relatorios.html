@@ -48,7 +48,7 @@
                         <td>
                             <a href="{% url 'editar-relatorio' relatorios.pk %}" class="btn btn-warning btn-sm" title="Editar">Editar</a>
                             <a href="{% url 'excluir-relatorio' relatorios.pk %}" class="btn btn-danger btn-sm" title="Excluir">Excluir</a>
-                            <a href="{% url 'listar-resposta' %}" class="btn btn-primary btn-sm" title="Dados">Dados</a>
+                            <a href="{% url 'listar-resposta' relatorios.pk %}" class="btn btn-primary btn-sm" title="Dados">Dados</a>
                         </td>
                     </tr>
                 {% empty %}

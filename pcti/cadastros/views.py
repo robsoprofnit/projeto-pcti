@@ -5,6 +5,7 @@ from .models import Relatorios, Ano_base, Regiao, Variavel
 from .models import Respostas
 from django.contrib.auth.mixins import LoginRequiredMixin
 from braces.views import GroupRequiredMixin
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
@@ -18,6 +19,12 @@ class AnoBaseCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     fields = ['ano', '_delete']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-ano')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['titulo'] = 'Cadastro de Ano Base'
+
+        return context
 
 
 class RegiaoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
@@ -77,6 +84,13 @@ class AnoBaseUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-ano')
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['titulo'] = 'Cadastro de Ano Base'
+        context['botao'] = 'Salvar'
+
+        return context
+
 
 class RegiaoUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
@@ -93,6 +107,10 @@ class RelatorioUpdate(LoginRequiredMixin, UpdateView):
     fields = ['id_instituicao', 'id_ano', 'id_dimensao', 'user']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-relatorio')
+
+    def get_object(self, queryset=None):
+        self.object = get_object_or_404(Relatorios, pk=self.kwargs['pk'], user=self.request.user)
+        return self.object
 
 
 class VariavelUpdate(LoginRequiredMixin, UpdateView):
@@ -137,6 +155,10 @@ class RelatorioDelete(LoginRequiredMixin, DeleteView):
     template_name = 'cadastros/form-delete.html'
     success_url = reverse_lazy('listar-relatorio')
 
+    def get_object(self, queryset=None):
+        self.object = get_object_or_404(Relatorios, pk=self.kwargs['pk'], user=self.request.user)
+        return self.object
+
 
 class VariavelDelete(LoginRequiredMixin, DeleteView):
     login_url = reverse_lazy('login')
@@ -172,7 +194,9 @@ class RelatorioList(LoginRequiredMixin, ListView):
     model = Relatorios
     template_name = 'cadastros/listas/relatorios.html'
 
-
+    def get_queryset(self):
+        self.object_list = Relatorios.objects.filter(user=self.request.user)
+        return self.object_list
 
 class VariavelList(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
@@ -184,4 +208,9 @@ class RespostaList(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
     model = Respostas
     template_name = 'cadastros/listas/respostas.html'
+
+    def get_queryset(self):
+        filtro = self.kwargs['pk']
+        self.object_list = Respostas.objects.filter(id_relatorio=filtro)
+        return self.object_list
 

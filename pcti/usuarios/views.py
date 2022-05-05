@@ -1,12 +1,18 @@
-from django.shortcuts import render
-from django.contrib.auth.forms import UserCreationForm
+from django.views.generic.edit import CreateView
+from .forms import UsuarioForm
 from django.urls import reverse_lazy
-from django.views import generic
 
 # Create your views here.
 
 
-class SignUp(generic.CreateView):
-    form_class = UserCreationForm
+class UsuarioCriate(CreateView):
+    template_name = "cadastros/form.html"
+    form_class = UsuarioForm
     success_url = reverse_lazy('login')
-    template_name = 'registration/register.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['titulo'] = "Registro de novo usuário"
+
+        return context

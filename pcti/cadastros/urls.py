@@ -27,5 +27,5 @@ urlpatterns = [
     path('listar/regiao/', RegiaoList.as_view(), name='listar-regiao'),
     path('listar/relatorio/', RelatorioList.as_view(), name='listar-relatorio'),
     path('listar/variavel/', VariavelList.as_view(), name='listar-variavel'),
-    path('listar/resposta/', RespostaList.as_view(), name='listar-resposta'),
+    path('listar/resposta/<int:pk>', RespostaList.as_view(), name='listar-resposta'),
 ]
