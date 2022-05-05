@@ -80,7 +80,7 @@ class PF(models.Model):
     class Meta:
         verbose_name_plural = "Pessoas Físicas"
     nome = models.CharField(max_length=256, verbose_name='Nome completo')
-    cpf = models.CharField(max_length=50, verbose_name='CPF')
+    cpf = models.CharField(max_length=14, null=True, verbose_name='CPF')
     nome_social = models.CharField(max_length=256, blank=True, verbose_name='Nome Social')
     id_email = models.ForeignKey(Email, on_delete=models.PROTECT, verbose_name='Email')
     _delete = models.BooleanField()
@@ -110,7 +110,7 @@ class PJ(models.Model):
 class User_pessoa(models.Model):
     class Meta:
         verbose_name_plural = "Users_Pessoas"
-    id_user = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name='Usuário')
+    id_user = models.OneToOneField(User, on_delete=models.PROTECT, verbose_name='Usuário')
     id_pessoa = models.ForeignKey(PF, on_delete=models.PROTECT, verbose_name='Nome do Usuário')
     _delete = models.BooleanField()
 
