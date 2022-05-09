@@ -1,10 +1,8 @@
-from django.contrib import admin
 from django.urls import path
 from .views import PaginaInicial, SobreView, DashboardView, ConfiguracoesView
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', PaginaInicial.as_view(), name='inicio'),
     path('sobre/', SobreView.as_view(), name='sobre'),
     path('dashboard/', DashboardView.as_view(), name='dashboard'),

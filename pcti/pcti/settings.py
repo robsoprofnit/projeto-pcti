@@ -40,9 +40,10 @@ INSTALLED_APPS = [
     # importando apps criados
     'paginas.apps.PaginasConfig',
     'usuarios.apps.UsersConfig',
-    'crispy_forms',
-    # 'accounts',
     'cadastros.apps.CadastrosConfig',
+
+    'django_cleanup.apps.CleanupConfig',
+    'crispy_forms',
 ]
 
 # DECIMAL_SEPARATOR = '.'

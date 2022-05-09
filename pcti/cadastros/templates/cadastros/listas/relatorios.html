@@ -43,7 +43,7 @@
                     <tr>
                         <td>{{ relatorios.pk }}</td>
                         <td>{{ relatorios.id_ano }}</td>
-                        <td>{{ relatorios.id_instituicao }}</td>
+                        <td>{{ relatorios.id_pessoa_juridica }}</td>
                         <td>{{ relatorios.id_dimensao }}</td>
                         <td>
                             <a href="{% url 'editar-relatorio' relatorios.pk %}" class="btn btn-warning btn-sm" title="Editar">Editar</a>
@@ -61,7 +61,7 @@
         <ul class="ano-list">
             {% for relatorio in relatorios %}
             <li class="ano-item">
-                <span><a href="variaveis/{{ relatorio.id }}">{{ relatorio.id_ano }} - {{ relatorio.id_instituicao }} - {{ relatorio.id_dimensao }}</a></span>
+                <span><a href="variaveis/{{ relatorio.id }}">{{ relatorio.id_ano }} - {{ relatorio.id_pessoa_juridica }} - {{ relatorio.id_dimensao }}</a></span>
                 <a href="delete/{{ relatorio.id }}" class="delete-btn"><span><i class="fas fa-trash"></i></span></a>
                 <a href="update/{{ relatorio.id }}"><span><i class="fas fa-edit"></i></span></a>
             </li>
