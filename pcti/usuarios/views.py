@@ -1,7 +1,7 @@
 from django.views.generic.edit import CreateView, UpdateView
 from .forms import UsuarioForm
 from django.urls import reverse_lazy
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import Group
 from django.shortcuts import get_object_or_404
 from cadastros.models import Pessoa
 
@@ -17,6 +17,7 @@ class UsuarioCriate(CreateView):
     def form_valid(self, form):
 
         grupo = get_object_or_404(Group, name='GestorCTIC')
+        form.instance.desativar = 0
 
         url = super().form_valid(form)
 
@@ -24,13 +25,6 @@ class UsuarioCriate(CreateView):
         self.object.save()
 
         Pessoa.objects.create(id_user=self.object)
-
-        return url
-
-    def form_valid(self, form):
-        form.instance.desativar = 0
-
-        url = super().form_valid(form)
 
         return url
 
@@ -42,22 +36,22 @@ class UsuarioCriate(CreateView):
         return context
 
 
-#class UsuarioUpdate(UpdateView):
-#    template_name = "cadastros/form.html"
-#    from pcti.cadastros.models import User_pessoa
-#    model = User_pessoa
-#    fields = ['nome', 'cpf', 'nome_social']
-#    success_url = reverse_lazy('index')
-#
-#    def get_object(self, queryset=None):
-#        from pcti.cadastros.models import User_pessoa
-#        self.object = get_object_or_404(User_pessoa, id_user=self.request.user)
-#        return self.object
-#
-#       def get_context_data(self, **kwargs):
-#           context = super().get_context_data(self, **kwargs)
-#
-#           context["titulo"] = "Meus dados pessoais"
-#           context["botao"] = "Atualizar"
-#
-#           return context
+class UsuarioUpdate(UpdateView):
+    template_name = "cadastros/form.html"
+    model = Pessoa
+    fields = ['nome', 'cpf', 'nome_social']
+    success_url = reverse_lazy('index')
+
+    def get_object(self, queryset=None):
+
+        self.object = get_object_or_404(Pessoa, id_user=self.request.user)
+
+        return self.object
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(self, **kwargs)
+
+        context["titulo"] = "Meus dados pessoais"
+        context["botao"] = "Atualizar"
+
+        return context
