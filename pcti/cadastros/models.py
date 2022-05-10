@@ -143,7 +143,7 @@ class Variavel(models.Model):
 class Sub_indicadores(models.Model):
     class Meta:
         verbose_name_plural = "Sub Indicadores"
-    nome = models.CharField(max_length=50, verbose_name='Sub-Indicador')
+    nome = models.CharField(max_length=250, verbose_name='Sub-Indicador')
     descricao = models.TextField(verbose_name='Descrição do Sub-Indicador')
     desativar = models.BooleanField()
 

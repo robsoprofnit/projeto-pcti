@@ -39,7 +39,7 @@ class UsuarioUpdate(UpdateView):
     template_name = "cadastros/form.html"
     model = Pessoa
     fields = ['nome', 'cpf', 'nome_social']
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('atualizar-dados')
 
     def get_object(self, queryset=None):
         self.object = get_object_or_404(Pessoa, id_user=self.request.user)
