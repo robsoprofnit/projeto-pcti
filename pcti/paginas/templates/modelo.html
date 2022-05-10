@@ -84,7 +84,7 @@
                                             <span>{{ request.user }}</span>
                                         </a>
                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <li><a class="dropdown-item" href="#">Meus Dados</a></li>
+                                            <li><a class="dropdown-item" href="{% url 'atualizar-dados' %}">Meus Dados</a></li>
                                             <li><a class="dropdown-item" href="#">Alterar Senha</a></li>
                                             <li><a class="dropdown-item" href="{% url 'logout' %}">Sair</a></li>
                                         </ul>
@@ -114,9 +114,11 @@
     </div>
 
     <!-- /#page-content-wrapper -->
-
+    <script src={% static 'js/jquery-3.6.0.min.js' %}></script>
     <script src="{% static 'js/my_chart.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.5/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
         var el = document.getElementById("wrapper");
         var toggleButton = document.getElementById("menu-toggle");
@@ -125,5 +127,10 @@
             el.classList.toggle("toggled");
         };
     </script>
+
+    <!-- Bloco de scripts destinasdo a cada página -->
+    {% block scripts %}
+
+    {% endblock %}
 </body>
 </html>

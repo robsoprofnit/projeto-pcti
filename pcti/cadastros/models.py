@@ -81,7 +81,7 @@ class Municipio(models.Model):
 # Create Pessoa Model
 class Pessoa(models.Model):
     class Meta:
-        verbose_name_plural = "Pessoas Físicas"
+        verbose_name_plural = "Pessoas"
     nome = models.CharField(max_length=256, verbose_name='Nome completo')
     cpf = models.CharField(max_length=14, null=True, verbose_name='CPF')
     nome_social = models.CharField(max_length=256, blank=True, verbose_name='Nome Social')

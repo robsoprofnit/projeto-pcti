@@ -17,7 +17,6 @@ class UsuarioCriate(CreateView):
     def form_valid(self, form):
 
         grupo = get_object_or_404(Group, name='GestorCTIC')
-        form.instance.desativar = 0
 
         url = super().form_valid(form)
 
@@ -28,8 +27,8 @@ class UsuarioCriate(CreateView):
 
         return url
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
 
         context['titulo'] = "Registro de novo usuário"
 
@@ -43,13 +42,11 @@ class UsuarioUpdate(UpdateView):
     success_url = reverse_lazy('index')
 
     def get_object(self, queryset=None):
-
         self.object = get_object_or_404(Pessoa, id_user=self.request.user)
-
         return self.object
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(self, **kwargs)
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
 
         context["titulo"] = "Meus dados pessoais"
         context["botao"] = "Atualizar"
