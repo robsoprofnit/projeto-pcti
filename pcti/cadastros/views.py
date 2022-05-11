@@ -1,11 +1,14 @@
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 from django.urls import reverse_lazy
-from .models import Relatorios, Ano_base, Regiao, Variavel
-from .models import Respostas
+from .models import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 from braces.views import GroupRequiredMixin
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
+from .forms import RepostaForm
+
+import json
+
 
 # Create your views here.
 
@@ -46,12 +49,12 @@ class RelatorioCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
 
-        form.instance.user = self.request.user
+        form.instance.id_user = self.request.user
         form.instance.desativar = 0
 
-        url = super().form_valid(form)
+        valor = super().form_valid(form)
 
-        return url
+        return valor
 
 
 class VariavelCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
@@ -68,9 +71,35 @@ class RespostaCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     group_required = [u'Administrador', u'GestorCTIC']
     model = Respostas
     fields = ['resposta', 'tag', 'id_ano_base', 'id_pessoa_juridica',
-              'id_pessoa', 'id_variavel', 'id_relatorio', 'desativar']
-    template_name = 'cadastros/form.html'
+              'id_dimensao', 'id_variavel', 'id_relatorio']
+    template_name = 'cadastros/resposta-form.html'
     success_url = reverse_lazy('listar-resposta')
+
+
+    def form_valid(self, form):
+
+        form.instance.id_user = self.request.user
+        form.instance.desativar = 0
+
+        valor = super().form_valid(form)
+
+        return valor
+
+def respostaform_page(request):
+    context = {}
+    respostaform = RepostaForm
+    context['respostaform'] = respostaform
+
+    dimensao = DimensaoList
+    varialvel = VariavelList
+
+    json_dimensao = json.dumps(dimensao)
+    json_variavel = json.dumps(varialvel)
+
+    context['json_dimensao'] = json_dimensao
+    context['json_variavel'] = json_variavel
+
+    return render(request, 'cadastros/resposta-form.html', context)
 
 
 ###################### UPDATE VIEWS ######################
@@ -104,13 +133,21 @@ class RegiaoUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
 class RelatorioUpdate(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
     model = Relatorios
-    fields = ['id_pessoa_juridica', 'id_ano', 'id_dimensao', 'id_user']
+    fields = ['id_pessoa_juridica', 'id_ano', 'id_dimensao']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-relatorio')
 
     def get_object(self, queryset=None):
         self.object = get_object_or_404(Relatorios, pk=self.kwargs['pk'], id_user=self.request.user)
         return self.object
+
+    def form_valid(self, form):
+
+        form.instance.id_user = self.request.user
+
+        valor = super().form_valid(form)
+
+        return valor
 
 
 class VariavelUpdate(LoginRequiredMixin, UpdateView):
@@ -156,7 +193,7 @@ class RelatorioDelete(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('listar-relatorio')
 
     def get_object(self, queryset=None):
-        self.object = get_object_or_404(Relatorios, pk=self.kwargs['pk'], user=self.request.user)
+        self.object = get_object_or_404(Relatorios, pk=self.kwargs['pk'], id_user=self.request.user)
         return self.object
 
 
@@ -189,6 +226,12 @@ class RegiaoList(LoginRequiredMixin, ListView):
     template_name = 'cadastros/listas/regiao.html'
 
 
+class DimensaoList(LoginRequiredMixin, ListView):
+    login_url = reverse_lazy('login')
+    model = Dimensoes
+    template_name = 'cadastros/listas/dimensao.html'
+
+
 class RelatorioList(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
     model = Relatorios
@@ -213,4 +256,3 @@ class RespostaList(LoginRequiredMixin, ListView):
         filtro = self.kwargs['pk']
         self.object_list = Respostas.objects.filter(id_relatorio=filtro)
         return self.object_list
-

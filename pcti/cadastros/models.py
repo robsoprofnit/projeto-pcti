@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 class Ano_base(models.Model):
     class Meta:
         verbose_name_plural = "Anos Base"
+
     ano = models.PositiveIntegerField(verbose_name='Ano')
     desativar = models.BooleanField()
 
@@ -21,6 +22,7 @@ class Ano_base(models.Model):
 class Regiao(models.Model):
     class Meta:
         verbose_name_plural = "Regiões"
+
     nome = models.CharField(max_length=50, verbose_name='Região Geográfica')
     desativar = models.BooleanField()
 
@@ -32,6 +34,7 @@ class Regiao(models.Model):
 class Tipo_esfera(models.Model):
     class Meta:
         verbose_name_plural = "Tipos de Esferas"
+
     nome = models.CharField(max_length=50, verbose_name='Tipo Esfera')
     desativar = models.BooleanField()
 
@@ -43,6 +46,7 @@ class Tipo_esfera(models.Model):
 class Dimensoes(models.Model):
     class Meta:
         verbose_name_plural = "Dimensões"
+
     nome = models.CharField(max_length=256, verbose_name='Dimensão')
     descricao = models.TextField(verbose_name='Descrição da Dimensão')
     desativar = models.BooleanField()
@@ -55,6 +59,7 @@ class Dimensoes(models.Model):
 class Uf(models.Model):
     class Meta:
         verbose_name_plural = "Estados"
+
     nome = models.CharField(max_length=50, verbose_name='Estado')
     sigla = models.CharField(max_length=2, verbose_name='Sigla UF')
     desativar = models.BooleanField()
@@ -69,6 +74,7 @@ class Uf(models.Model):
 class Municipio(models.Model):
     class Meta:
         verbose_name_plural = "Municípios"
+
     nome = models.CharField(max_length=50, verbose_name='Município')
     desativar = models.BooleanField()
 
@@ -82,6 +88,7 @@ class Municipio(models.Model):
 class Pessoa(models.Model):
     class Meta:
         verbose_name_plural = "Pessoas"
+
     nome = models.CharField(max_length=256, verbose_name='Nome completo')
     cpf = models.CharField(max_length=14, null=True, verbose_name='CPF')
     nome_social = models.CharField(max_length=256, blank=True, verbose_name='Nome Social')
@@ -98,6 +105,7 @@ class Pessoa(models.Model):
 class Pessoa_juridica(models.Model):
     class Meta:
         verbose_name_plural = "Pessoas Jurídicas"
+
     nome = models.CharField(max_length=256, verbose_name='Nome')
     cnpj = models.CharField(max_length=50, verbose_name='CNPJ')
     razao_social = models.CharField(max_length=256, verbose_name='Razão Social')
@@ -115,6 +123,7 @@ class Pessoa_juridica(models.Model):
 class Responsavel_instituicao(models.Model):
     class Meta:
         verbose_name_plural = "Responsáveis Instituição"
+
     desativar = models.BooleanField()
 
     id_pessoa = models.ForeignKey(Pessoa, on_delete=models.PROTECT, verbose_name='Pessoa Responsável')
@@ -128,6 +137,7 @@ class Responsavel_instituicao(models.Model):
 class Variavel(models.Model):
     class Meta:
         verbose_name_plural = "Variáveis"
+
     nome = models.CharField(max_length=256, verbose_name='Variável')
     descricao = models.TextField(verbose_name='Descrição da Variável')
     tag = models.CharField(max_length=50, verbose_name='#TAG')
@@ -143,6 +153,7 @@ class Variavel(models.Model):
 class Sub_indicadores(models.Model):
     class Meta:
         verbose_name_plural = "Sub Indicadores"
+
     nome = models.CharField(max_length=250, verbose_name='Sub-Indicador')
     descricao = models.TextField(verbose_name='Descrição do Sub-Indicador')
     desativar = models.BooleanField()
@@ -157,6 +168,7 @@ class Sub_indicadores(models.Model):
 class Relatorios(models.Model):
     class Meta:
         verbose_name_plural = "Relatórios"
+
     desativar = models.BooleanField()
 
     id_pessoa_juridica = models.ForeignKey(Pessoa_juridica, on_delete=models.PROTECT, verbose_name='Instituição')
@@ -172,6 +184,7 @@ class Relatorios(models.Model):
 class Respostas(models.Model):
     class Meta:
         verbose_name_plural = "Respostas"
+
     resposta = models.CharField(max_length=256, verbose_name='Resposa')
     data_criacao = models.DateTimeField(auto_now_add=True, verbose_name='Data de cadastro')
     data_atualizacao = models.DateTimeField(auto_now=True, null=True, verbose_name='Ultima alteração')
@@ -186,6 +199,7 @@ class Respostas(models.Model):
     id_user = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name='Usuário')
     id_variavel = models.ForeignKey(Variavel, on_delete=models.CASCADE, verbose_name='Variável')
     id_relatorio = models.ForeignKey(Relatorios, on_delete=models.CASCADE, verbose_name='Relatório')
+    id_dimensao = models.ForeignKey(Dimensoes, on_delete=models.CASCADE, verbose_name='Dimensão')
 
     def __str__(self):
         return '{} ({} - {})'.format(self.resposta, self.tag, self.id_ano_base)
@@ -195,6 +209,7 @@ class Respostas(models.Model):
 class Grupo_variavel_subind(models.Model):
     class Meta:
         verbose_name_plural = "Grupo_variavel_subind"
+
     desativar = models.BooleanField()
 
     id_variavel = models.ForeignKey(Variavel, on_delete=models.PROTECT, verbose_name='Variável')
@@ -203,3 +218,4 @@ class Grupo_variavel_subind(models.Model):
 
     def __str__(self):
         return '{} - {} - {}'.format(self.id_dimensao, self.id_sub_indicador, self.id_variavel)
+

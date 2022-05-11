@@ -2,7 +2,7 @@ from django.urls import path
 from .views import AnoBaseCreate, RegiaoCreate, RelatorioCreate, VariavelCreate, RespostaCreate
 from .views import AnoBaseUpdate, RegiaoUpdate, RelatorioUpdate, VariavelUpdate, RespostaUpdate
 from .views import AnoBaseDelete, RegiaoDelete, RelatorioDelete, VariavelDelete, RespostaDelete
-from .views import AnoBaseList, RegiaoList, RelatorioList, VariavelList, RespostaList
+from .views import AnoBaseList, RegiaoList, RelatorioList, VariavelList, RespostaList, DimensaoList
 
 urlpatterns = [
     path('cadastrar/ano/', AnoBaseCreate.as_view(), name='cadastrar-ano'),
@@ -22,10 +22,12 @@ urlpatterns = [
     path('excluir/relatorio/<int:pk>', RelatorioDelete.as_view(), name='excluir-relatorio'),
     path('excluir/variavel/<int:pk>', VariavelDelete.as_view(), name='excluir-variavel'),
     path('excluir/resposta/<int:pk>', RespostaDelete.as_view(), name='excluir-resposta'),
+    #path('excluir/dimensao/<int:pk>', DimensaoDelete.as_view(), name='excluir-dimensao'),
 
     path('listar/ano/', AnoBaseList.as_view(), name='listar-ano'),
     path('listar/regiao/', RegiaoList.as_view(), name='listar-regiao'),
     path('listar/relatorio/', RelatorioList.as_view(), name='listar-relatorio'),
     path('listar/variavel/', VariavelList.as_view(), name='listar-variavel'),
     path('listar/resposta/<int:pk>', RespostaList.as_view(), name='listar-resposta'),
+    path('listar/dimensao/', DimensaoList.as_view(), name='listar-dimensao'),
 ]

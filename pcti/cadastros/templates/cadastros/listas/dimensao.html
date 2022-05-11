@@ -1,0 +1,50 @@
+{% extends 'modelo.html' %}
+
+{% load static %}
+
+{% block titulo %}
+    <title>Dimensões</title>
+{% endblock %}
+
+{% block conteudo %}
+    <h1>Listar Dimensões</h1>
+    <hr>
+    <div>
+        <a id="add-link" href="{% url 'cadastrar-ano' %}">
+            <div class="col-2 add-div">
+                <i class="fas fa-plus"></i> Cadastrar dados
+            </div>
+        </a>
+    </div>
+    {% if messages %}
+        <ul class="message">
+            {% for message in messages %}
+                <li {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <tr>
+                <th>Ano</th>
+                <th>Opções</th>
+            </tr>
+
+            {% for dimensao in object_list %}
+                <tr>
+                    <td>{{ dimensao.nome }}</td>
+                    <td>
+                        <a href="{% url 'excluir-ano' dimensao.pk %}" class="btn btn-warning btn-sm" title="Editar">Editar</a>
+                        <a href="{% url 'excluir-ano' dimensao.pk %}" class="btn btn-danger btn-sm" title="Excluir">Excluir</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="3">Nenhum registro encontrado.</td>
+                </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+
+{% endblock %}
