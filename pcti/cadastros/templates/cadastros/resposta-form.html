@@ -13,19 +13,33 @@
 
     <hr>
 
-    <form action="" method="POST">
+    <select id="dimensao">
+        <option selected disabled="true"> -- Selecione uma Dimensão --</option>
+        {% for dimensao in Dimensao %}
+            <option value="{{ dimensao.pk }}">{{ dimensao.nome }}</option>
+        {% endfor %}
+    </select>
 
-        {% csrf_token %}
+    <select id="variavel">
+        <option selected disabled="true"> -- Selecione uma Variavel --</option>
+        {% for variavel in Variavel %}
+            <option value="{{ variavel.pk }}">{{ variavel.nome }}</option>
+        {% endfor %}
+    </select>
 
-        {{ respostaform.as_p }}
-
-        {{ form|crispy }}
-
-        <button type="submit" class="btn btn-light mt-3">{{ botao|default:'Cadastrar' }}</button>
-    </form>
+    <hr>
 
 {% endblock %}
 
 {% block scripts %}
-
+    <script>
+        $(document).ready(function (){
+            var $dimensao=$('#dimensao'),
+                $variavel=$('#variavel'),
+                $options=$variavel.find('option');
+                $dimensao.on('change', function (){
+                   $variavel.html($options.filter('[value="'+this.value+'"]'));
+                }).trigger('change');
+        });
+    </script>
 {%  endblock %}

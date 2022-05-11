@@ -1,16 +1,22 @@
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
+from django.views.generic import TemplateView
 from django.urls import reverse_lazy
 from .models import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 from braces.views import GroupRequiredMixin
 from django.shortcuts import get_object_or_404, render
-from .forms import RepostaForm
-
-import json
 
 
 # Create your views here.
+
+def RepostaView(request):
+
+    dimensao = Dimensoes.objects.all()
+    variavel = Variavel.objects.all()
+
+    return render(request, 'cadastros/resposta-form.html', {"Dimensao": dimensao, "Variavel": variavel})
+
 
 ###################### CREATE VIEWS ######################
 
@@ -72,7 +78,7 @@ class RespostaCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     model = Respostas
     fields = ['resposta', 'tag', 'id_ano_base', 'id_pessoa_juridica',
               'id_dimensao', 'id_variavel', 'id_relatorio']
-    template_name = 'cadastros/resposta-form.html'
+    template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-resposta')
 
 
@@ -84,22 +90,6 @@ class RespostaCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
         valor = super().form_valid(form)
 
         return valor
-
-def respostaform_page(request):
-    context = {}
-    respostaform = RepostaForm
-    context['respostaform'] = respostaform
-
-    dimensao = DimensaoList
-    varialvel = VariavelList
-
-    json_dimensao = json.dumps(dimensao)
-    json_variavel = json.dumps(varialvel)
-
-    context['json_dimensao'] = json_dimensao
-    context['json_variavel'] = json_variavel
-
-    return render(request, 'cadastros/resposta-form.html', context)
 
 
 ###################### UPDATE VIEWS ######################
