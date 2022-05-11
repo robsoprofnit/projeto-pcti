@@ -11,10 +11,6 @@
     <h1>Lista de Variáveis</h1>
 
         <div class="col-9 search-div">
-            <form method="GET" id="search-form">
-                <input class="form-control" type="text" id="search" name="search" placeholder="Buscar..." value="{{ request.GET.search }}">
-                <i class="fas fa-search"></i>
-            </form>
             <a id="add-link" href="{% url 'cadastrar-variavel' %}">
                 <div class="col-2 add-div">
                     <i class="fas fa-plus"></i> Cadastrar dados

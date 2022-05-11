@@ -3,16 +3,16 @@
 {% load static %}
 
 {% block titulo %}
-    <title>Respostas</title>
+    <title>UF</title>
 {% endblock %}
 
 {% block conteudo %}
-    <h1>Lista de Respostas</h1>
+    <h1>Listar UF</h1>
     <hr>
     <div>
-        <a id="add-link" href="{% url 'cadastrar-resposta' %}">
+        <a id="add-link" href="{% url 'cadastrar-uf' %}">
             <div class="col-2 add-div">
-                <i class="fas fa-plus"></i> Cadastrar resposta
+                <i class="fas fa-plus"></i> Cadastrar dados
             </div>
         </a>
     </div>
@@ -26,20 +26,17 @@
     <div class="table-responsive">
         <table class="table table-striped">
             <tr>
-                <th>RESPOSTA</th>
-                <th>TAG</th>
-                <th>VARIÁVEL</th>
-                <th>RELATORIO</th>
+                <th>Nome</th>
+                <th>Sigla</th>
+                <th>Opções</th>
             </tr>
-            {% for resposta in object_list %}
+
+            {% for ano in object_list %}
                 <tr>
-                    <td>{{ resposta.resposta }}</td>
-                    <td>{{ resposta.tag }}</td>
-                    <td>{{ resposta.id_variavel }}</td>
-                    <td>{{ resposta.id_relatorio }}</td>
+                    <td>{{ ano.ano }}</td>
                     <td>
-                        <a href="{% url 'editar-resposta' resposta.pk %}" class="btn btn-warning btn-sm" title="Editar">Editar</a>
-                        <a href="{% url 'excluir-resposta' resposta.pk %}" class="btn btn-danger btn-sm" title="Excluir">Excluir</a>
+                        <a href="{% url 'editar-uf' uf.pk %}" class="btn btn-warning btn-sm" title="Editar">Editar</a>
+                        <a href="{% url 'excluir-uf' uf.pk %}" class="btn btn-danger btn-sm" title="Excluir">Excluir</a>
                     </td>
                 </tr>
             {% empty %}
@@ -47,6 +44,8 @@
                     <td colspan="3">Nenhum registro encontrado.</td>
                 </tr>
             {% endfor %}
+
         </table>
     </div>
+
 {% endblock %}

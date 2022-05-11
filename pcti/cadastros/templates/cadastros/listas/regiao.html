@@ -9,6 +9,20 @@
 {% block conteudo %}
     <h1>Listar Regiões Geográficas</h1>
     <hr>
+    <div>
+        <a id="add-link" href="{% url 'cadastrar-regiao' %}">
+            <div class="col-2 add-div">
+                <i class="fas fa-plus"></i> Cadastrar dados
+            </div>
+        </a>
+    </div>
+    {% if messages %}
+        <ul class="message">
+            {% for message in messages %}
+                <li {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
     <div class="table-responsive">
         <table class="table table-striped">
             <tr>
