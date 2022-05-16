@@ -4,6 +4,10 @@
 
 {% load crispy_forms_tags %}
 
+{% block menu_vertical %}
+
+{% endblock %}
+
 {% block conteudo %}
 
     <div class="row">
@@ -21,21 +25,23 @@
             {% else %}
             <div class="col-md-4 mx-auto">
 
-                    <h3>Autenticação</h3>
+                <img src="{% static 'img/logo.png' %}" alt="pcti" style="max-height: 200px;" class="img-fluid">
 
-                    <!-- <p class="lead">
-                        Preencha todos os campos obrigatórios.
-                    </p> -->
+                <h3>Autenticação</h3>
 
-                    <hr>
-                    <form action="" method="post">
-                        {% csrf_token %}
+                <!-- <p class="lead">
+                    Preencha todos os campos obrigatórios.
+                </p> -->
 
-                        {{ form|crispy }}
+                <hr>
+                <form action="" method="post">
+                    {% csrf_token %}
 
-                        <button type="submit" class="btn btn-light mt-3">Entrar</button>
+                    {{ form|crispy }}
 
-                    </form>
+                    <button type="submit" class="btn btn-light mt-3">Entrar</button>
+
+                </form>
 
             </div>
         {% endif %}

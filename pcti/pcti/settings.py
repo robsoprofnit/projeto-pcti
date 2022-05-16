@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'crispy_forms',
 ]
 
-# DECIMAL_SEPARATOR = '.'
+DECIMAL_SEPARATOR = '.'
 # USE_THOUSAND_SEPARATOR = True
 
 MIDDLEWARE = [

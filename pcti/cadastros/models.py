@@ -161,7 +161,7 @@ class Sub_indicadores(models.Model):
     id_dimensao = models.ForeignKey(Dimensoes, on_delete=models.PROTECT, verbose_name='Dimensão')
 
     def __str__(self):
-        return '{}'.format(self.nome)
+        return '{} - {}'.format(self.id_dimensao ,self.nome)
 
 
 # Create Relatórios Anuais Model
@@ -185,7 +185,7 @@ class Respostas(models.Model):
     class Meta:
         verbose_name_plural = "Respostas"
 
-    resposta = models.CharField(max_length=256, verbose_name='Resposa')
+    resposta = models.FloatField(verbose_name='Resposa')
     data_criacao = models.DateTimeField(auto_now_add=True, verbose_name='Data de cadastro')
     data_atualizacao = models.DateTimeField(auto_now=True, null=True, verbose_name='Ultima alteração')
     tag = models.CharField(max_length=50, verbose_name='#TAG')
@@ -194,12 +194,12 @@ class Respostas(models.Model):
     id_ano_base = models.ForeignKey(Ano_base, on_delete=models.CASCADE, verbose_name='Ano')
     id_pessoa_juridica = models.ForeignKey(Pessoa_juridica, related_name='instituicao',
                                            on_delete=models.CASCADE, verbose_name='Instituição')
-    id_pessoa = models.ForeignKey(Pessoa, related_name='responsavel',
-                                  on_delete=models.CASCADE, verbose_name='Responsável')
     id_user = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name='Usuário')
+    id_dimensao = models.ForeignKey(Dimensoes, on_delete=models.CASCADE, verbose_name='Dimensão')
+    id_subindicador = models.ForeignKey(Sub_indicadores, on_delete=models.CASCADE, verbose_name='Sub-Indicador')
     id_variavel = models.ForeignKey(Variavel, on_delete=models.CASCADE, verbose_name='Variável')
     id_relatorio = models.ForeignKey(Relatorios, on_delete=models.CASCADE, verbose_name='Relatório')
-    id_dimensao = models.ForeignKey(Dimensoes, on_delete=models.CASCADE, verbose_name='Dimensão')
+
 
     def __str__(self):
         return '{} ({} - {})'.format(self.resposta, self.tag, self.id_ano_base)

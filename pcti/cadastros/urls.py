@@ -2,11 +2,11 @@ from django.urls import path
 from .views import AnoBaseCreate, RegiaoCreate, RelatorioCreate, VariavelCreate, RespostaCreate
 from .views import AnoBaseUpdate, RegiaoUpdate, RelatorioUpdate, VariavelUpdate, RespostaUpdate
 from .views import AnoBaseDelete, RegiaoDelete, RelatorioDelete, VariavelDelete, RespostaDelete
-from .views import AnoBaseList, RegiaoList, RelatorioList, VariavelList, RespostaList, DimensaoList, RepostaView
+from .views import AnoBaseList, RegiaoList, RelatorioList, VariavelList, RespostaList, DimensaoList, drop_list
 
 urlpatterns = [
 
-    path('cadastrar/resposta2/', RepostaView),
+    path('cadastrar/resposta2/', drop_list),
 
     path('cadastrar/ano/', AnoBaseCreate.as_view(), name='cadastrar-ano'),
     path('cadastrar/regiao/', RegiaoCreate.as_view(), name='cadastrar-regiao'),

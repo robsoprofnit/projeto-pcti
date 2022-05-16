@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 
 
 class UsuarioForm(UserCreationForm):
+
     email = forms.EmailField(max_length=100)
 
     class Meta:

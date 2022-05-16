@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import PaginaInicial, SobreView, DashboardView, ConfiguracoesView
+from .views import PaginaInicial, SobreView, DashboardView, ConfiguracoesView, ModeloAdmView
 
 
 urlpatterns = [
@@ -7,4 +7,5 @@ urlpatterns = [
     path('sobre/', SobreView.as_view(), name='sobre'),
     path('dashboard/', DashboardView.as_view(), name='dashboard'),
     path('configuracoes/', ConfiguracoesView.as_view(), name='configuracoes'),
+    path('modeloadm/', ModeloAdmView.as_view(), name='modelo-adm'),
 ]

@@ -1,16 +1,33 @@
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
-from django.views.generic import TemplateView
 from django.urls import reverse_lazy
 from .models import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 from braces.views import GroupRequiredMixin
 from django.shortcuts import get_object_or_404, render
+from django.db.models.aggregates import Avg
 
 
 # Create your views here.
 
-def RepostaView(request):
+class RepostaView(CreateView):
+    model = Respostas
+    fields = ['id_ano_base', 'id_pessoa_juridica', 'id_dimensao', 'id_subindicador',
+              'id_variavel', 'id_relatorio', 'resposta', 'tag']
+    template_name = 'cadastros/resposta-form.html'
+    success_url = reverse_lazy('listar-relatorio')
+
+
+    def form_valid(self, form):
+
+        form.instance.id_user = self.request.user
+        form.instance.desativar = 0
+
+        valor = super().form_valid(form)
+
+        return valor
+
+def drop_list(request):
 
     dimensao = Dimensoes.objects.all()
     variavel = Variavel.objects.all()
@@ -51,11 +68,12 @@ class RelatorioCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     model = Relatorios
     fields = ['id_pessoa_juridica', 'id_ano', 'id_dimensao']
     template_name = 'cadastros/form.html'
-    success_url = reverse_lazy('listar-relatorio')
+    success_url = reverse_lazy('listar-relatorio2')
 
     def form_valid(self, form):
 
         form.instance.id_user = self.request.user
+        form.instance.id_pessoa = self.request.id_pessoa_id
         form.instance.desativar = 0
 
         valor = super().form_valid(form)
@@ -76,10 +94,10 @@ class RespostaCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
     group_required = [u'Administrador', u'GestorCTIC']
     model = Respostas
-    fields = ['resposta', 'tag', 'id_ano_base', 'id_pessoa_juridica',
-              'id_dimensao', 'id_variavel', 'id_relatorio']
+    fields = ['id_ano_base', 'id_pessoa_juridica', 'id_dimensao', 'id_subindicador',
+              'id_variavel', 'id_relatorio', 'resposta', 'tag']
     template_name = 'cadastros/form.html'
-    success_url = reverse_lazy('listar-resposta')
+    success_url = reverse_lazy('listar-relatorio')
 
 
     def form_valid(self, form):
@@ -151,10 +169,10 @@ class VariavelUpdate(LoginRequiredMixin, UpdateView):
 class RespostaUpdate(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
     model = Respostas
-    fields = ['resposta', 'tag', 'id_ano_base', 'id_instituicao',
-              'id_respondido_por', 'id_variavel', 'id_relatorio', 'desativar']
+    fields = ['id_ano_base', 'id_pessoa_juridica', 'id_dimensao', 'id_subindicador',
+              'id_variavel', 'id_relatorio', 'resposta', 'tag']
     template_name = 'cadastros/form.html'
-    success_url = reverse_lazy('listar-resposta')
+    success_url = reverse_lazy('listar-relatorio')
 
 
 ###################### DELETE VIEWS ######################
@@ -198,7 +216,7 @@ class RespostaDelete(LoginRequiredMixin, DeleteView):
     login_url = reverse_lazy('login')
     model = Respostas
     template_name = 'cadastros/form-delete.html'
-    success_url = reverse_lazy('listar-resposta')
+    success_url = reverse_lazy('listar-relatorio')
 
 
 ###################### LISTA ######################
@@ -222,8 +240,7 @@ class DimensaoList(LoginRequiredMixin, ListView):
     template_name = 'cadastros/listas/dimensao.html'
 
 
-class RelatorioList(LoginRequiredMixin, ListView):
-    login_url = reverse_lazy('login')
+class RelatorioList(ListView):
     model = Relatorios
     template_name = 'cadastros/listas/relatorios.html'
 
@@ -231,14 +248,14 @@ class RelatorioList(LoginRequiredMixin, ListView):
         self.object_list = Relatorios.objects.filter(id_user=self.request.user)
         return self.object_list
 
+
 class VariavelList(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
     model = Variavel
     template_name = 'cadastros/listas/variaveis.html'
 
 
-class RespostaList(LoginRequiredMixin, ListView):
-    login_url = reverse_lazy('login')
+class RespostaList(ListView):
     model = Respostas
     template_name = 'cadastros/listas/respostas.html'
 
@@ -246,3 +263,7 @@ class RespostaList(LoginRequiredMixin, ListView):
         filtro = self.kwargs['pk']
         self.object_list = Respostas.objects.filter(id_relatorio=filtro)
         return self.object_list
+
+    def Somar(self):
+        self.soma = Respostas.objects.all().aggregate(total=Avg(Respostas.resposta))
+        return self.soma

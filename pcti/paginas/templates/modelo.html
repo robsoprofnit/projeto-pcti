@@ -27,8 +27,11 @@
         <!-- Sidebar -->
         {% block menu_vertical %}
         <div class="bg-white" id="sidebar-wrapper">
-            <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"><i
-                    class="fas fa-compass"></i> PCTI </div>
+            <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">
+                {% block logo %}
+                 <img src="{% static 'img/logo.png' %}" alt="pcti" style="max-height: 50px;" class="img-fluid">
+                {% endblock %}
+            </div>
             <div class="list-group list-group-flush my-3">
                 <a href="{% url 'inicio' %}"
                    class="list-group-item list-group-item-action bg-transparent second-text active">
@@ -66,13 +69,6 @@
                 <nav class="navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                     <div class="d-flex justify-content-between">
                         <div class="p-2 fas fa-bars primary-text fs-4 me-3" id="menu-toggle"></div>
-                        <div class="p-2">
-                            <!-- search -->
-                            <label>
-                                <input type="text" placeholder="Busque aqui...">
-                                <i class="fas fa-search" nane="search-outline"></i>
-                            </label>
-                        </div>
                         <div class="p-2" id="navbarSupportedContent">
                             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 

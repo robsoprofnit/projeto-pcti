@@ -1,4 +1,5 @@
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
+from cadastros.models import Respostas
 # Create your views here.
 
 
@@ -10,10 +11,14 @@ class SobreView(TemplateView):
     template_name = 'sobre.html'
 
 
-class DashboardView(TemplateView):
+class DashboardView(ListView):
+    model = Respostas
     template_name = 'dashboard.html'
 
 
 class ConfiguracoesView(TemplateView):
     template_name = 'configuracoes.html'
 
+
+class ModeloAdmView(TemplateView):
+    template_name = 'modelo-admin.html'
