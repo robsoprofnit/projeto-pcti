@@ -1,6 +1,5 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 
 
@@ -53,21 +52,6 @@ class Dimensoes(models.Model):
 
     def __str__(self):
         return '{}'.format(self.nome)
-
-
-# Create Grupo Sub-Indicadores
-class GrupoSubIndicadores(models.Model):
-    class Meta:
-        verbose_name_plural = "Gupos_Sub_Indicadores"
-
-    nome = models.CharField(max_length=256, verbose_name='Nome Grupo Sub-Indicadorer')
-    descricao = models.TextField(verbose_name='Descrição do Grupo Sub-indicadores')
-    desativar = models.BooleanField()
-
-    id_dimensao = models.ForeignKey(Dimensoes, on_delete=models.PROTECT, verbose_name='Dimensão')
-
-    def __str__(self):
-        return '{} - {}'.format(self.id_dimensao, self.nome)
 
 
 # Create Uf Model
@@ -148,6 +132,37 @@ class Responsavel_instituicao(models.Model):
         return '{} - {}'.format(self.id_pessoa, self.id_pessoa_juridica)
 
 
+# Create Grupo Indicadores
+class GrupoIndicadores(models.Model):
+    class Meta:
+        verbose_name_plural = "Gupos Indicadores"
+
+    nome = models.CharField(max_length=256, verbose_name='Nome Grupo Indicadorer')
+    descricao = models.TextField(verbose_name='Descrição do Grupo Indicadores')
+    desativar = models.BooleanField()
+
+    id_dimensao = models.ForeignKey(Dimensoes, on_delete=models.PROTECT, verbose_name='Dimensão')
+
+    def __str__(self):
+        return '{} - {}'.format(self.id_dimensao, self.nome)
+
+
+# Create Indicadores Model
+class Indicadores(models.Model):
+    class Meta:
+        verbose_name_plural = "Indicadores"
+
+    nome = models.CharField(max_length=250, verbose_name='Indicador')
+    descricao = models.TextField(verbose_name='Descrição do Indicador')
+    desativar = models.BooleanField()
+
+    id_dimensao = models.ForeignKey(Dimensoes, on_delete=models.PROTECT, verbose_name='Dimensão')
+    id_grupoindicadores = models.ForeignKey(GrupoIndicadores, on_delete=models.PROTECT, verbose_name='Grupo Indicador')
+
+    def __str__(self):
+        return '{} - {}'.format(self.id_grupoindicadores, self.nome)
+
+
 # Create Variavel Model
 class Variavel(models.Model):
     class Meta:
@@ -155,28 +170,14 @@ class Variavel(models.Model):
 
     nome = models.CharField(max_length=256, verbose_name='Variável')
     descricao = models.TextField(verbose_name='Descrição da Variável')
-    tag = models.CharField(max_length=50, verbose_name='#TAG')
     desativar = models.BooleanField()
 
     id_dimensao = models.ForeignKey(Dimensoes, on_delete=models.PROTECT, verbose_name='Dimensão')
+    id_grupoindicador = models.ForeignKey(GrupoIndicadores, on_delete=models.PROTECT, verbose_name='Grupo Idicador')
+    id_indicador = models.ForeignKey(Indicadores, on_delete=models.PROTECT, verbose_name='Indicador')
 
     def __str__(self):
         return '{}'.format(self.nome)
-
-
-# Create Sub-Indicadores Model
-class Sub_indicadores(models.Model):
-    class Meta:
-        verbose_name_plural = "Sub Indicadores"
-
-    nome = models.CharField(max_length=250, verbose_name='Sub-Indicador')
-    descricao = models.TextField(verbose_name='Descrição do Sub-Indicador')
-    desativar = models.BooleanField()
-
-    id_dimensao = models.ForeignKey(Dimensoes, on_delete=models.PROTECT, verbose_name='Dimensão')
-
-    def __str__(self):
-        return '{} - {}'.format(self.id_dimensao, self.nome)
 
 
 # Create Relatórios Anuais Model
@@ -203,7 +204,6 @@ class Respostas(models.Model):
     resposta = models.FloatField(verbose_name='Resposa')
     data_criacao = models.DateTimeField(auto_now_add=True, verbose_name='Data de cadastro')
     data_atualizacao = models.DateTimeField(auto_now=True, null=True, verbose_name='Ultima alteração')
-    tag = models.CharField(max_length=50, verbose_name='#TAG')
     desativar = models.BooleanField()
 
     id_ano_base = models.ForeignKey(Ano_base, on_delete=models.CASCADE, verbose_name='Ano')
@@ -211,24 +211,9 @@ class Respostas(models.Model):
                                            on_delete=models.CASCADE, verbose_name='Instituição')
     id_user = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name='Usuário')
     id_dimensao = models.ForeignKey(Dimensoes, on_delete=models.CASCADE, verbose_name='Dimensão')
-    id_subindicador = models.ForeignKey(Sub_indicadores, on_delete=models.CASCADE, verbose_name='Sub-Indicador')
+    id_indicador = models.ForeignKey(Indicadores, on_delete=models.CASCADE, verbose_name='Indicador')
     id_variavel = models.ForeignKey(Variavel, on_delete=models.CASCADE, verbose_name='Variável')
     id_relatorio = models.ForeignKey(Relatorios, on_delete=models.CASCADE, verbose_name='Relatório')
 
     def __str__(self):
-        return '{} ({} - {})'.format(self.resposta, self.tag, self.id_ano_base)
-
-
-# Create Grupo de Variáveis, Sub-indicadores e Dimensções Model
-class Grupo_variavel_subind(models.Model):
-    class Meta:
-        verbose_name_plural = "Grupo_variavel_subind"
-
-    desativar = models.BooleanField()
-
-    id_variavel = models.ForeignKey(Variavel, on_delete=models.PROTECT, verbose_name='Variável')
-    id_sub_indicador = models.ForeignKey(Sub_indicadores, on_delete=models.PROTECT, verbose_name='Indicadores')
-    id_dimensao = models.ForeignKey(Dimensoes, on_delete=models.PROTECT, verbose_name='Dimensões')
-
-    def __str__(self):
-        return '{} - {} - {}'.format(self.id_dimensao, self.id_sub_indicador, self.id_variavel)
+        return '{} ({} - {})'.format(self.resposta, self.id_ano_base)
