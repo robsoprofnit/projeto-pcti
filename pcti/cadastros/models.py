@@ -55,6 +55,21 @@ class Dimensoes(models.Model):
         return '{}'.format(self.nome)
 
 
+# Create Grupo Sub-Indicadores
+class GrupoSubIndicadores(models.Model):
+    class Meta:
+        verbose_name_plural = "Gupos_Sub_Indicadores"
+
+    nome = models.CharField(max_length=256, verbose_name='Nome Grupo Sub-Indicadorer')
+    descricao = models.TextField(verbose_name='Descrição do Grupo Sub-indicadores')
+    desativar = models.BooleanField()
+
+    id_dimensao = models.ForeignKey(Dimensoes, on_delete=models.PROTECT, verbose_name='Dimensão')
+
+    def __str__(self):
+        return '{} - {}'.format(self.id_dimensao, self.nome)
+
+
 # Create Uf Model
 class Uf(models.Model):
     class Meta:
@@ -161,7 +176,7 @@ class Sub_indicadores(models.Model):
     id_dimensao = models.ForeignKey(Dimensoes, on_delete=models.PROTECT, verbose_name='Dimensão')
 
     def __str__(self):
-        return '{} - {}'.format(self.id_dimensao ,self.nome)
+        return '{} - {}'.format(self.id_dimensao, self.nome)
 
 
 # Create Relatórios Anuais Model
@@ -200,7 +215,6 @@ class Respostas(models.Model):
     id_variavel = models.ForeignKey(Variavel, on_delete=models.CASCADE, verbose_name='Variável')
     id_relatorio = models.ForeignKey(Relatorios, on_delete=models.CASCADE, verbose_name='Relatório')
 
-
     def __str__(self):
         return '{} ({} - {})'.format(self.resposta, self.tag, self.id_ano_base)
 
@@ -218,4 +232,3 @@ class Grupo_variavel_subind(models.Model):
 
     def __str__(self):
         return '{} - {} - {}'.format(self.id_dimensao, self.id_sub_indicador, self.id_variavel)
-
