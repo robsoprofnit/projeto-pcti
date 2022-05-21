@@ -1,0 +1,142 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="Projeto de mestrado PROFNIT/UNIFAP">
+    <meta name="author" content="Robson R. N. Aguiar Lachat">
+    {% block titulo %}
+        <title>PCTI</title>
+    {% endblock %}
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+          integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+          integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <!-- CDN ChartsJs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+    <!-- CSS adicional -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+<body>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        {% block menu_vertical %}
+        <div class="bg-white" id="sidebar-wrapper">
+            <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">
+                {% block logo %}
+                    <img src="{% static 'img/logo.png' %}" height="50" alt="">
+                    <img src="{% static 'img/logo2.png' %}" height="50" alt="">
+                {% endblock %}
+            </div>
+            <div class="list-group list-group-flush my-3">
+                <a href="{% url 'inicio' %}"
+                   class="list-group-item list-group-item-action bg-transparent second-text active">
+                    <i class="icon fas fa-home me-2"></i><span class="title"> Início </span></a>
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'listar-relatorio' %}"
+                   class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                    <i class="icon fas fa-file-alt me-2"></i><span class="title"> Relatórios Anuais </span></a>
+                <a href="{% url 'configuracoes' %}"
+                   class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                    <i class="fas fa-cog me-2"></i><span class="title"> Configurações </span></a>
+                {% endif %}
+                <a href="{% url 'dashboard' %}"
+                   class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                    <i class="fas fa-tachometer-alt me-2"></i><span class="title"> Dashboard </span></a>
+                <a href="{% url 'sobre' %}"
+                   class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                    <i class="fas fa-info me-2"></i><span class="title"> Sobre </span></a>
+
+                {% if request.user.is_authenticated %}
+                <a href="#"
+                   class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                    <i class="fas fa-user me-2"></i><span class="title"> Perfil </span></a>
+                <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
+                        class="fas fa-power-off me-2"></i>Logout</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endblock %}
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            {% block menutopo %}
+                <nav class="navbar-expand-lg navbar-light bg-transparent py-4 px-4">
+                    <div class="d-flex justify-content-between">
+                        <div class="p-2 fas fa-bars primary-text fs-4 me-3" id="menu-toggle"></div>
+                        <div class="p-2" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+                                {% if request.user.is_authenticated %}
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdown"
+                                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="fas fa-user me-2"></i>
+                                            <span>{{ request.user }}</span>
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <li><a class="dropdown-item" href="{% url 'atualizar-dados' %}">Meus Dados</a></li>
+                                            <li><a class="dropdown-item" href="#">Alterar Senha</a></li>
+                                            <li><a class="dropdown-item" href="{% url 'logout' %}">Sair</a></li>
+                                        </ul>
+                                    </li>
+                                    {% else %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'registrar' %}">
+                                            <i class="fas fa-user-plus"></i> Registar
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'login' %}">
+                                            <i class="fas fa-sign-in-alt"></i> Login
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            {% endblock %}
+
+            {% block conteudo %}
+                Conteúdo da página
+
+                {% block dropdown %}
+                {% endblock %}
+
+            {% endblock %}
+        </div>
+    </div>
+
+    <!-- /#page-content-wrapper -->
+    <script src={% static 'js/jquery-3.6.0.min.js' %}></script>
+    <!-- <script src="{% static 'js/popper-2.4.4.js' %}"></script> -->
+    <script src="{% static 'js/bootstrap-5.1.3.min.js' %}"></script>
+    <script src="{% static 'js/my_chart.js' %}"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script>
+        var el = document.getElementById("wrapper");
+        var toggleButton = document.getElementById("menu-toggle");
+
+        toggleButton.onclick = function () {
+            el.classList.toggle("toggled");
+        };
+    </script>
+
+<!-- Bloco de scripts destinasdo a cada página -->
+{% block scripts %}
+
+{% endblock %}
+
+</body>
+</html>

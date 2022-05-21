@@ -201,14 +201,13 @@ class Respostas(models.Model):
     class Meta:
         verbose_name_plural = "Respostas"
 
-    resposta = models.FloatField(verbose_name='Resposa')
+    resposta = models.FloatField(verbose_name='Resposta')
     data_criacao = models.DateTimeField(auto_now_add=True, verbose_name='Data de cadastro')
     data_atualizacao = models.DateTimeField(auto_now=True, null=True, verbose_name='Ultima alteração')
     desativar = models.BooleanField()
 
     id_ano_base = models.ForeignKey(Ano_base, on_delete=models.CASCADE, verbose_name='Ano')
-    id_pessoa_juridica = models.ForeignKey(Pessoa_juridica, related_name='instituicao',
-                                           on_delete=models.CASCADE, verbose_name='Instituição')
+    id_pessoa_juridica = models.ForeignKey(Pessoa_juridica, on_delete=models.CASCADE, verbose_name='Instituição')
     id_user = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name='Usuário')
     id_dimensao = models.ForeignKey(Dimensoes, on_delete=models.CASCADE, verbose_name='Dimensão')
     id_indicador = models.ForeignKey(Indicadores, on_delete=models.CASCADE, verbose_name='Indicador')

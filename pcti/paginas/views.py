@@ -3,8 +3,12 @@ from cadastros.models import Respostas
 # Create your views here.
 
 
-class PaginaInicial(TemplateView):
-    template_name = 'paginas/index.html'
+class ManagerView(TemplateView):
+    template_name = 'paginas/index-manager.html'
+
+
+class InitialView(TemplateView):
+    template_name = 'paginas/dashboard.html'
 
 
 class SobreView(TemplateView):

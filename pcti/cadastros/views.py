@@ -14,7 +14,7 @@ class RepostaView(CreateView):
     model = Respostas
     fields = ['id_ano_base', 'id_pessoa_juridica', 'id_dimensao', 'id_subindicador',
               'id_variavel', 'id_relatorio', 'resposta', 'tag']
-    template_name = 'cadastros/resposta-form.html'
+    template_name = 'cadastros/indicadores/form-resposta2.html'
     success_url = reverse_lazy('listar-relatorio')
 
 
@@ -32,7 +32,7 @@ def drop_list(request):
     dimensao = Dimensoes.objects.all()
     variavel = Variavel.objects.all()
 
-    return render(request, 'cadastros/resposta-form.html', {"Dimensao": dimensao, "Variavel": variavel})
+    return render(request, 'cadastros/indicadores/form-resposta2.html', {"Dimensao": dimensao, "Variavel": variavel})
 
 
 ###################### CREATE VIEWS ######################
@@ -94,9 +94,8 @@ class RespostaCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
     group_required = [u'Administrador', u'GestorCTIC']
     model = Respostas
-    fields = ['id_ano_base', 'id_pessoa_juridica', 'id_dimensao', 'id_subindicador',
-              'id_variavel', 'id_relatorio', 'resposta', 'tag']
-    template_name = 'cadastros/form.html'
+    fields = ['id_ano_base', 'id_variavel', 'resposta']
+    template_name = 'cadastros/indicadores/form-resposta.html'
     success_url = reverse_lazy('listar-relatorio')
 
 
@@ -242,7 +241,7 @@ class DimensaoList(LoginRequiredMixin, ListView):
 
 class RelatorioList(ListView):
     model = Relatorios
-    template_name = 'cadastros/listas/relatorios.html'
+    template_name = 'cadastros/listas/dimensoes.html'
 
     def get_queryset(self):
         self.object_list = Relatorios.objects.filter(id_user=self.request.user)
