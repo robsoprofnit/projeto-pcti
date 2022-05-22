@@ -177,7 +177,7 @@ class Variavel(models.Model):
     id_indicador = models.ForeignKey(Indicadores, on_delete=models.PROTECT, verbose_name='Indicador')
 
     def __str__(self):
-        return '{}'.format(self.nome)
+        return '{} - {}'.format(self.id_dimensao, self.nome)
 
 
 # Create Relatórios Anuais Model
@@ -215,4 +215,5 @@ class Respostas(models.Model):
     id_relatorio = models.ForeignKey(Relatorios, on_delete=models.CASCADE, verbose_name='Relatório')
 
     def __str__(self):
-        return '{} ({} - {})'.format(self.resposta, self.id_ano_base)
+        return '{} ({} - {} - {} - {})'.format(self.resposta, self.id_ano_base, self.id_dimensao,
+                                               self.id_pessoa_juridica, self.id_variavel)

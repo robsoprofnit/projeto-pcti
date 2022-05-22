@@ -4,8 +4,9 @@ from django.urls import reverse_lazy
 from .models import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 from braces.views import GroupRequiredMixin
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, _get_queryset
 from django.db.models.aggregates import Avg
+from .forms import RepostaForm
 
 
 # Create your views here.
@@ -93,16 +94,27 @@ class VariavelCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
 class RespostaCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
     group_required = [u'Administrador', u'GestorCTIC']
-    model = Respostas
-    fields = ['id_ano_base', 'id_variavel', 'resposta']
+    form_class = RepostaForm
     template_name = 'cadastros/indicadores/form-resposta.html'
     success_url = reverse_lazy('listar-relatorio')
 
+    def get_object(self, queryset=None):
+        self.object = get_object_or_404(Variavel, pk=self.kwargs['1'])
+        return self.object
 
     def form_valid(self, form):
 
+        #form.instance.id_dimensao = get_object_or_404(Variavel, id_dimensao_id=1)
         form.instance.id_user = self.request.user
         form.instance.desativar = 0
+        form.instance.data_criacao = 0
+        form.instance.data_atualizacao = 0
+        form.instance.id_ano_base_id = 1
+        form.instance.id_pessoa_juridica_id = 1
+        form.instance.id_dimensao_id = 1
+        form.instance.id_indicador_id = 1
+        form.instance.id_variavel_id = 1
+        form.instance.id_relatorio_id = 1
 
         valor = super().form_valid(form)
 

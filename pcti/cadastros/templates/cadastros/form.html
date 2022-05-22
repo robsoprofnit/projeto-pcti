@@ -6,21 +6,23 @@
 
 
 {% block conteudo %}
-    <h3>{{ titulo|default:'Cadastro' }}</h3>
-    <p class="lead">
-        Preencha todos os campos obrigatórios.
-    </p>
+    <div class="container">
+        <h3>{{ titulo|default:'Cadastro' }}</h3>
+        <p class="lead">
+            Preencha todos os campos obrigatórios.
+        </p>
 
-    <hr>
+        <hr>
 
-    <form action="" method="POST">
-        {% csrf_token %}
+        <form action="" method="POST">
+            {% csrf_token %}
 
-        {{ form|crispy }}
+            {{ form|crispy }}
 
-        <button type="submit" class="btn btn-light mt-3">{{ botao|default:'Cadastrar' }}</button>
+            <button type="submit" class="btn btn-light mt-3">{{ botao|default:'Cadastrar' }}</button>
 
-    </form>
+        </form>
+    </div>
 {% endblock %}
 
 {% block scripts %}
