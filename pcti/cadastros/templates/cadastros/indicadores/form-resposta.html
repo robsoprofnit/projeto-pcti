@@ -23,36 +23,26 @@
                 <p>{{ form.id_relatorio }}</p>
 
             <table>
-                <table>
                 <tr>
                     <th>Variável</th>
                     <th>Resposta</th>
                 </tr>
-                {% for variavel in object_list %}
-                    <td>{{ form.id_variavel }}</td>
-                    <td>{{ form.resposta }}</td>
+                {% for variavel in form.id_variavel %}
+                        <tr>
+                            <td>{{ form.id_variavel }}</td>
+                            <td>{{ form.resposta }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="3">Nenhum registro encontrado.</td>
+                        </tr>
                 {% endfor %}
+
                 <tr>
                     <td>Nome da variável 1:</td>
                     <td>{{ form.resposta }}</td>
                 </tr>
-                <tr>
-                    <td>Nome da variável 2:</td>
-                    <td>{{ form.resposta }}</td>
-                </tr>
-                <tr>
-                    <td>Nome da variável 3:</td>
-                    <td>{{ form.resposta }}</td>
-                </tr>
-                <tr>
-                    <td>Nome da variável 4:</td>
-                    <td>{{ form.resposta }}</td>
-                </tr>
-                <tr>
-                    <td>Nome da variável 5:</td>
-                    <td>{{ form.resposta }}</td>
-                </tr>
-            </table>
+
             </table>
 
             <button type="submit" class="btn btn-light mt-3">{{ botao|default:'Cadastrar' }}</button>
