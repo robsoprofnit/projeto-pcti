@@ -20,14 +20,18 @@
         <form action="" method="POST">
             {% csrf_token %}
 
-               <p>Relatório: {{ form.id_relatorio }}</p>
+                <p>{{ form.id_relatorio }}</p>
 
             <table>
+                <table>
                 <tr>
                     <th>Variável</th>
                     <th>Resposta</th>
                 </tr>
-
+                {% for variavel in object_list %}
+                    <td>{{ form.id_variavel }}</td>
+                    <td>{{ form.resposta }}</td>
+                {% endfor %}
                 <tr>
                     <td>Nome da variável 1:</td>
                     <td>{{ form.resposta }}</td>
@@ -48,6 +52,7 @@
                     <td>Nome da variável 5:</td>
                     <td>{{ form.resposta }}</td>
                 </tr>
+            </table>
             </table>
 
             <button type="submit" class="btn btn-light mt-3">{{ botao|default:'Cadastrar' }}</button>
