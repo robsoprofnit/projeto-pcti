@@ -75,7 +75,6 @@ class RelatorioCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.id_user = self.request.user
-        form.instance.id_pessoa = self.request.id_pessoa_id
         form.instance.desativar = 0
 
         valor = super().form_valid(form)
@@ -97,7 +96,7 @@ class VariavelCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
 def resposta_create(request):
     dimensao = request.GET.get('dimensao')
     variaveis = Variavel.objects.filter(id_dimensao=dimensao)
-    relatorios = Relatorios.objects.all()
+    relatorios = Relatorios.objects.filter(id_dimensao_id=dimensao)
     context = {
         "variaveis": variaveis,
         "relatorios": relatorios
