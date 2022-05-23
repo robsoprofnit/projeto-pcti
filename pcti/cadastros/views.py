@@ -106,8 +106,6 @@ class RespostaCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.id_user = self.request.user
         form.instance.desativar = 0
-        form.instance.data_criacao = 0
-        form.instance.data_atualizacao = 0
         form.instance.id_pessoa_juridica_id = 1
         form.instance.id_dimensao_id = 1
         form.instance.id_indicador_id = 1
