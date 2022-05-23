@@ -12,7 +12,7 @@ urlpatterns = [
     path('cadastrar/regiao/', RegiaoCreate.as_view(), name='cadastrar-regiao'),
     path('cadastrar/relatorio/', RelatorioCreate.as_view(), name='cadastrar-relatorio'),
     path('cadastrar/variavel/', VariavelCreate.as_view(), name='cadastrar-variavel'),
-    path('cadastrar/resposta/<int:fk>', RespostaCreate.as_view(), name='cadastrar-resposta'),
+    path('cadastrar/resposta/', RespostaCreate.as_view(), name='cadastrar-resposta'),
 
     path('editar/ano/<int:pk>', AnoBaseUpdate.as_view(), name='editar-ano'),
     path('editar/regiao/<int:pk>', RegiaoUpdate.as_view(), name='editar-regiao'),

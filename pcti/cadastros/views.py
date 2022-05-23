@@ -98,14 +98,12 @@ class RespostaCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     template_name = 'cadastros/indicadores/form-resposta.html'
     success_url = reverse_lazy('listar-relatorio')
 
-    def get_queryset(self):
-        filtro = self.kwargs['fk']
-        self.object_list = Variavel.objects.filter(id_dimensao=filtro)
-        return self.object_list
+    def get_form_kwargs(self):
+        kwargs = super(RespostaCreate, self).get_form_kwargs()
+        kwargs['dimensao'] = self.request.GET.get('dimensao')
+        return kwargs
 
     def form_valid(self, form):
-
-        #form.instance.id_dimensao = get_object_or_404(Variavel, id_dimensao_id=1)
         form.instance.id_user = self.request.user
         form.instance.desativar = 0
         form.instance.data_criacao = 0
