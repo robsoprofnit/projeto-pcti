@@ -308,6 +308,11 @@ class DimensaoList(LoginRequiredMixin, ListView):
     template_name = 'cadastros/listas/dimensao.html'
 
 
+class RelatorioList2(ListView):
+    model = Relatorios
+    template_name = 'cadastros/listas/relatorios-bkp.html'
+
+
 class RelatorioList(ListView):
     model = Relatorios
     template_name = 'cadastros/listas/dimensoes.html'

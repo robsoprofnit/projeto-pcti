@@ -2,7 +2,7 @@ from django.urls import path
 from .views import AnoBaseCreate, RegiaoCreate, RelatorioCreate, VariavelCreate, RespostaCreate
 from .views import AnoBaseUpdate, RegiaoUpdate, RelatorioUpdate, VariavelUpdate, RespostaUpdate
 from .views import AnoBaseDelete, RegiaoDelete, RelatorioDelete, VariavelDelete, RespostaDelete
-from .views import AnoBaseList, RegiaoList, RelatorioList, VariavelList, RespostaList, DimensaoList, drop_list
+from .views import AnoBaseList, RegiaoList, RelatorioList, VariavelList, RespostaList, DimensaoList, RelatorioList2
 from .views import resposta_create, resposta_update
 
 urlpatterns = [
@@ -28,6 +28,7 @@ urlpatterns = [
 
     path('listar/ano/', AnoBaseList.as_view(), name='listar-ano'),
     path('listar/regiao/', RegiaoList.as_view(), name='listar-regiao'),
+    path('listar/relatorio2/', RelatorioList2.as_view(), name='listar-relatorio2'),
     path('listar/relatorio/', RelatorioList.as_view(), name='listar-relatorio'),
     path('listar/variavel/', VariavelList.as_view(), name='listar-variavel'),
     path('listar/resposta/<int:pk>', RespostaList.as_view(), name='listar-resposta'),
