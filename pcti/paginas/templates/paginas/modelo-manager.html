@@ -52,14 +52,6 @@
                 <a href="{% url 'sobre' %}"
                    class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                     <i class="fas fa-info me-2"></i><span class="title"> Sobre </span></a>
-
-                {% if request.user.is_authenticated %}
-                <a href="#"
-                   class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                    <i class="fas fa-user me-2"></i><span class="title"> Perfil </span></a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
-                        class="fas fa-power-off me-2"></i>Logout</a>
-                {% endif %}
             </div>
         </div>
         {% endblock %}

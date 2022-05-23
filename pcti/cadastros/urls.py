@@ -6,7 +6,6 @@ from .views import AnoBaseList, RegiaoList, RelatorioList, VariavelList, Respost
 from .views import resposta_create, resposta_update
 
 urlpatterns = [
-
     path('cadastrar/ano/', AnoBaseCreate.as_view(), name='cadastrar-ano'),
     path('cadastrar/regiao/', RegiaoCreate.as_view(), name='cadastrar-regiao'),
     path('cadastrar/relatorio/', RelatorioCreate.as_view(), name='cadastrar-relatorio'),
@@ -24,7 +23,6 @@ urlpatterns = [
     path('excluir/relatorio/<int:pk>', RelatorioDelete.as_view(), name='excluir-relatorio'),
     path('excluir/variavel/<int:pk>', VariavelDelete.as_view(), name='excluir-variavel'),
     path('excluir/resposta/<int:pk>', RespostaDelete.as_view(), name='excluir-resposta'),
-    #path('excluir/dimensao/<int:pk>', DimensaoDelete.as_view(), name='excluir-dimensao'),
 
     path('listar/ano/', AnoBaseList.as_view(), name='listar-ano'),
     path('listar/regiao/', RegiaoList.as_view(), name='listar-regiao'),

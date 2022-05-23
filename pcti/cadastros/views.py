@@ -7,7 +7,7 @@ from .decorator import group_required
 from .models import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 from braces.views import GroupRequiredMixin
-from django.shortcuts import get_object_or_404, render, _get_queryset
+from django.shortcuts import get_object_or_404, render
 from django.db.models.aggregates import Avg
 from .forms import RepostaForm
 
@@ -259,7 +259,7 @@ class RelatorioDelete(LoginRequiredMixin, DeleteView):
     login_url = reverse_lazy('login')
     model = Relatorios
     template_name = 'cadastros/form-delete.html'
-    success_url = reverse_lazy('listar-relatorio')
+    success_url = reverse_lazy('listar-relatorio2')
 
     def get_object(self, queryset=None):
         self.object = get_object_or_404(Relatorios, pk=self.kwargs['pk'], id_user=self.request.user)
@@ -303,7 +303,7 @@ class DimensaoList(LoginRequiredMixin, ListView):
 
 class RelatorioList2(ListView):
     model = Relatorios
-    template_name = 'cadastros/listas/relatorios-bkp.html'
+    template_name = 'cadastros/listas/relatorios.html'
 
 
 class RelatorioList(ListView):
@@ -312,7 +312,6 @@ class RelatorioList(ListView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(RelatorioList, self).get_context_data(*args, **kwargs)
-        # context['dimensoes'] = my_object
         return context
 
     def get_queryset(self):

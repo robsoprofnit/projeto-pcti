@@ -8,28 +8,34 @@
 {% endblock %}
 
 {% block conteudo %}
-    <h1>Configurações</h1>
-    <hr>
-    Contúdo sobre o projeto PCTI
-    <a id="add-link" href="{% url 'listar-ano' %}">
-        <div class="add-div">
-            <i class="fas fa-plus"></i> Cadastrar Ano
-        </div>
-    </a>
-    <a id="add-link" href="{% url 'listar-regiao' %}">
-        <div class="add-div">
-            <i class="fas fa-plus"></i> Cadastrar Regiões
-        </div>
-    </a>
-    <a id="add-link" href="{% url 'listar-variavel' %}">
-        <div class="add-div">
-            <i class="fas fa-plus"></i> Cadastrar Variavel
-        </div>
-    </a>
-    <a id="add-link" href="{% url 'listar-dimensao' %}">
-        <div class="add-div">
-            <i class="fas fa-plus"></i> Cadastrar Dimensão
-        </div>
-    </a>
+    <div class="container">
+        <h1>Configurações</h1>
+        <hr>
+        Contúdo sobre o projeto PCTI
+        <a id="add-link" href="{% url 'listar-ano' %}">
+            <div class="add-div">
+                <i class="fas fa-plus"></i> Cadastrar Ano
+            </div>
+        </a>
+        <a id="add-link" href="{% url 'listar-regiao' %}">
+            <div class="add-div">
+                <i class="fas fa-plus"></i> Cadastrar Regiões
+            </div>
+        </a>
+        <a id="add-link" href="{% url 'listar-variavel' %}">
+            <div class="add-div">
+                <i class="fas fa-plus"></i> Cadastrar Variavel
+            </div>
+        </a>
+        <a id="add-link" href="{% url 'listar-dimensao' %}">
+            <div class="add-div">
+                <i class="fas fa-plus"></i> Cadastrar Dimensão
+            </div>
+        </a>
+        <a id="add-link" href="{% url 'listar-relatorio2' %}">
+            <div class="add-div">
+                <i class="fa-solid fa-gear"></i> Gestão de Relatórios
+            </div>
+        </a>
+    </div>
 {% endblock %}
-
