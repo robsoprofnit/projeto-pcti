@@ -16,3 +16,4 @@ admin.site.register(Variavel)
 admin.site.register(Indicadores)
 admin.site.register(Respostas)
 admin.site.register(Relatorios)
+

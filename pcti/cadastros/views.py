@@ -99,8 +99,13 @@ class RespostaCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('listar-relatorio')
 
     def get_object(self, queryset=None):
-        self.object = get_object_or_404(Variavel, pk=self.kwargs['1'])
+        self.object = get_object_or_404(Variavel, fk=self.kwargs['1'])
         return self.object
+
+    def get_queryset(self):
+        filtro = self.kwargs['pk']
+        self.object_list = Variavel.objects.filter(id_dimensao=filtro)
+        return self.object_list
 
     def form_valid(self, form):
 
@@ -109,11 +114,9 @@ class RespostaCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
         form.instance.desativar = 0
         form.instance.data_criacao = 0
         form.instance.data_atualizacao = 0
-        form.instance.id_ano_base_id = 1
         form.instance.id_pessoa_juridica_id = 1
         form.instance.id_dimensao_id = 1
         form.instance.id_indicador_id = 1
-        form.instance.id_variavel_id = 1
         form.instance.id_relatorio_id = 1
 
         valor = super().form_valid(form)
