@@ -109,7 +109,7 @@ class RespostaCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
         form.instance.id_pessoa_juridica_id = 1
         form.instance.id_dimensao_id = 1
         form.instance.id_indicador_id = 1
-        form.instance.id_relatorio_id = 1
+        form.instance.id_ano_base_id = 1
 
         valor = super().form_valid(form)
 

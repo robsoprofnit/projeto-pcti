@@ -20,7 +20,35 @@
         <form action="" method="POST">
             {% csrf_token %}
 
-            {{ form|crispy }}
+               <p>Relatório: {{ form.id_relatorio }}</p>
+
+            <table>
+                <tr>
+                    <th>Variável</th>
+                    <th>Resposta</th>
+                </tr>
+
+                <tr>
+                    <td>Nome da variável 1:</td>
+                    <td>{{ form.resposta }}</td>
+                </tr>
+                <tr>
+                    <td>Nome da variável 2:</td>
+                    <td>{{ form.resposta }}</td>
+                </tr>
+                <tr>
+                    <td>Nome da variável 3:</td>
+                    <td>{{ form.resposta }}</td>
+                </tr>
+                <tr>
+                    <td>Nome da variável 4:</td>
+                    <td>{{ form.resposta }}</td>
+                </tr>
+                <tr>
+                    <td>Nome da variável 5:</td>
+                    <td>{{ form.resposta }}</td>
+                </tr>
+            </table>
 
             <button type="submit" class="btn btn-light mt-3">{{ botao|default:'Cadastrar' }}</button>
 
