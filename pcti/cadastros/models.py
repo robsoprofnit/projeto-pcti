@@ -200,11 +200,12 @@ class Relatorios(models.Model):
 class Respostas(models.Model):
     class Meta:
         verbose_name_plural = "Respostas"
+        unique_together = ('id_relatorio', 'id_variavel')
 
     resposta = models.FloatField(verbose_name='Resposta')
     data_criacao = models.DateTimeField(auto_now_add=True, verbose_name='Data de cadastro')
     data_atualizacao = models.DateTimeField(auto_now=True, null=True, verbose_name='Ultima alteração')
-    desativar = models.BooleanField()
+    desativar = models.BooleanField(default=False)
 
     id_ano_base = models.ForeignKey(Ano_base, on_delete=models.CASCADE, verbose_name='Ano')
     id_pessoa_juridica = models.ForeignKey(Pessoa_juridica, on_delete=models.CASCADE, verbose_name='Instituição')

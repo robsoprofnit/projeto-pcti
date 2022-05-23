@@ -1,6 +1,9 @@
+from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 from django.urls import reverse_lazy
+
+from .decorator import group_required
 from .models import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 from braces.views import GroupRequiredMixin
@@ -15,12 +18,10 @@ class RepostaView(CreateView):
     model = Respostas
     fields = ['id_ano_base', 'id_pessoa_juridica', 'id_dimensao', 'id_subindicador',
               'id_variavel', 'id_relatorio', 'resposta', 'tag']
-    template_name = 'cadastros/indicadores/form-resposta2.html'
+    template_name = 'cadastros/indicadores/form-resposta-update.html'
     success_url = reverse_lazy('listar-relatorio')
 
-
     def form_valid(self, form):
-
         form.instance.id_user = self.request.user
         form.instance.desativar = 0
 
@@ -28,12 +29,12 @@ class RepostaView(CreateView):
 
         return valor
 
-def drop_list(request):
 
+def drop_list(request):
     dimensao = Dimensoes.objects.all()
     variavel = Variavel.objects.all()
 
-    return render(request, 'cadastros/indicadores/form-resposta2.html', {"Dimensao": dimensao, "Variavel": variavel})
+    return render(request, 'cadastros/indicadores/form-resposta-update.html', {"Dimensao": dimensao, "Variavel": variavel})
 
 
 ###################### CREATE VIEWS ######################
@@ -72,7 +73,6 @@ class RelatorioCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('listar-relatorio2')
 
     def form_valid(self, form):
-
         form.instance.id_user = self.request.user
         form.instance.id_pessoa = self.request.id_pessoa_id
         form.instance.desativar = 0
@@ -89,6 +89,37 @@ class VariavelCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     fields = ['nome', 'descricao', 'tag', 'id_dimensao', 'desativar']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-variavel')
+
+
+@login_required
+@group_required(u'Administrador', u'GestorCTIC')
+def resposta_create(request):
+    dimensao = request.GET.get('dimensao')
+    variaveis = Variavel.objects.filter(id_dimensao=dimensao)
+    relatorios = Relatorios.objects.all()
+    context = {
+        "variaveis": variaveis,
+        "relatorios": relatorios
+    }
+    if request.method == 'POST':
+        relatorio = None
+        for chave, valor in request.POST.items():
+            posicao = chave.split("-")
+            if len(posicao) == 1 and chave == 'relatorio':
+                relatorio = Relatorios.objects.get(pk=valor)
+            elif chave != 'csrfmiddlewaretoken':
+                id_variavel = posicao[1]
+                variavel = Variavel.objects.get(pk=id_variavel)
+                Respostas.objects.create(resposta=valor,
+                                         id_variavel=variavel,
+                                         id_relatorio=relatorio,
+                                         id_user_id=request.user.pk,
+                                         id_dimensao_id=dimensao,
+                                         id_pessoa_juridica=relatorio.id_pessoa_juridica,
+                                         id_ano_base=relatorio.id_ano,
+                                         id_indicador=variavel.id_indicador)
+
+    return render(request, "cadastros/indicadores/form-resposta.html", context=context)
 
 
 class RespostaCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
@@ -156,7 +187,6 @@ class RelatorioUpdate(LoginRequiredMixin, UpdateView):
         return self.object
 
     def form_valid(self, form):
-
         form.instance.id_user = self.request.user
 
         valor = super().form_valid(form)
@@ -170,6 +200,38 @@ class VariavelUpdate(LoginRequiredMixin, UpdateView):
     fields = ['nome', 'descricao', 'tag', 'id_dimensao', 'desativar']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-variavel')
+
+
+@login_required
+@group_required(u'Administrador', u'GestorCTIC')
+def resposta_update(request):
+    dimensao = request.GET.get('dimensao')
+    variaveis = Variavel.objects.filter(id_dimensao=dimensao)
+    relatorios = Relatorios.objects.all()
+    respostas = Respostas.objects.filter(id_dimensao_id=dimensao)
+    context = {
+        "variaveis": variaveis,
+        "relatorios": relatorios
+    }
+    if request.method == 'POST':
+        relatorio = None
+        for chave, valor in request.POST.items():
+            posicao = chave.split("-")
+            if len(posicao) == 1 and chave == 'relatorio':
+                relatorio = Relatorios.objects.get(pk=valor)
+            elif chave != 'csrfmiddlewaretoken':
+                id_variavel = posicao[1]
+                variavel = Variavel.objects.get(pk=id_variavel)
+                Respostas.objects.create(resposta=valor,
+                                         id_variavel=variavel,
+                                         id_relatorio=relatorio,
+                                         id_user_id=request.user.pk,
+                                         id_dimensao_id=dimensao,
+                                         id_pessoa_juridica=relatorio.id_pessoa_juridica,
+                                         id_ano_base=relatorio.id_ano,
+                                         id_indicador=variavel.id_indicador)
+
+    return render(request, "cadastros/indicadores/form-resposta-update.html", context=context)
 
 
 class RespostaUpdate(LoginRequiredMixin, UpdateView):
@@ -249,6 +311,11 @@ class DimensaoList(LoginRequiredMixin, ListView):
 class RelatorioList(ListView):
     model = Relatorios
     template_name = 'cadastros/listas/dimensoes.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(RelatorioList, self).get_context_data(*args, **kwargs)
+        # context['dimensoes'] = my_object
+        return context
 
     def get_queryset(self):
         self.object_list = Relatorios.objects.filter(id_user=self.request.user)
