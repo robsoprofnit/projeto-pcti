@@ -22,22 +22,17 @@
 
             <p>{{ form.id_relatorio }}</p>
 
-            <select name="relatorio" id="relatorio">
-                <option value="">----------------</option>
-                {% for relatorio in relatorios %}
-                    <option value="{{ relatorio.pk }}">{{ relatorio }}</option>
-                {% endfor %}
-            </select>
+            <p><strong>{{ relatorio }}</strong></p>
 
             <table>
                 <tr>
                     <th>Variável</th>
                     <th>Resposta</th>
                 </tr>
-                {% for variavel in variaveis %}
+                {% for resposta in respostas %}
                     <tr>
-                        <td>{{ variavel }}</td>
-                        <td><input type="number" name="variavel-{{ variavel.pk }}" value="0" step="0.01"></td>
+                        <td>{{ resposta.id_variavel }}</td>
+                        <td><input type="number" name="resposta-{{ resposta.pk }}" value="{{ resposta.resposta }}" step="0.01"></td>
                     </tr>
                 {% empty %}
                     <tr>
@@ -47,7 +42,7 @@
 
             </table>
 
-            <button type="submit" class="btn btn-light mt-3">{{ botao|default:'Cadastrar' }}</button>
+            <button type="submit" class="btn btn-light mt-3">{{ botao|default:'Atualizar' }}</button>
 
         </form>
     </div>

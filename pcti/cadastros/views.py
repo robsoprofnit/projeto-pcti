@@ -34,7 +34,8 @@ def drop_list(request):
     dimensao = Dimensoes.objects.all()
     variavel = Variavel.objects.all()
 
-    return render(request, 'cadastros/indicadores/form-resposta-update.html', {"Dimensao": dimensao, "Variavel": variavel})
+    return render(request, 'cadastros/indicadores/form-resposta-update.html',
+                  {"Dimensao": dimensao, "Variavel": variavel})
 
 
 ###################### CREATE VIEWS ######################
@@ -206,30 +207,23 @@ class VariavelUpdate(LoginRequiredMixin, UpdateView):
 @group_required(u'Administrador', u'GestorCTIC')
 def resposta_update(request):
     dimensao = request.GET.get('dimensao')
+    ano = request.GET.get('ano')
+    instituicao = request.GET.get('instituicao')
     variaveis = Variavel.objects.filter(id_dimensao=dimensao)
-    relatorios = Relatorios.objects.all()
-    respostas = Respostas.objects.filter(id_dimensao_id=dimensao)
+    respostas = Respostas.objects.filter(id_dimensao_id=dimensao, id_ano_base_id=ano, id_pessoa_juridica_id=instituicao)
     context = {
         "variaveis": variaveis,
-        "relatorios": relatorios
+        "respostas": respostas,
+        "relatorio": respostas[0].id_relatorio
     }
     if request.method == 'POST':
-        relatorio = None
         for chave, valor in request.POST.items():
             posicao = chave.split("-")
-            if len(posicao) == 1 and chave == 'relatorio':
-                relatorio = Relatorios.objects.get(pk=valor)
-            elif chave != 'csrfmiddlewaretoken':
-                id_variavel = posicao[1]
-                variavel = Variavel.objects.get(pk=id_variavel)
-                Respostas.objects.create(resposta=valor,
-                                         id_variavel=variavel,
-                                         id_relatorio=relatorio,
-                                         id_user_id=request.user.pk,
-                                         id_dimensao_id=dimensao,
-                                         id_pessoa_juridica=relatorio.id_pessoa_juridica,
-                                         id_ano_base=relatorio.id_ano,
-                                         id_indicador=variavel.id_indicador)
+            if len(posicao) > 1:
+                id_resposta = posicao[1]
+                Respostas.objects.filter(pk=id_resposta).update(
+                    resposta=valor
+                )
 
     return render(request, "cadastros/indicadores/form-resposta-update.html", context=context)
 

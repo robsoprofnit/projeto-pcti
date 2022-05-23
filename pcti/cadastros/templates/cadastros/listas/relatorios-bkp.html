@@ -40,9 +40,12 @@
                         <td>{{ relatorios.id_pessoa_juridica }}</td>
                         <td>{{ relatorios.id_dimensao }}</td>
                         <td>
-                            <a href="{% url 'editar-relatorio' relatorios.pk %}" class="btn btn-warning btn-sm" title="Editar">Editar</a>
-                            <a href="{% url 'excluir-relatorio' relatorios.pk %}" class="btn btn-danger btn-sm" title="Excluir">Excluir</a>
-                            <a href="{% url 'listar-resposta' relatorios.pk %}" class="btn btn-primary btn-sm" title="Dados">Dados</a>
+                            <a href="{% url 'editar-resposta' %}?dimensao={{ relatorios.id_dimensao_id }}&ano={{ relatorios.id_ano_id }}&instituicao={{ relatorios.id_pessoa_juridica_id }}"
+                               class="btn btn-warning btn-sm" title="Editar">Editar</a>
+                            <a href="{% url 'excluir-relatorio' relatorios.pk %}" class="btn btn-danger btn-sm"
+                               title="Excluir">Excluir</a>
+                            <a href="{% url 'listar-resposta' relatorios.pk %}" class="btn btn-primary btn-sm"
+                               title="Dados">Dados</a>
                         </td>
                     </tr>
                 {% empty %}
@@ -54,11 +57,12 @@
         </div>
         <ul class="ano-list">
             {% for relatorio in relatorios %}
-            <li class="ano-item">
-                <span><a href="variaveis/{{ relatorio.id }}">{{ relatorio.id_ano }} - {{ relatorio.id_pessoa_juridica }} - {{ relatorio.id_dimensao }}</a></span>
-                <a href="delete/{{ relatorio.id }}" class="delete-btn"><span><i class="fas fa-trash"></i></span></a>
-                <a href="update/{{ relatorio.id }}"><span><i class="fas fa-edit"></i></span></a>
-            </li>
+                <li class="ano-item">
+                    <span><a
+                            href="variaveis/{{ relatorio.id }}">{{ relatorio.id_ano }} - {{ relatorio.id_pessoa_juridica }} - {{ relatorio.id_dimensao }}</a></span>
+                    <a href="delete/{{ relatorio.id }}" class="delete-btn"><span><i class="fas fa-trash"></i></span></a>
+                    <a href="update/{{ relatorio.id }}"><span><i class="fas fa-edit"></i></span></a>
+                </li>
             {% endfor %}
         </ul>
         <div class="pagination">
