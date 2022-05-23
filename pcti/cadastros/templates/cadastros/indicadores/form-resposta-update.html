@@ -32,7 +32,7 @@
                 {% for resposta in respostas %}
                     <tr>
                         <td>{{ resposta.id_variavel }}</td>
-                        <td><input type="number" name="resposta-{{ resposta.pk }}" value="{{ resposta.resposta }}" step="0.01"></td>
+                        <td><input type="number" name="resposta-{{ resposta.pk }}" value="{{ resposta.resposta|stringformat:'.2f' }}" step="0.01"></td>
                     </tr>
                 {% empty %}
                     <tr>
