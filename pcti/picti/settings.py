@@ -59,7 +59,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'pcti.urls'
+ROOT_URLCONF = 'picti.urls'
 
 TEMPLATES = [
     {
@@ -77,7 +77,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'pcti.wsgi.application'
+WSGI_APPLICATION = 'picti.wsgi.application'
 
 
 # Database
