@@ -1,5 +1,5 @@
 """
-ASGI config for pcti project.
+ASGI config for picti project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 

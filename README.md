@@ -1,4 +1,4 @@
-# projeto-pcti
+# projeto-picti
 # Instalar Python
 # Configurar variáveis de ambiente adicionando no Path o caminho de onde está o Python instalado e a tambpem da pasta Script
 # Set no Powershell (Set-ExecutionPolicy Unrestricted)
@@ -18,4 +18,4 @@
 
 # Config Server in paycharm
 # Interpretador
-# Varialveis de desenvolvimento: PYTHONUNBUFFERED=1;DJANGO_SETTINGS_MODULE=pcti.settings
+# Varialveis de desenvolvimento: PYTHONUNBUFFERED=1;DJANGO_SETTINGS_MODULE=picti.settings

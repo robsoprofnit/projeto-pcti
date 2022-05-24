@@ -1,5 +1,5 @@
 """
-WSGI config for pcti project.
+WSGI config for picti project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
