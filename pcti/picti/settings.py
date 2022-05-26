@@ -85,9 +85,17 @@ WSGI_APPLICATION = 'picti.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'picti',
+        'USER': 'root',
+        'PASSWORD': 'cHwM5r8fxteA3k5',
+        'HOST': 'picti.cg8x4od2tzm0.us-east-1.rds.amazonaws.com',
+        'PORT': '5432'
     }
+    # 'desenv': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
 }
 
 
