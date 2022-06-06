@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-@um6pl_*u#kuz(&jp+qfip6bo(*4(w0#k*7%ji#yuay*v4y_3n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["35.89.106.1", "ec2-35-89-106-1.us-west-2.compute.amazonaws.com"]
 
 
 # Application definition
@@ -86,14 +86,14 @@ WSGI_APPLICATION = 'picti.wsgi.application'
 DATABASES = {
     'default': {
 
-        'ENGINE': 'django.db.backends.sqlite3',
-         'NAME': BASE_DIR / 'db.sqlite3',
-       # 'ENGINE': 'django.db.backends.postgresql',
-        #'NAME': 'picti',
-        #'USER': 'root',
-        #'PASSWORD': 'cHwM5r8fxteA3k5',
-        #'HOST': 'picti.cg8x4od2tzm0.us-east-1.rds.amazonaws.com',
-        #'PORT': '5432'
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'picti',
+        'USER': 'root',
+        'PASSWORD': 'cHwM5r8fxteA3k5',
+        'HOST': 'picti.cg8x4od2tzm0.us-east-1.rds.amazonaws.com',
+        'PORT': '5432'
     }
     # 'desenv': {
     #     'ENGINE': 'django.db.backends.sqlite3',
@@ -142,6 +142,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+STATIC_ROOT = '/home/ubuntu/static_root'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
