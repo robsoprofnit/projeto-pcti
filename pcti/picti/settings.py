@@ -27,7 +27,7 @@ DEBUG = True
 
 # ALLOWED_HOSTS = ["localhost"]
 
-ALLOWED_HOSTS = ["44.226.139.188", "ec2-44-226-139-188.us-west-2.compute.amazonaws.com"]
+ALLOWED_HOSTS = ["44.226.139.188", "ec2-44-226-139-188.us-west-2.compute.amazonaws.com", "localhost"]
 
 
 # Application definition
