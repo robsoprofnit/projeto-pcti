@@ -28,22 +28,18 @@
             <div class="table-responsive">
                 <table class="table table-striped">
                     <tr>
-                        <th>Nome</th>
-                        <th>CNPJ</th>
-                        <th>ESFERA</th>
-                        <th>MUNICÍPIO</th>
+                        <th>Instituição</th>
+                        <th>Responsável</th>
                         <th>OPÇÕES</th>
                     </tr>
                     {% for responsavel in object_list %}
                         <tr>
-                            <td>{{ responsavel.nome }}</td>
-                            <td>{{ instituicao.cnpj }}</td>
-                            <td>{{ instituicao.id_tipo_esfera }}</td>
-                            <td>{{ instituicao.id_municipio }}</td>
+                            <td>{{ responsavel.id_pessoa_juridica }}</td>
+                            <td>{{ responsavel.id_pessoa }}</td>
                             <td>
-                                <a href="{% url 'editar-instituicao' instituicao.pk %}" class="btn btn-warning btn-sm"
+                                <a href="{% url 'editar-responsavel' responsavel.pk %}" class="btn btn-warning btn-sm"
                                    title="Editar">Editar</a>
-                                <a href="{% url 'excluir-instituicao' instituicao.pk %}" class="btn btn-danger btn-sm"
+                                <a href="{% url 'excluir-responsavel' responsavel.pk %}" class="btn btn-danger btn-sm"
                                    title="Excluir">Excluir</a>
                             </td>
                         </tr>
@@ -54,28 +50,28 @@
                     {% endfor %}
                 </table>
             </div>
-            <ul class="instituicao-list">
-                {% for instituicao in instituicoes %}
-                    <li class="instituicao-item">
+            <ul class="responsavel-list">
+                {% for responsavel in responsaveis %}
+                    <li class="responsavel-item">
                         <span>
-                            <a href="update/{{ instituicao.id }}"><span><i class="fas fa-edit"></i></span></a>
-                            <a href="delete/{{ instituicao.id }}"><span><i class="fas fa-trash"></i></span></a>
+                            <a href="update/{{ responsavel.id }}"><span><i class="fas fa-edit"></i></span></a>
+                            <a href="delete/{{ responsavel.id }}"><span><i class="fas fa-trash"></i></span></a>
                         </span>
                     </li>
                 {% endfor %}
             </ul>
             <div class="pagination">
                 <span class="step-links">
-                    {% if instituicoes.has_previous %}
-                        <a href="?page={{ instituicoes.previous_page_number }}"><i class="fas fa-arrow-left"></i></a>
+                    {% if responsaveis.has_previous %}
+                        <a href="?page={{ responsaveis.previous_page_number }}"><i class="fas fa-arrow-left"></i></a>
                     {% endif %}
-                    {% if instituicoes.paginator.num_pages %}
+                    {% if responsaveis.paginator.num_pages %}
                         <span class="current">
-                            {{ instituicoes.number }} de {{ indetituicoes.paginator.num_pages }}
+                            {{ responsaveis.number }} de {{ responsaveis.paginator.num_pages }}
                         </span>
                     {% endif %}
-                    {% if instituicoes.has_next %}
-                        <a href="?page={{ instituicoes.next_page_number }}"><i class="fas fa-arrow-right"></i></a>
+                    {% if responsaveis.has_next %}
+                        <a href="?page={{ responsaveis.next_page_number }}"><i class="fas fa-arrow-right"></i></a>
                     {% endif %}
                 </span>
             </div>
