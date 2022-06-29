@@ -11,25 +11,19 @@
     <div class="container">
         <h1>Configurações</h1>
         <hr>
-        Contúdo sobre o projeto PICTI
+        <a id="add-link" href="{% url 'listar-instituicao' %}">
+            <div class="add-div">
+                <i class="fas fa-plus"></i> Cadastrar Instituição
+            </div>
+        </a>
         <a id="add-link" href="{% url 'listar-ano' %}">
             <div class="add-div">
                 <i class="fas fa-plus"></i> Cadastrar Ano
             </div>
         </a>
-        <a id="add-link" href="{% url 'listar-regiao' %}">
+        <a id="add-link" href="{% url 'listar-responsavel' %}">
             <div class="add-div">
-                <i class="fas fa-plus"></i> Cadastrar Regiões
-            </div>
-        </a>
-        <a id="add-link" href="{% url 'listar-variavel' %}">
-            <div class="add-div">
-                <i class="fas fa-plus"></i> Cadastrar Variavel
-            </div>
-        </a>
-        <a id="add-link" href="{% url 'listar-dimensao' %}">
-            <div class="add-div">
-                <i class="fas fa-plus"></i> Cadastrar Dimensão
+                <i class="fas fa-plus"></i> Cadastrar Responsáveis da Instituição
             </div>
         </a>
         <a id="add-link" href="{% url 'listar-relatorio2' %}">

@@ -1,0 +1,84 @@
+{% extends 'paginas/modelo-manager.html' %}
+
+{% load static %}
+
+{% block titulo %}
+    <title>Instituições</title>
+{% endblock %}
+
+{% block conteudo %}
+    <div class="container">
+        <div class="offset-1 col-10 list-div">
+            <h1>Lista de Instituições</h1>
+            <hr>
+            <a id="add-link" href="{% url 'cadastrar-instituicao' %}">
+                <div class="col-2 add-div">
+                    <i class="fas fa-plus"></i>Adicionar Instituição
+                </div>
+            </a>
+
+            {% if messages %}
+                <ul class="message">
+                    {% for message in messages %}
+                        <li {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <tr>
+                        <th>Nome</th>
+                        <th>CNPJ</th>
+                        <th>ESFERA</th>
+                        <th>MUNICÍPIO</th>
+                        <th>OPÇÕES</th>
+                    </tr>
+                    {% for instituicao in object_list %}
+                        <tr>
+                            <td>{{ instituicao.nome }}</td>
+                            <td>{{ instituicao.cnpj }}</td>
+                            <td>{{ instituicao.id_tipo_esfera }}</td>
+                            <td>{{ instituicao.id_municipio }}</td>
+                            <td>
+                                <a href="{% url 'editar-instituicao' instituicao.pk %}" class="btn btn-warning btn-sm"
+                                   title="Editar">Editar</a>
+                                <a href="{% url 'excluir-instituicao' instituicao.pk %}" class="btn btn-danger btn-sm"
+                                   title="Excluir">Excluir</a>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="3">Nenhum registro encontrado.</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <ul class="instituicao-list">
+                {% for instituicao in instituicoes %}
+                    <li class="instituicao-item">
+                        <span>
+                            <a href="update/{{ instituicao.id }}"><span><i class="fas fa-edit"></i></span></a>
+                            <a href="delete/{{ instituicao.id }}"><span><i class="fas fa-trash"></i></span></a>
+                        </span>
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="pagination">
+                <span class="step-links">
+                    {% if instituicoes.has_previous %}
+                        <a href="?page={{ instituicoes.previous_page_number }}"><i class="fas fa-arrow-left"></i></a>
+                    {% endif %}
+                    {% if instituicoes.paginator.num_pages %}
+                        <span class="current">
+                            {{ instituicoes.number }} de {{ indetituicoes.paginator.num_pages }}
+                        </span>
+                    {% endif %}
+                    {% if instituicoes.has_next %}
+                        <a href="?page={{ instituicoes.next_page_number }}"><i class="fas fa-arrow-right"></i></a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </div>
+{% endblock %}

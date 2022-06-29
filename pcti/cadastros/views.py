@@ -2,7 +2,6 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 from django.urls import reverse_lazy
-
 from .decorator import group_required
 from .models import *
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -147,6 +146,22 @@ class RespostaCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
         return valor
 
 
+class InstituicaoCreate(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('login')
+    model = Pessoa_juridica
+    fields = ['nome', 'cnpj', 'razao_social', 'email', 'id_municipio', 'id_tipo_esfera']
+    template_name = 'cadastros/form.html'
+    success_url = reverse_lazy('listar-instituicao')
+
+
+class ResponsavelCreate(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('login')
+    model = Responsavel_instituicao
+    fields = ['id_pessoa', 'id_pessoa_juridica']
+    template_name = 'cadastros/form.html'
+    success_url = reverse_lazy('Listar-responsavel')
+
+
 ###################### UPDATE VIEWS ######################
 
 
@@ -154,7 +169,7 @@ class AnoBaseUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
     group_required = [u'Administrador']
     model = Ano_base
-    fields = ['ano', 'desativar']
+    fields = ['ano']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-ano')
 
@@ -236,6 +251,29 @@ class RespostaUpdate(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('listar-relatorio')
 
 
+class InstituicaoUpdate(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('login')
+    model = Pessoa_juridica
+    fields = ['nome', 'cnpj', 'razao_social', 'email', 'id_municipio', 'id_tipo_esfera']
+    template_name = 'cadastros/form.html'
+    success_url = reverse_lazy('listar-instituicao')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['titulo'] = 'Cadastrar Instituição'
+        context['botao'] = 'Salvar'
+
+        return context
+
+
+class ResponsavelUpdate(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('login')
+    model = Responsavel_instituicao
+    fields = ['id_pessoa', 'id_pessoa_juridica']
+    template_name = 'cadastros/form.html'
+    success_url = reverse_lazy('listar-responsavel')
+
+
 ###################### DELETE VIEWS ######################
 
 
@@ -278,6 +316,20 @@ class RespostaDelete(LoginRequiredMixin, DeleteView):
     model = Respostas
     template_name = 'cadastros/form-delete.html'
     success_url = reverse_lazy('listar-relatorio')
+
+
+class InstituicaoDelete(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('login')
+    model = Pessoa_juridica
+    template_name = 'cadastros/form-delete.html'
+    success_url = reverse_lazy('listar-instituicao')
+
+
+class ResponsavelDelete(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('login')
+    model = Responsavel_instituicao
+    template_name = 'cadastros/form-delete.html'
+    success_url = reverse_lazy('listar-responsavel')
 
 
 ###################### LISTA ######################
@@ -337,3 +389,15 @@ class RespostaList(ListView):
     def Somar(self):
         self.soma = Respostas.objects.all().aggregate(total=Avg(Respostas.resposta))
         return self.soma
+
+
+class InstituicaoList(LoginRequiredMixin, ListView):
+    login_url = reverse_lazy('login')
+    model = Pessoa_juridica
+    template_name = 'cadastros/listas/instituicao.html'
+
+
+class ResponsavelList(LoginRequiredMixin, ListView):
+    login_url = reverse_lazy('login')
+    model = Responsavel_instituicao
+    template_name = 'cadastros/listas/responsavel.html'

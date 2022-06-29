@@ -1,4 +1,4 @@
-{% extends 'paginas/modelo.html' %}
+{% extends 'paginas/modelo-manager.html' %}
 
 {% load static %}
 
@@ -7,44 +7,72 @@
 {% endblock %}
 
 {% block conteudo %}
-    <h1>Listar Relatórios Anuais</h1>
-    <hr>
-    <div>
-        <a id="add-link" href="{% url 'cadastrar-ano' %}">
-            <div class="col-2 add-div">
-                <i class="fas fa-plus"></i> Cadastrar dados
+    <div class="container">
+        <div class="offset-1 col-10 list-div">
+            <h1>Listar Relatórios Anuais</h1>
+            <hr>
+            <div>
+                <a id="add-link" href="{% url 'cadastrar-ano' %}">
+                    <div class="col-2 add-div">
+                        <i class="fas fa-plus"></i> Cadastrar dados
+                    </div>
+                </a>
             </div>
-        </a>
+            {% if messages %}
+                <ul class="message">
+                    {% for message in messages %}
+                        <li {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <tr>
+                        <th>Ano</th>
+                        <th>Opções</th>
+                    </tr>
+
+                    {% for ano in object_list %}
+                        <tr>
+                            <td>{{ ano.ano }}</td>
+                            <td>
+                                <a href="{% url 'editar-ano' ano.pk %}" class="btn btn-warning btn-sm" title="Editar">Editar</a>
+                                <a href="{% url 'excluir-ano' ano.pk %}" class="btn btn-danger btn-sm" title="Excluir">Excluir</a>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="3">Nenhum registro encontrado.</td>
+                        </tr>
+                    {% endfor %}
+
+                </table>
+            </div>
+            <ul class="ano-list">
+                {% for ano in anos %}
+                    <li class="ano-item">
+                        <span>
+                            <a href="update/{{ ano.id }}"><span><i class="fas fa-edit"></i></span></a>
+                            <a href="delete/{{ ano.id }}"><span><i class="fas fa-trash"></i></span></a>
+                        </span>
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="pagination">
+                <span class="step-links">
+                    {% if anos.has_previous %}
+                        <a href="?page={{ anos.previous_page_number }}"><i class="fas fa-arrow-left"></i></a>
+                    {% endif %}
+                    {% if anos.paginator.num_pages %}
+                        <span class="current">
+                            {{ anos.number }} de {{ anos.paginator.num_pages }}
+                        </span>
+                    {% endif %}
+                    {% if anos.has_next %}
+                        <a href="?page={{ anos.next_page_number }}"><i class="fas fa-arrow-right"></i></a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
     </div>
-    {% if messages %}
-        <ul class="message">
-            {% for message in messages %}
-                <li {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <tr>
-                <th>Ano</th>
-                <th>Opções</th>
-            </tr>
-
-            {% for ano in object_list %}
-                <tr>
-                    <td>{{ ano.ano }}</td>
-                    <td>
-                        <a href="{% url 'editar-ano' ano.pk %}" class="btn btn-warning btn-sm" title="Editar">Editar</a>
-                        <a href="{% url 'excluir-ano' ano.pk %}" class="btn btn-danger btn-sm" title="Excluir">Excluir</a>
-                    </td>
-                </tr>
-            {% empty %}
-                <tr>
-                    <td colspan="3">Nenhum registro encontrado.</td>
-                </tr>
-            {% endfor %}
-
-        </table>
-    </div>
-
 {% endblock %}

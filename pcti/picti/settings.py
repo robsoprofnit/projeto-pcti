@@ -25,10 +25,7 @@ SECRET_KEY = 'django-insecure-@um6pl_*u#kuz(&jp+qfip6bo(*4(w0#k*7%ji#yuay*v4y_3n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ["localhost"]
-
 ALLOWED_HOSTS = ["44.226.139.188", "ec2-44-226-139-188.us-west-2.compute.amazonaws.com", "localhost"]
-
 
 # Application definition
 
@@ -88,15 +85,14 @@ WSGI_APPLICATION = 'picti.wsgi.application'
 DATABASES = {
     'default': {
 
-        #'ENGINE': 'django.db.backends.sqlite3',
-        #'NAME': BASE_DIR / 'db.sqlite3',
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'picti',
-        'USER': 'root',
-        'PASSWORD': 'cHwM5r8fxteA3k5',
-        #'HOST': 'picti.cg8x4od2tzm0.us-east-1.rds.amazonaws.com',
-        'HOST': 'picti.cjxbdre4c3je.us-west-2.rds.amazonaws.com',
-        'PORT': '5432'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+        #'ENGINE': 'django.db.backends.postgresql',
+        #'NAME': 'picti',
+        #'USER': 'root',
+        #'PASSWORD': 'cHwM5r8fxteA3k5',
+        #'HOST': 'picti.cjxbdre4c3je.us-west-2.rds.amazonaws.com',
+        #'PORT': '5432'
     }
     # 'desenv': {
     #     'ENGINE': 'django.db.backends.sqlite3',
