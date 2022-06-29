@@ -6,7 +6,9 @@
     <title>PICTI</title>
 {% endblock %}
 
+
 {% block conteudo %}
+    <div class="container">
     <!-- cards -->
     {% block cards %}
         <div class="container-fluid px-4">
@@ -77,131 +79,92 @@
     {% endblock %}
     <!-- tables list -->
     {% block tables %}
-        <div class="row my-5">
-            <div class="col-md-8">
-                <h3 class="fs-4 mb-3">Recursos Aplicados</h3>
-                <a href="#" class="btn">Ver Todos</a>
-                <div class="col">
-                    <table class="table bg-white rounded shadow-sm  table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">Sub-Indicador</th>
-                                <th scope="col">Valor 2020</th>
-                                <th scope="col">Valor 2021</th>
-                                <th scope="col">Variação</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">Dispêndios dos governos estaduais em (C&T)</th>
-                                <td>R$1200</td>
-                                <td>R$1500</td>
-                                <td><span class="status deliveride">%<i class="fas fa-arrow-up"></i></span></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Total de pessoas envolvidas em pesquisa e desenvolvimento (P&D) (pesquisadores+pessoal de apoio)</td>
-                                <td>110</td>
-                                <td>110</td>
-                                <td><span class="status pending">%<i class="fas fa-arrows-alt-v"></i></span></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">CNPq - Total de bolsas/ano concedidas no País e no exterior</td>
-                                <td>620</td>
-                                <td>400</td>
-                                <td><span class="status return">%<i class="fas fa-arrow-down"></i></span></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Produção científica, segundo meio de divulgação no diretório dos grupos de pesquisa do CNPq</td>
-                                <td>110</td>
-                                <td>0</td>
-                                <td><span class="status inprogress">%<i class="fas fa-arrows-alt-h"></i></span></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Pedidos de patentes depositados no INPI, segundo tipos de patentes e origem do depositante</td>
-                                <td>1100</td>
-                                <td>1200</td>
-                                <td><span class="status deliveride">%<i class="fas fa-arrow-up"></i></span></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Pedidos e concessões de patentes de invenção junto ao USPTO</td>
-                                <td>110</td>
-                                <td>110</td>
-                                <td><span class="status pending">%<i class="fas fa-arrows-alt-v"></i></span></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Pedidos de patentes depositados de acordo com o PCT, na sua fase internacional, que designam o EPO por UF de residência do inventor</td>
-                                <td>620</td>
-                                <td>120</td>
-                                <td><span class="status return">%<i class="fas fa-arrow-down"></i></span></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Total de Famílias de Patentes Triádicas, de inventores residentes no Brasil, por data de prioridade</td>
-                                <td>110</td>
-                                <td>0</td>
-                                <td><span class="status inprogress">%<i class="fas fa-arrows-alt-h"></i></span></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Percentual de empresas que implementaram inovações de produto e/ou processo, segundo as atividades selecionadas da indústria, do setor de eletricidade e gás e dos serviços</td>
-                                <td>575</td>
-                                <td>575</td>
-                                <td><span class="status pending">%<i class="fas fa-arrows-alt-v"></i></span></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Número e Percentual de Empresas Industriais que fazem P&D contínuo</td>
-                                <td>110</td>
-                                <td>110</td>
-                                <td><span class="status pending">%<i class="fas fa-arrows-alt-v"></i></span></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Dispêndios realizados nas atividades inovativas de empresas que implementaram inovações, segundo as atividades selecionadas da indústria, do setor de eletricidade e gás e dos serviços</td>
-                                <td>110</td>
-                                <td>0</td>
-                                <td><span class="status inprogress">%<i class="fas fa-arrows-alt-h"></i></span></td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <div class="row my-5">
+                <div class="col-md-13">
+                    <h3 class="fs-4 mb-3">Recursos Aplicados</h3>
+                    <a href="#" class="btn">Ver Todos</a>
+                    <div class="col">
+                        <table class="table bg-white rounded shadow-sm  table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Sub-Indicador</th>
+                                    <th scope="col">Valor 2020</th>
+                                    <th scope="col">Valor 2021</th>
+                                    <th scope="col">Variação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Dispêndios dos governos estaduais em (C&T)</th>
+                                    <td>R$1200</td>
+                                    <td>R$1500</td>
+                                    <td><span class="status deliveride">%<i class="fas fa-arrow-up"></i></span></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Total de pessoas envolvidas em pesquisa e desenvolvimento (P&D) (pesquisadores+pessoal de apoio)</td>
+                                    <td>110</td>
+                                    <td>110</td>
+                                    <td><span class="status pending">%<i class="fas fa-arrows-alt-v"></i></span></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">CNPq - Total de bolsas/ano concedidas no País e no exterior</td>
+                                    <td>620</td>
+                                    <td>400</td>
+                                    <td><span class="status return">%<i class="fas fa-arrow-down"></i></span></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Produção científica, segundo meio de divulgação no diretório dos grupos de pesquisa do CNPq</td>
+                                    <td>110</td>
+                                    <td>0</td>
+                                    <td><span class="status inprogress">%<i class="fas fa-arrows-alt-h"></i></span></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Pedidos de patentes depositados no INPI, segundo tipos de patentes e origem do depositante</td>
+                                    <td>1100</td>
+                                    <td>1200</td>
+                                    <td><span class="status deliveride">%<i class="fas fa-arrow-up"></i></span></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Pedidos e concessões de patentes de invenção junto ao USPTO</td>
+                                    <td>110</td>
+                                    <td>110</td>
+                                    <td><span class="status pending">%<i class="fas fa-arrows-alt-v"></i></span></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Pedidos de patentes depositados de acordo com o PCT, na sua fase internacional, que designam o EPO por UF de residência do inventor</td>
+                                    <td>620</td>
+                                    <td>120</td>
+                                    <td><span class="status return">%<i class="fas fa-arrow-down"></i></span></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Total de Famílias de Patentes Triádicas, de inventores residentes no Brasil, por data de prioridade</td>
+                                    <td>110</td>
+                                    <td>0</td>
+                                    <td><span class="status inprogress">%<i class="fas fa-arrows-alt-h"></i></span></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Percentual de empresas que implementaram inovações de produto e/ou processo, segundo as atividades selecionadas da indústria, do setor de eletricidade e gás e dos serviços</td>
+                                    <td>575</td>
+                                    <td>575</td>
+                                    <td><span class="status pending">%<i class="fas fa-arrows-alt-v"></i></span></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Número e Percentual de Empresas Industriais que fazem P&D contínuo</td>
+                                    <td>110</td>
+                                    <td>110</td>
+                                    <td><span class="status pending">%<i class="fas fa-arrows-alt-v"></i></span></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Dispêndios realizados nas atividades inovativas de empresas que implementaram inovações, segundo as atividades selecionadas da indústria, do setor de eletricidade e gás e dos serviços</td>
+                                    <td>110</td>
+                                    <td>0</td>
+                                    <td><span class="status inprogress">%<i class="fas fa-arrows-alt-h"></i></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-2">
-                <h3 class="fs-4 mb-3">Colaboradores</h3>
-                <a href="#" class="btn">Ver Todos</a>
-                <div class="col">
-                    <table>
-                    <tr>
-                        <th scope="row" width="60px"><div class="imgBx"><img src="{% static 'img/user.jpg' %}"></div></th>
-                        <td><h4>Rafael<br><span>Secretário SETEC</span></h4></td>
-                    </tr>
-                    <tr>
-                        <th scope="row" width="60px"><div class="imgBx"><img src="{% static 'img/user.jpg' %}"></div></td>
-                        <td><h4>Ruthele<br><span>Chefe de Gabinete</span></h4></td>
-                    </tr>
-                    <tr>
-                        <th scope="row" width="60px"><div class="imgBx"><img src="{% static 'img/user.jpg' %}"></div></td>
-                        <td><h4>Fábio<br><span>Coordenador de Desenvolvimento Científico</span></h4></td>
-                    </tr>
-                    <tr>
-                        <th scope="row" width="60px"><div class="imgBx"><img src="{% static 'img/user.jpg' %}"></div></td>
-                        <td><h4>Darlene<br><span>Assessora de Desenvolvimento Institucional</span></h4></td>
-                    </tr>
-                    <tr>
-                        <th scope="row" width="60px"><div class="imgBx"><img src="{% static 'img/user.jpg' %}"></div></td>
-                        <td><h4>Eduardo<br><span>Coordenador de Desenvolvimento Tecnológico e Inovação</span></h4></td>
-                    </tr>
-                    <tr>
-                        <th scope="row" width="60px"><div class="imgBx"><img src="{% static 'img/user.jpg' %}"></div></td>
-                        <td><h4>Fabrício<br><span>Gerente do Núcleo Administrativo Financeiro</span></h4></td>
-                    </tr>
-                    <tr>
-                        <th scope="row" width="60px"><div class="imgBx"><img src="{% static 'img/user.jpg' %}"></div></td>
-                        <td><h4>Glaucilene<br><span>Professora</span></h4></td>
-                    </tr>
-                    <tr>
-                        <th scope="row" width="60px"><div class="imgBx"><img src="{% static 'img/user.jpg' %}"></div></td>
-                        <td><h4>Josirlan<br><span>Gerente do Núcleo de Tecnologias Sociais</span></h4></td>
-                    </tr>
-                </table>
-                </div>
-            </div>
-        </div>
     {% endblock %}
+    </div>
 {% endblock %}
