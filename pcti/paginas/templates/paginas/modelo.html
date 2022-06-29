@@ -36,34 +36,30 @@
     {% endblock %}
 
 </head>
-<body class="d-flex flex-column h-100" id="wrapper">
-    <main role="main" class="flex-shrink-0">
-
-        {% block logo %}
-
-            <!--
-            <img src="{% static 'img/logo.png' %}" alt="picti" style="max-height: 200px;" class="img-fluid">
-            -->
-
-        {% endblock %}
+<body>
+<div class="d-flex flex-column" id="wrapper">
+    <!-- Page Content -->
+    <div  id="page-content-wrapper">
 
         <!-- Bloco com o menu principal -->
         {% block menutopo %}
-            <nav class="navbar navbar-expand-lg navbar-dark bg-ifpr font-115 shadow">
+
+            <nav class="navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                 <div class="container">
-                    <a class="navbar-brand" href="{% url 'inicio' %}">
-                        <img src="{% static 'img/logo.png' %}" height="50" alt="">
-                        <img src="{% static 'img/logo2.png' %}" height="50" alt="">
-                    </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                        <ul class="navbar-nav mr-auto">
+                        {% block logo %}
+                            <a class="navbar-brand" href="{% url 'inicio' %}">
+                                <img src="{% static 'img/logo.png' %}" height="50" alt="">
+                                <img src="{% static 'img/logo2.png' %}" height="50" alt="">
+                            </a>
+                        {% endblock %}
 
+                        <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'inicio' %}">
                                 <i class="fa fa-home" aria-hidden="true"></i>
@@ -138,7 +134,7 @@
                 </div>
             </nav>
         {% endblock %}
-    </main>
+    </div>
             {% block conteudo %}
                 Conteúdo da página
 
