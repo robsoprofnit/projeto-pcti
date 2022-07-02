@@ -16,8 +16,8 @@
                     <div class="col-md-3">
                         <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                             <div>
-                                <h3 class="fs-2">1.504.644,65</h3>
-                                <p class="fs-5">Receita</p>
+                                <h3 class="fs-2">-</h3>
+                                <p class="fs-5">Orçamento</p>
                             </div>
                             <i class="far fa-money-bill-alt fs-1 primary-text border rounded-full secondary-bg p-3"></i>
                         </div>
@@ -39,7 +39,7 @@
                             <div>
                                 <span>{{ self.soma }}</span>
                                 <h3 class="fs-2">
-                                    96.841,22
+                                    -
                                 </h3>
                                 <p class="fs-5">Recursos Humanos</p>
                             </div>
@@ -50,7 +50,7 @@
                     <div class="col-md-3">
                         <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                             <div>
-                                <h3 class="fs-2">16.584</h3>
+                                <h3 class="fs-2">-</h3>
                                 <p class="fs-5">Patentes Concedidas</p>
                             </div>
                             <i class="far fa-file-alt fs-1 primary-text border rounded-full secondary-bg p-3"></i>
@@ -63,30 +63,36 @@
         {% block charts %}
             <div class="row my-5">
                 <div class="col-md-5">
+                    <h4 style="text-align: center">Recursos Aplicados</h4>
                     <h5 style="text-align:justify">Dispêndios dos governos estaduais em ciência e tecnologia (C&T)
                         por atividade</h5>
                     <canvas id="recaplic"></canvas>
                 </div>
                 <div class="col-md-5">
+                    <h4 style="text-align: center">Recursos Humanos</h4>
                     <h5 style="text-align: justify">Total de pessoas envolvidas em pesquisa e desenvolvimento (P&D)
                         (pesquisadores + pessoal de apoio), em número de pessoas, por setor institucional</h5>
                     <canvas id="rechuman"></canvas>
                 </div>
                 <div class="col-md-5">
+                    <h4 style="text-align: center">Bolsa Formação</h4>
                     <h5 style="text-align: justify">CNPq - Total de bolsas/ano concedidas no país e no exterior</h5>
                     <canvas id="bolforma"></canvas>
                 </div>
                 <div class="col-md-5">
+                    <h4 style="text-align: center">Produção Científica</h4>
                     <h5 style="text-align: justify">Número de artigos brasileiros indexados pela Scopus e percentual em
                         relação ao mundo</h5>
                     <canvas id="prodcien"></canvas>
                 </div>
                 <div class="col-md-5">
+                    <h4 style="text-align: center">Patentes</h4>
                     <h5 style="text-align: justify">Pedidos de patentes depositados no Instituto Nacional da
                         Propriedade Industrial (INPI), segundo tipos de patentes</h5>
                     <canvas id="patentes"></canvas>
                 </div>
                 <div class="col-md-5">
+                    <h4 style="text-align: center">Inovação</h4>
                     <h5 style="text-align: justify">Percentual de empresas que implementaram inovações de produto e/ou
                         processo, segundo as atividades selecionadas da indústria, do setor de eletricidade e gás e dos
                         serviços</h5>
