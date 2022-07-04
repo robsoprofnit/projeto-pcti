@@ -23,7 +23,7 @@ class UsuarioCriate(CreateView):
         self.object.groups.add(grupo)
         self.object.save()
 
-        Pessoa.objects.create(id_user=self.object)
+        # Pessoa.objects.create(id_user=self.object)
 
         return url
 
