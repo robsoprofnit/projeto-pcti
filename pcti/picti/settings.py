@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-@um6pl_*u#kuz(&jp+qfip6bo(*4(w0#k*7%ji#yuay*v4y_3n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["44.226.139.188", "ec2-44-226-139-188.us-west-2.compute.amazonaws.com", "localhost"]
+ALLOWED_HOSTS = ["picti.tk", "44.226.139.188", "ec2-44-226-139-188.us-west-2.compute.amazonaws.com", "localhost"]
 
 # Application definition
 
