@@ -11,7 +11,6 @@ from django.db.models.aggregates import Avg
 from .forms import RepostaForm
 
 
-
 # Create your views here.
 
 class RepostaView(CreateView):
