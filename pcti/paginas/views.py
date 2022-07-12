@@ -1,5 +1,7 @@
+from django.shortcuts import render
 from django.views.generic import TemplateView, ListView
 from cadastros.models import Respostas
+from datetime import datetime
 # Create your views here.
 
 
@@ -18,6 +20,17 @@ class SobreView(TemplateView):
 class DashboardView(ListView):
     model = Respostas
     template_name = 'paginas/dashboard.html'
+
+    def dashboard(request, year, institution):
+        # Get current year
+        year = 2021
+        # Get institution
+        institution = "setec"
+        return render(request,
+                      {
+                          "year": year,
+                          "institution": institution,
+                      })
 
 
 class ConfiguracoesView(TemplateView):
