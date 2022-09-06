@@ -23,7 +23,7 @@
             <p>{{ form.id_relatorio }}</p>
 
             <select name="relatorio" id="relatorio">
-                <option value="">----------------</option>
+                <option value="">-----------------</option>
                 {% for relatorio in relatorios %}
                     <option value="{{ relatorio.pk }}">{{ relatorio }}</option>
                 {% endfor %}
