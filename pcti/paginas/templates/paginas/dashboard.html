@@ -74,18 +74,18 @@
                         <h4 style="text-align: center">Recursos Aplicados</h4>
                         <h5 style="text-align:justify">Dispêndios dos governos estaduais em ciência e tecnologia (C&T)
                             por atividade</h5>
-                        <canvas id="recaplic"></canvas>
+                        <canvas id="recurso_aplicado"></canvas>
                     </div>
                     <div class="col-md-5">
                         <h4 style="text-align: center">Recursos Humanos</h4>
                         <h5 style="text-align: justify">Total de pessoas envolvidas em pesquisa e desenvolvimento (P&D)
                             (pesquisadores + pessoal de apoio), em número de pessoas, por setor institucional</h5>
-                        <canvas id="rechuman"></canvas>
+                        <canvas id="rh"></canvas>
                     </div>
                     <div class="col-md-5">
                         <h4 style="text-align: center">Bolsa Formação</h4>
                         <h5 style="text-align: justify">CNPq - Total de bolsas/ano concedidas no país e no exterior</h5>
-                        <canvas id="bolforma"></canvas>
+                        <canvas id="bolsas"></canvas>
                     </div>
                     <div class="col-md-5">
                         <h4 style="text-align: center">Produção Científica</h4>
@@ -111,6 +111,7 @@
         {% endblock %}
         <!-- tables list -->
         {% block tables %}
+                {% comment %} 
                 <div class="row my-5">
                     <div class="col-md-13">
                         <h3 class="fs-4 mb-3">Recursos Aplicados</h3>
@@ -197,6 +198,140 @@
                         </div>
                     </div>
                 </div>
+                 {% endcomment %}
         {% endblock %}
     </div>
+    <script>
+        const colors = ["red", "blue", "green", "orange", "gray", "purple", "yellow"]
+        var recurso_aplicado = document.getElementById("recurso_aplicado").getContext("2d");
+        var rh = document.getElementById("rh").getContext("2d");
+        var bolsas = document.getElementById("bolsas").getContext("2d");
+        var patentes = document.getElementById("patentes").getContext("2d");
+        var inovacao = document.getElementById("inovacao").getContext("2d");
+        new Chart(recurso_aplicado, {
+            type: "bar",
+            data: {
+              datasets: [
+                  {% for resposta in recurso_aplicado %}
+                      {
+                      align: "start",
+                      data: [{{resposta.resposta}}],
+                      label: "{{resposta.id_variavel.nome|safe}}",
+                      borderColor: [colors[{{ forloop.counter0 }}]],
+                      backgroundColor: [colors[{{ forloop.counter0 }}]],
+                      },
+                  {% endfor %}
+              ],
+              labels: [
+                {% for ano in recurso_aplicado_anos %}
+                      {{ano}}
+                  {% endfor %}
+                ],
+            },
+          }
+        );
+          
+        new Chart(rh, {
+            type: "bar",
+            data: {
+              datasets: [
+                  {% for resposta in rh %}
+                      {
+                      align: "start",
+                      data: [{{resposta.resposta}}],
+                      label: "{{resposta.id_variavel.nome|safe}}",
+                      borderColor: [colors[{{ forloop.counter0 }}]],
+                      backgroundColor: [colors[{{ forloop.counter0 }}]],
+                      },
+                  {% endfor %}
+              ],
+              labels: [
+                {% for ano in rh_anos %}
+                      {{ano}}
+                  {% endfor %}
+               ],
+            }
+          });
+
+          new Chart(bolsas, {
+            type: "bar",
+            data: {
+              datasets: [
+                    {
+                      data: [{{bolsas_53}}],
+                      label: "{{nome_53}}",
+                      borderColor: [colors[0]],
+                      backgroundColor: [colors[0]],
+                    },
+                    {
+                        data: [{{bolsas_54}}],
+                        label: "{{nome_54}}",
+                        borderColor: [colors[1]],
+                        backgroundColor: [colors[1]],
+                    },
+              ],
+              labels: [
+                {% for ano in bolsas_anos %}
+                      {{ano}}
+                  {% endfor %}
+               ],
+            }
+          });
+
+          new Chart(patentes, {
+            type: "bar",
+            data: {
+              datasets: [
+                  {% for resposta in patentes %}
+                      {
+                      align: "start",
+                      data: [{{resposta.resposta}}],
+                      label: "{{resposta.id_variavel.nome|safe}}",
+                      borderColor: [colors[{{ forloop.counter0 }}]],
+                      backgroundColor: [colors[{{ forloop.counter0 }}]],
+                      },
+                  {% endfor %}
+              ],
+              labels: [
+                {% for ano in patentes_anos %}
+                      {{ano}}
+                  {% endfor %}
+                ],
+            },
+          }
+        );
+
+        new Chart(inovacao, {
+            type: "bar",
+            data: {
+              datasets: [
+                    {
+                      data: [{{inovacao_1173}}],
+                      label: "{{inovacao_nome_1173}}",
+                      borderColor: [colors[0]],
+                      backgroundColor: [colors[0]],
+                    },
+                    {
+                        data: [{{inovacao_1177}}],
+                        label: "{{inovacao_nome_1177}}",
+                        borderColor: [colors[1]],
+                        backgroundColor: [colors[1]],
+                    },
+                    {
+                        data: [{{inovacao_1181}}],
+                        label: "{{inovacao_nome_1181}}",
+                        borderColor: [colors[2]],
+                        backgroundColor: [colors[2]],
+                    },
+              ],
+              labels: [
+                {% for ano in inovacao_anos %}
+                      {{ano}}
+                  {% endfor %}
+               ],
+            }
+          });
+        
+          
+        </script>
 {% endblock %}

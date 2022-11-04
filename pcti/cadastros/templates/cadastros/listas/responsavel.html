@@ -18,11 +18,9 @@
             </a>
 
             {% if messages %}
-                <ul class="message">
-                    {% for message in messages %}
-                        <li {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>{{ message }}</li>
-                    {% endfor %}
-                </ul>
+                {% for message in messages %}
+                    <div class="p-3 mb-2 bg-success text-white">{{message}}</div>
+                {% endfor %}
             {% endif %}
 
             <div class="table-responsive">

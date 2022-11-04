@@ -1,3 +1,4 @@
+from email.policy import default
 from django.contrib.auth.models import User
 from django.db import models
 from django.contrib.auth.models import User
@@ -109,7 +110,7 @@ class Pessoa_juridica(models.Model):
     cnpj = models.CharField(max_length=50, verbose_name='CNPJ')
     razao_social = models.CharField(max_length=256, verbose_name='Razão Social')
     email = models.CharField(max_length=150, verbose_name='Email')
-    desativar = models.BooleanField()
+    desativar = models.BooleanField(default=False)
 
     id_tipo_esfera = models.ForeignKey(Tipo_esfera, on_delete=models.PROTECT, verbose_name='Tipo Esfera')
     id_municipio = models.ForeignKey(Municipio, on_delete=models.PROTECT, verbose_name='Município')
@@ -123,7 +124,7 @@ class Responsavel_instituicao(models.Model):
     class Meta:
         verbose_name_plural = "Responsáveis Instituição"
 
-    desativar = models.BooleanField()
+    desativar = models.BooleanField(default=False)
 
     id_pessoa = models.ForeignKey(Pessoa, on_delete=models.PROTECT, verbose_name='Pessoa Responsável')
     id_pessoa_juridica = models.ForeignKey(Pessoa_juridica, on_delete=models.PROTECT, verbose_name='Instituição')

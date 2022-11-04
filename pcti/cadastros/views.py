@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from .decorator import group_required
 from .models import *
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -9,6 +9,8 @@ from braces.views import GroupRequiredMixin
 from django.shortcuts import get_object_or_404, render
 from django.db.models.aggregates import Avg
 from .forms import RepostaForm
+from django.contrib import messages
+from django.shortcuts import redirect
 
 
 # Create your views here.
@@ -46,7 +48,10 @@ class AnoBaseCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     model = Ano_base
     fields = ['ano', 'desativar']
     template_name = 'cadastros/form.html'
-    success_url = reverse_lazy('listar-ano')
+    # success_url = reverse_lazy('listar-ano')
+    def get_success_url(self):
+        messages.add_message(self.request, messages.INFO, "Item cadastrado com sucesso")
+        return reverse('listar-ano')
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -61,7 +66,10 @@ class RegiaoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     model = Regiao
     fields = ['nome', 'desativar']
     template_name = 'cadastros/form.html'
-    success_url = reverse_lazy('listar-regiao')
+    # success_url = reverse_lazy('listar-regiao')
+    def get_success_url(self):
+        messages.add_message(self.request, messages.INFO, "Item cadastrado com sucesso")
+        return reverse('listar-regiao')
 
 
 class RelatorioCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
@@ -70,7 +78,9 @@ class RelatorioCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     model = Relatorios
     fields = ['id_pessoa_juridica', 'id_ano', 'id_dimensao']
     template_name = 'cadastros/form.html'
-    success_url = reverse_lazy('listar-relatorio2')
+    def get_success_url(self):
+        messages.add_message(self.request, messages.INFO, "Item cadastrado com sucesso")
+        return reverse('listar-relatorio2')
 
     def form_valid(self, form):
         form.instance.id_user = self.request.user
@@ -87,7 +97,10 @@ class VariavelCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     model = Variavel
     fields = ['nome', 'descricao', 'tag', 'id_dimensao', 'desativar']
     template_name = 'cadastros/form.html'
-    success_url = reverse_lazy('listar-variavel')
+    # success_url = reverse_lazy('listar-variavel')
+    def get_success_url(self):
+        messages.add_message(self.request, messages.INFO, "Item cadastrado com sucesso")
+        return reverse('variavel-create')
 
 
 @login_required
@@ -98,7 +111,8 @@ def resposta_create(request):
     relatorios = Relatorios.objects.filter(id_dimensao_id=dimensao)
     context = {
         "variaveis": variaveis,
-        "relatorios": relatorios
+        "relatorios": relatorios,
+        "teste": "121"
     }
     if request.method == 'POST':
         relatorio = None
@@ -126,7 +140,10 @@ class RespostaCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     group_required = [u'Administrador', u'GestorCTIC']
     form_class = RepostaForm
     template_name = 'cadastros/indicadores/form-resposta.html'
-    success_url = reverse_lazy('listar-relatorio')
+    # success_url = reverse_lazy('listar-relatorio')
+    def get_success_url(self):
+        messages.add_message(self.request, messages.INFO, "Item cadastrado com sucesso")
+        return reverse('listar-relatorio')
 
     def get_form_kwargs(self):
         kwargs = super(RespostaCreate, self).get_form_kwargs()
@@ -151,7 +168,10 @@ class InstituicaoCreate(LoginRequiredMixin, CreateView):
     model = Pessoa_juridica
     fields = ['nome', 'cnpj', 'razao_social', 'email', 'id_municipio', 'id_tipo_esfera']
     template_name = 'cadastros/form.html'
-    success_url = reverse_lazy('listar-instituicao')
+    # success_url = reverse_lazy('listar-instituicao')
+    def get_success_url(self):
+        messages.add_message(self.request, messages.INFO, "Item cadastrado com sucesso")
+        return reverse('listar-instituicao')
 
 
 class ResponsavelCreate(LoginRequiredMixin, CreateView):
@@ -159,7 +179,10 @@ class ResponsavelCreate(LoginRequiredMixin, CreateView):
     model = Responsavel_instituicao
     fields = ['id_pessoa', 'id_pessoa_juridica']
     template_name = 'cadastros/form.html'
-    success_url = reverse_lazy('Listar-responsavel')
+    # success_url = reverse_lazy('Listar-responsavel')
+    def get_success_url(self):
+        messages.add_message(self.request, messages.INFO, "Item cadastrado com sucesso")
+        return reverse('listar-responsavel')
 
 
 ###################### UPDATE VIEWS ######################
@@ -171,7 +194,9 @@ class AnoBaseUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     model = Ano_base
     fields = ['ano']
     template_name = 'cadastros/form.html'
-    success_url = reverse_lazy('listar-ano')
+    def get_success_url(self):
+        messages.add_message(self.request, messages.INFO, "Item atualizado com sucesso")
+        return reverse('listar-ano')
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -228,7 +253,8 @@ def resposta_update(request):
     context = {
         "variaveis": variaveis,
         "respostas": respostas,
-        "relatorio": respostas[0].id_relatorio
+        "relatorio": respostas[0].id_relatorio,
+        "mensagem": ""
     }
     if request.method == 'POST':
         for chave, valor in request.POST.items():
@@ -238,6 +264,7 @@ def resposta_update(request):
                 Respostas.objects.filter(pk=id_resposta).update(
                     resposta=valor
                 )
+                context["mensagem"] = "Item atualizado com sucesso"
 
     return render(request, "cadastros/indicadores/form-resposta-update.html", context=context)
 
@@ -256,7 +283,10 @@ class InstituicaoUpdate(LoginRequiredMixin, UpdateView):
     model = Pessoa_juridica
     fields = ['nome', 'cnpj', 'razao_social', 'email', 'id_municipio', 'id_tipo_esfera']
     template_name = 'cadastros/form.html'
-    success_url = reverse_lazy('listar-instituicao')
+    # success_url = reverse_lazy('listar-instituicao')
+    def get_success_url(self):
+        messages.add_message(self.request, messages.INFO, "Item atualizado com sucesso")
+        return reverse('listar-instituicao')
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -271,7 +301,10 @@ class ResponsavelUpdate(LoginRequiredMixin, UpdateView):
     model = Responsavel_instituicao
     fields = ['id_pessoa', 'id_pessoa_juridica']
     template_name = 'cadastros/form.html'
-    success_url = reverse_lazy('listar-responsavel')
+    # success_url = reverse_lazy('listar-responsavel')
+    def get_success_url(self):
+        messages.add_message(self.request, messages.INFO, "Item atualizado com sucesso")
+        return reverse('listar-responsavel')
 
 
 ###################### DELETE VIEWS ######################
@@ -282,7 +315,10 @@ class AnoBaseDelete(GroupRequiredMixin, LoginRequiredMixin, DeleteView):
     group_required = [u'Administrador']
     model = Ano_base
     template_name = 'cadastros/form-delete.html'
-    success_url = reverse_lazy('listar-ano')
+    # success_url = reverse_lazy('listar-ano')
+    def get_success_url(self):
+        messages.add_message(self.request, messages.INFO, "Item deletado com sucesso")
+        return reverse('listar-ano')
 
 
 class RegiaoDelete(GroupRequiredMixin, LoginRequiredMixin, DeleteView):
@@ -297,7 +333,10 @@ class RelatorioDelete(LoginRequiredMixin, DeleteView):
     login_url = reverse_lazy('login')
     model = Relatorios
     template_name = 'cadastros/form-delete.html'
-    success_url = reverse_lazy('listar-relatorio2')
+    # success_url = reverse_lazy('listar-relatorio2')
+    def get_success_url(self):
+        messages.add_message(self.request, messages.INFO, "Item deletado com sucesso")
+        return reverse('listar-relatorio2')
 
     def get_object(self, queryset=None):
         self.object = get_object_or_404(Relatorios, pk=self.kwargs['pk'], id_user=self.request.user)
@@ -323,13 +362,28 @@ class InstituicaoDelete(LoginRequiredMixin, DeleteView):
     model = Pessoa_juridica
     template_name = 'cadastros/form-delete.html'
     success_url = reverse_lazy('listar-instituicao')
+    # def get_success_url(self):
+    #     return reverse('listar-instituicao')
+    def post(self, request, *args, **kwargs):
+            print("cheguei aqui####################################################")
+            self.object = self.get_object()
+            success_url = self.get_success_url()
+            try:
+                self.object.delete()
+                messages.add_message(self.request, messages.INFO, "Item deletado com sucesso")
+            except models.ProtectedError:
+                messages.add_message(self.request, messages.WARNING, "Falha ao deletar. Item já está sendo utilizado")
+            return redirect(success_url)
 
 
 class ResponsavelDelete(LoginRequiredMixin, DeleteView):
     login_url = reverse_lazy('login')
     model = Responsavel_instituicao
     template_name = 'cadastros/form-delete.html'
-    success_url = reverse_lazy('listar-responsavel')
+    # success_url = reverse_lazy('listar-responsavel')
+    def get_success_url(self):
+        messages.add_message(self.request, messages.INFO, "Item deletado com sucesso")
+        return reverse('listar-responsavel')
 
 
 ###################### LISTA ######################
