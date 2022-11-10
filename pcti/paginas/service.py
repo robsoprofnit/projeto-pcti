@@ -9,16 +9,15 @@ from cadastros.models import (
 )
 
 
-def generate_dashboard_info():
+def generate_dashboard_info(ano, pessoa_juridica):
     context = {}
-    ano = Ano_base.objects.first()
     # DIMENSÃO RECURSO APLICADO
     dimensao_recurso_aplicado = Dimensoes.objects.filter(id=1).first()
     recurso_aplicado = Respostas.objects.filter(
         id_indicador=1,
         id_ano_base=ano,
         id_dimensao=dimensao_recurso_aplicado,
-        id_pessoa_juridica=1,
+        id_pessoa_juridica=pessoa_juridica.pk,
     )
     recurso_aplicado_anos = []
     for resposta in recurso_aplicado:
@@ -30,7 +29,7 @@ def generate_dashboard_info():
     # DIMENSAO RH
     dimensao_rh = Dimensoes.objects.filter(id=2).first()
     context["rh"] = Respostas.objects.filter(
-        id_indicador=15, id_ano_base=ano, id_dimensao=dimensao_rh, id_pessoa_juridica=1
+        id_indicador=15, id_ano_base=ano, id_dimensao=dimensao_rh, id_pessoa_juridica=pessoa_juridica.pk
     )
     rh_anos = []
     for resposta in context["rh"]:
@@ -44,7 +43,7 @@ def generate_dashboard_info():
         id_indicador__in=[53, 54],
         id_ano_base=ano,
         id_dimensao=dimensao_bolsa,
-        id_pessoa_juridica=1,
+        id_pessoa_juridica=pessoa_juridica.pk,
     )
     soma_53 = 0
     indicador_nome_53 = None
@@ -74,7 +73,7 @@ def generate_dashboard_info():
         id_indicador=70,
         id_ano_base=ano,
         id_dimensao=dimensao_patentes,
-        id_pessoa_juridica=1,
+        id_pessoa_juridica=pessoa_juridica.pk,
     )
     patentes_anos = []
     for resposta in context["patentes"]:
@@ -88,7 +87,7 @@ def generate_dashboard_info():
         id_indicador=94,
         id_ano_base=ano,
         id_dimensao=dimensao_inovacao,
-        id_pessoa_juridica=1,
+        id_pessoa_juridica=pessoa_juridica.pk,
     )
     # 1172, 1176, 1180 - Total de Empresas
     # 1173, 1177, 1181 - Total Produto ou Processo
@@ -145,7 +144,7 @@ def generate_dashboard_info():
         id_indicador=67,
         id_ano_base=ano,
         id_dimensao=dimensao_prod_cienc,
-        id_pessoa_juridica=1,
+        id_pessoa_juridica=pessoa_juridica.pk,
     )   
     prod_cienc_anos = []
 

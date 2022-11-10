@@ -35,7 +35,24 @@ class SobreView(TemplateView):
 
 
 def dashboard(request):
-    context = generate_dashboard_info()
+    context = {}
+    ano = Ano_base.objects.first()
+    instituicao = Pessoa_juridica.objects.get(id=1)
+    if request.method == "POST":
+        ano_id = request.POST.get("ano")
+        instituicao_id = request.POST.get("instituicao")
+        if ano and instituicao:
+            ano = Ano_base.objects.get(pk=ano_id)
+            instituicao = Pessoa_juridica.objects.get(pk=instituicao_id)
+            context = generate_dashboard_info(ano, instituicao)
+            context["ano_selecionado"] = ano
+            context["instituicao_selecionada"] = instituicao
+    else:
+        context = generate_dashboard_info(ano, instituicao)
+        context["ano_selecionado"] = ano
+        context["instituicao_selecionada"] = instituicao
+    context["filtro_anos"] = Ano_base.objects.all()
+    context["filtro_instituicoes"] = Pessoa_juridica.objects.all()
     return render(request, "paginas/dashboard.html", context=context)
 
 
