@@ -25,7 +25,6 @@ def generate_dashboard_info():
         if resposta.id_ano_base not in recurso_aplicado_anos:
             recurso_aplicado_anos.append(resposta.id_ano_base)
     context["recurso_aplicado"] = recurso_aplicado
-    print(recurso_aplicado)
     context["recurso_aplicado_anos"] = recurso_aplicado_anos
 
     # DIMENSAO RH
@@ -91,35 +90,57 @@ def generate_dashboard_info():
         id_dimensao=dimensao_inovacao,
         id_pessoa_juridica=1,
     )
-    # 1173, 1177, 1181
-    soma_1173 = 0
-    soma_1177 = 0
-    soma_1181 = 0
-    inovacao_nome_1173 = None
-    inovacao_nome_1177 = None
-    inovacao_nome_1181 = None
+    # 1172, 1176, 1180 - Total de Empresas
+    # 1173, 1177, 1181 - Total Produto ou Processo
+    # 1174, 1178, 1182 - Total Produto
+    # 1175, 1179, 1183 - Total Processo
+    soma_empresas = 0
+    inovacao_nome_empresas = "Total de Empresas"
+    lista_empresas = [1172, 1176, 1180]
+
+    soma_produto_processo = 0
+    inovacao_nome_produto_processo = "Total Produto ou Processo"
+    lista_produto_processo = [1173, 1177, 1181]
+
+    soma_produto = 0
+    inovacao_nome_produto = "Total Produto"
+    lista_produto = [1174, 1178, 1182]
+
+    soma_processo = 0
+    inovacao_nome_processo = "Total Processo"
+    lista_processo = [1175, 1179, 1183]
+
     patentes_anos = []
+
     for inova in inovacao:
-        if inova.id_variavel.id == 1173:
-            soma_1173 = soma_1173 + inova.resposta
-            if inovacao_nome_1173 is None:
-                inovacao_nome_1173 = inova.id_variavel.nome
-        elif inova.id_variavel.id == 1177:
-            soma_1177 = soma_1177 + inova.resposta
-            if inovacao_nome_1177 is None:
-                inovacao_nome_1177 = inova.id_variavel.nome
-        if inova.id_variavel.id == 1181:
-            soma_1181 = soma_1181 + inova.resposta
-            if inovacao_nome_1181 is None:
-                inovacao_nome_1181 = inova.id_variavel.nome
+        if inova.id_variavel.id in lista_empresas:
+            soma_empresas = soma_empresas + inova.resposta
+
+        elif inova.id_variavel.id in lista_produto_processo:
+            soma_produto_processo = soma_produto_processo + inova.resposta
+
+        elif inova.id_variavel.id in lista_produto:
+            soma_produto = soma_produto + inova.resposta
+
+        elif inova.id_variavel.id in lista_processo:
+            soma_processo = soma_processo + inova.resposta
+
         if inova.id_ano_base not in patentes_anos:
             patentes_anos.append(resposta.id_ano_base)
+
     context["inovacao_anos"] = patentes_anos
-    context["inovacao_1173"] = soma_1173
-    context["inovacao_1177"] = soma_1177
-    context["inovacao_1181"] = soma_1181
-    context["inovacao_nome_1173"] = inovacao_nome_1173
-    context["inovacao_nome_1177"] = inovacao_nome_1177
-    context["inovacao_nome_1181"] = inovacao_nome_1181
+    context["inovacao_empresas"] = soma_empresas
+    context["inovacao_produto_processo"] = soma_produto_processo
+    context["inovacao_produto"] = soma_produto
+    context["inovacao_processo"] = soma_processo
+
+    context["inovacao_nome_empresas"] = inovacao_nome_empresas
+    context["inovacao_nome_produto_processo"] = inovacao_nome_produto_processo
+    context["inovacao_nome_produto"] = inovacao_nome_produto
+    context["inovacao_nome_processo"] = inovacao_nome_processo
 
     return context
+
+
+def soma():
+    pass
