@@ -214,6 +214,8 @@
         var bolsas = document.getElementById("bolsas").getContext("2d");
         var patentes = document.getElementById("patentes").getContext("2d");
         var inovacao = document.getElementById("inovacao").getContext("2d");
+        var prodcien = document.getElementById("prodcien").getContext("2d");
+
         new Chart(recurso_aplicado, {
             type: "bar",
             data: {
@@ -330,6 +332,54 @@
               ],
               labels: [
                 {% for ano in inovacao_anos %}                      {{ano}}{% endfor %}
+               ],
+            }
+          });
+
+          new Chart(prodcien, {
+            type: "bar",
+            data: {
+              datasets: [
+                    {
+                      data: [{{soma_thompson_brasil}}],
+                      label: "{{thompson_nome_brasil}}",
+                      borderColor: [colors[0]],
+                      backgroundColor: [colors[0]],
+                    },
+                    {
+                        data: [{{soma_thompson_latina}}],
+                        label: "{{thompson_nome_latina}}",
+                        borderColor: [colors[1]],
+                        backgroundColor: [colors[1]],
+                    },
+                    {
+                        data: [{{soma_thompson_mundo}}],
+                        label: "{{thompson_nome_mundo}}",
+                        borderColor: [colors[2]],
+                        backgroundColor: [colors[2]],
+                    },
+
+                    {
+                        data: [{{soma_scopus_brasil}}],
+                        label: "{{scopus_nome_brasil}}",
+                        borderColor: [colors[3]],
+                        backgroundColor: [colors[3]],
+                    },
+                    {
+                        data: [{{soma_scopus_latina}}],
+                        label: "{{scopus_nome_latina}}",
+                        borderColor: [colors[4]],
+                        backgroundColor: [colors[4]],
+                    },
+                    {
+                        data: [{{soma_scopus_mundo}}],
+                        label: "{{scopus_nome_mundo}}",
+                        borderColor: [colors[5]],
+                        backgroundColor: [colors[5]],
+                    },
+              ],
+              labels: [
+                {% for ano in prod_cienc_anos %}{{ano}}{% endfor %}
                ],
             }
           });

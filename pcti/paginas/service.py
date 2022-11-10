@@ -139,6 +139,67 @@ def generate_dashboard_info():
     context["inovacao_nome_produto"] = inovacao_nome_produto
     context["inovacao_nome_processo"] = inovacao_nome_processo
 
+    # DIMENSAO PRODUÇÃO CIENTÍFICA
+    dimensao_prod_cienc = Dimensoes.objects.filter(id=4).first()
+    prod_cienc = Respostas.objects.filter(
+        id_indicador=67,
+        id_ano_base=ano,
+        id_dimensao=dimensao_prod_cienc,
+        id_pessoa_juridica=1,
+    )   
+    prod_cienc_anos = []
+
+    soma_thompson_brasil = 0
+    thompson_brasil = [829,830,831,832,833,834,835,836,837,838,839,840,841,842,843,844,845,846,847,848,849,850]
+    soma_thompson_latina = 0
+    thompson_latina = [851,852,853,854,855,856,857,858,859,860,861,862,863,864,865,866,867,868,869,870,871,872]
+    soma_thompson_mundo = 0
+    thompson_mundo = [873,874,875,876,877,878,879,880,881,882,883,884,885,886,887,888,889,890,891,892,893,894]
+
+    soma_scopus_brasil = 0
+    scopus_brasil = [895,896,897,898,899,900,901,902,903,904,905,906,907,908,909,910,911,912,913,914,915,916,917,918,919,920,921]
+    soma_scopus_latina = 0
+    scopus_latina = [922,923,924,925,926,927,928,929,930,931,932,933,934,935,936,937,938,939,940,941,942,943,944,945,946,947,948]
+    soma_scopus_mundo = 0
+    scopus_mundo = [949,950,951,952,953,954,955,956,957,958,959,960,961,962,963,964,965,966,967,968,969,970,971,972,973,974,975]
+
+    for prod in prod_cienc:
+        if prod.id_variavel.id in thompson_brasil:
+            soma_thompson_brasil = soma_thompson_brasil + prod.resposta
+
+        if prod.id_variavel.id in thompson_latina:
+            soma_thompson_latina = soma_thompson_latina + prod.resposta
+
+        if prod.id_variavel.id in thompson_mundo:
+            soma_thompson_mundo = soma_thompson_mundo + prod.resposta
+
+        if prod.id_variavel.id in scopus_brasil:
+            soma_scopus_brasil = soma_scopus_brasil + prod.resposta
+
+        if prod.id_variavel.id in scopus_latina:
+            soma_scopus_latina = soma_scopus_latina + prod.resposta
+
+        if prod.id_variavel.id in scopus_mundo:
+            soma_scopus_mundo = soma_scopus_mundo + prod.resposta
+
+        if prod.id_ano_base not in prod_cienc_anos:
+            prod_cienc_anos.append(prod.id_ano_base)
+
+    context["prod_cienc_anos"] = prod_cienc_anos
+    context["soma_thompson_brasil"] = soma_thompson_brasil
+    context["soma_thompson_latina"] = soma_thompson_latina
+    context["soma_thompson_mundo"] = soma_thompson_mundo
+    context["thompson_nome_brasil"] = "Thompson/ISI - Brasil"
+    context["thompson_nome_latina"] = "Thompson/ISI - América Latina"
+    context["thompson_nome_mundo"] = "Thompson/ISI - Mundo"
+
+    context["soma_scopus_brasil"] = soma_scopus_brasil
+    context["soma_scopus_latina"] = soma_scopus_latina
+    context["soma_scopus_mundo"] = soma_scopus_mundo
+    context["scopus_nome_brasil"] = "Scopus - Brasil"
+    context["scopus_nome_latina"] = "Scopus - América Latina"
+    context["scopus_nome_mundo"] = "Scopus - Mundo"
+
     return context
 
 
