@@ -1,12 +1,6 @@
 {% extends 'paginas/modelo.html' %}
-
 {% load static %}
-
-{% block titulo %}
-    <title>PICTI</title>
-{% endblock %}
-
-
+{% block titulo %}<title>PICTI</title>{% endblock %}
 {% block conteudo %}
     <div class="container">
         <!-- cards -->
@@ -22,38 +16,42 @@
                             <i class="far fa-money-bill-alt fs-1 primary-text border rounded-full secondary-bg p-3"></i>
                         </div>
                     </div>
-
                     <div class="col-md-3">
                         <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                             <div>
                                 <p>
-                                <select style="font-weight: bold" name="ano">
-                                    <option value="">2021</option>
-                                    <option value="">----</option>
-                                </select>
+                                    <select style="font-weight: bold" name="ano">
+                                        <option value="">
+                                            2021
+                                        </option>
+                                        <option value="">
+                                            ----
+                                        </option>
+                                    </select>
                                 </p>
                                 <p class="fs-5">Ano</p>
                             </div>
-                            <i
-                                class="far fa-calendar-alt fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                            <i class="far fa-calendar-alt fs-1 primary-text border rounded-full secondary-bg p-3"></i>
                         </div>
                     </div>
-
                     <div class="col-md-3">
                         <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                             <div>
                                 <p>
-                                <select style="font-weight: bold" name="ano">
-                                    <option value="">SETEC-AP</option>
-                                    <option value="">---------</option>
-                                </select>
+                                    <select style="font-weight: bold" name="ano">
+                                        <option value="">
+                                            SETEC-AP
+                                        </option>
+                                        <option value="">
+                                            ---------
+                                        </option>
+                                    </select>
                                 </p>
                                 <p class="fs-5">Instituição</p>
                             </div>
                             <i class="fas fa-users fs-1 primary-text border rounded-full secondary-bg p-3"></i>
                         </div>
                     </div>
-
                     <div class="col-md-3">
                         <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                             <div>
@@ -72,14 +70,18 @@
                 <div class="row my-5">
                     <div class="col-md-5">
                         <h4 style="text-align: center">Recursos Aplicados</h4>
-                        <h5 style="text-align:justify">Dispêndios dos governos estaduais em ciência e tecnologia (C&T)
-                            por atividade</h5>
+                        <h5 style="text-align:justify">
+                            Dispêndios dos governos estaduais em ciência e tecnologia (C&T)
+                            por atividade
+                        </h5>
                         <canvas id="recurso_aplicado"></canvas>
                     </div>
                     <div class="col-md-5">
                         <h4 style="text-align: center">Recursos Humanos</h4>
-                        <h5 style="text-align: justify">Total de pessoas envolvidas em pesquisa e desenvolvimento (P&D)
-                            (pesquisadores + pessoal de apoio), em número de pessoas, por setor institucional</h5>
+                        <h5 style="text-align: justify">
+                            Total de pessoas envolvidas em pesquisa e desenvolvimento (P&D)
+                            (pesquisadores + pessoal de apoio), em número de pessoas, por setor institucional
+                        </h5>
                         <canvas id="rh"></canvas>
                     </div>
                     <div class="col-md-5">
@@ -89,21 +91,27 @@
                     </div>
                     <div class="col-md-5">
                         <h4 style="text-align: center">Produção Científica</h4>
-                        <h5 style="text-align: justify">Número de artigos brasileiros indexados pela Scopus e percentual em
-                            relação ao mundo</h5>
+                        <h5 style="text-align: justify">
+                            Número de artigos brasileiros indexados pela Scopus e percentual em
+                            relação ao mundo
+                        </h5>
                         <canvas id="prodcien"></canvas>
                     </div>
                     <div class="col-md-5">
                         <h4 style="text-align: center">Patentes</h4>
-                        <h5 style="text-align: justify">Pedidos de patentes depositados no Instituto Nacional da
-                            Propriedade Industrial (INPI), segundo tipos de patentes</h5>
+                        <h5 style="text-align: justify">
+                            Pedidos de patentes depositados no Instituto Nacional da
+                            Propriedade Industrial (INPI), segundo tipos de patentes
+                        </h5>
                         <canvas id="patentes"></canvas>
                     </div>
                     <div class="col-md-5">
                         <h4 style="text-align: center">Inovação</h4>
-                        <h5 style="text-align: justify">Percentual de empresas que implementaram inovações de produto e/ou
+                        <h5 style="text-align: justify">
+                            Percentual de empresas que implementaram inovações de produto e/ou
                             processo, segundo as atividades selecionadas da indústria, do setor de eletricidade e gás e dos
-                            serviços</h5>
+                            serviços
+                        </h5>
                         <canvas id="inovacao"></canvas>
                     </div>
                 </div>
@@ -111,7 +119,7 @@
         {% endblock %}
         <!-- tables list -->
         {% block tables %}
-                {% comment %} 
+            {% comment %}
                 <div class="row my-5">
                     <div class="col-md-13">
                         <h3 class="fs-4 mb-3">Recursos Aplicados</h3>
@@ -198,7 +206,7 @@
                         </div>
                     </div>
                 </div>
-                 {% endcomment %}
+            {% endcomment %}
         {% endblock %}
     </div>
     <script>
@@ -223,9 +231,7 @@
                   {% endfor %}
               ],
               labels: [
-                {% for ano in recurso_aplicado_anos %}
-                      {{ano}}
-                  {% endfor %}
+                {% for ano in recurso_aplicado_anos %}{{ano}}{% endfor %}
                 ],
             },
           }
@@ -246,9 +252,7 @@
                   {% endfor %}
               ],
               labels: [
-                {% for ano in rh_anos %}
-                      {{ano}}
-                  {% endfor %}
+                {% for ano in rh_anos %}                      {{ano}}{% endfor %}
                ],
             }
           });
@@ -271,9 +275,7 @@
                     },
               ],
               labels: [
-                {% for ano in bolsas_anos %}
-                      {{ano}}
-                  {% endfor %}
+                {% for ano in bolsas_anos %}                      {{ano}}{% endfor %}
                ],
             }
           });
@@ -293,9 +295,7 @@
                   {% endfor %}
               ],
               labels: [
-                {% for ano in patentes_anos %}
-                      {{ano}}
-                  {% endfor %}
+                {% for ano in patentes_anos %}                      {{ano}}{% endfor %}
                 ],
             },
           }
@@ -325,13 +325,11 @@
                     },
               ],
               labels: [
-                {% for ano in inovacao_anos %}
-                      {{ano}}
-                  {% endfor %}
+                {% for ano in inovacao_anos %}                      {{ano}}{% endfor %}
                ],
             }
           });
         
           
-        </script>
+    </script>
 {% endblock %}
