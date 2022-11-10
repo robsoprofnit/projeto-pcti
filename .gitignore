@@ -1,3 +1,4 @@
 /pcti/cadastros/migrations/
 /pcti/db.sqlite3
 venv/
+__pycache__/
