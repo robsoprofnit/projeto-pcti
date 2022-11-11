@@ -18,11 +18,11 @@
                                     </div>
                                 </div>
                                 <select id="inputState" class="form-control" required id="ano" name="ano">
-                                    <option selected value="">
+                                    <option value="">
                                         Escolha um ano
                                     </option>
                                     {% for ano in filtro_anos %}
-                                        <option value="{{ ano.id }}">
+                                        <option {% if ano_selecionado == ano %}selected{% endif %} value="{{ ano.id }}">
                                             {{ ano }}
                                         </option>
                                     {% endfor %}
@@ -42,11 +42,11 @@
                                         required
                                         id="instituicao"
                                         name="instituicao">
-                                    <option selected value="">
+                                    <option value="">
                                         Escolha uma instituição
                                     </option>
                                     {% for instituicao in filtro_instituicoes %}
-                                        <option value="{{ instituicao.id }}">
+                                        <option {% if instituicao_selecionada == instituicao %}selected{% endif %} value="{{ instituicao.id }}">
                                             {{ instituicao }}
                                         </option>
                                     {% endfor %}
