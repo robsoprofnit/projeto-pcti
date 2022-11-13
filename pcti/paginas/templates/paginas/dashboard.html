@@ -262,7 +262,24 @@
         {% endblock %}
     </div>
     <script>
-        const colors = ["red", "blue", "green", "orange", "gray", "purple", "yellow"]
+        const colors = [
+            'rgba(255,99,132,0.7)',
+            'rgba(255, 159, 64, 0.7)',
+            'rgba(255, 205, 86, 0.7)',
+            'rgba(75, 192, 192, 0.7)',
+            'rgba(54, 162, 235, 0.7)',
+            'rgba(153, 102, 255, 0.7)',
+            'rgba(201, 203, 207, 0.7)'
+        ]
+        const bcolors = [
+            'rgb(255, 99, 132)',
+      'rgb(255, 159, 64)',
+      'rgb(255, 205, 86)',
+      'rgb(75, 192, 192)',
+      'rgb(54, 162, 235)',
+      'rgb(153, 102, 255)',
+      'rgb(201, 203, 207)'
+        ]
         var recurso_aplicado = document.getElementById("recurso_aplicado").getContext("2d");
         var rh = document.getElementById("rh").getContext("2d");
         var bolsas = document.getElementById("bolsas").getContext("2d");
@@ -279,7 +296,7 @@
                             align: "start",
                             data: [{{resposta.resposta}}],
                             label: "{{resposta.id_variavel.nome|safe}}",
-                            borderColor: [colors[{{ forloop.counter0 }}]],
+                            borderColor: [bcolors[{{ forloop.counter0 }}]],
                             backgroundColor: [colors[{{ forloop.counter0 }}]],
                             borderWidth: 1,
                             borderRadius: 20,
@@ -339,7 +356,7 @@
                     {
                       data: [{{bolsas_53}}],
                       label: "{{nome_53}}",
-                      borderColor: [colors[0]],
+                      borderColor: [bcolors[0]],
                       backgroundColor: [colors[0]],
                         borderWidth: 1,
                         borderRadius: 20,
@@ -348,7 +365,7 @@
                     {
                         data: [{{bolsas_54}}],
                         label: "{{nome_54}}",
-                        borderColor: [colors[1]],
+                        borderColor: [bcolors[1]],
                         backgroundColor: [colors[1]],
                         borderWidth: 1,
                         borderRadius: 20,
@@ -378,7 +395,7 @@
                       align: "start",
                       data: [{{resposta.resposta}}],
                       label: "{{resposta.id_variavel.nome|safe}}",
-                      borderColor: [colors[{{ forloop.counter0 }}]],
+                      borderColor: [bcolors[{{ forloop.counter0 }}]],
                       backgroundColor: [colors[{{ forloop.counter0 }}]],
                           borderWidth: 1,
                           borderRadius: 20,
@@ -407,7 +424,7 @@
                     {
                       data: [{{inovacao_empresas}}],
                       label: "{{inovacao_nome_empresas}}",
-                      borderColor: [colors[0]],
+                      borderColor: [bcolors[0]],
                       backgroundColor: [colors[0]],
                         borderWidth: 1,
                         borderRadius: 20,
@@ -416,7 +433,7 @@
                     {
                         data: [{{inovacao_produto_processo}}],
                         label: "{{inovacao_nome_produto_processo}}",
-                        borderColor: [colors[1]],
+                        borderColor: [bcolors[1]],
                         backgroundColor: [colors[1]],
                         borderWidth: 1,
                         borderRadius: 20,
@@ -425,7 +442,7 @@
                     {
                         data: [{{inovacao_produto}}],
                         label: "{{inovacao_nome_produto}}",
-                        borderColor: [colors[2]],
+                        borderColor: [bcolors[2]],
                         backgroundColor: [colors[2]],
                         borderWidth: 1,
                         borderRadius: 20,
@@ -434,7 +451,7 @@
                     {
                         data: [{{inovacao_processo}}],
                         label: "{{inovacao_nome_processo}}",
-                        borderColor: [colors[3]],
+                        borderColor: [bcolors[3]],
                         backgroundColor: [colors[3]],
                         borderWidth: 1,
                         borderRadius: 20,
@@ -462,7 +479,7 @@
                     {
                       data: [{{soma_thompson_brasil}}],
                       label: "{{thompson_nome_brasil}}",
-                      borderColor: [colors[0]],
+                      borderColor: [bcolors[0]],
                       backgroundColor: [colors[0]],
                         borderWidth: 1,
                         borderRadius: 20,
@@ -471,7 +488,7 @@
                     {
                         data: [{{soma_thompson_latina}}],
                         label: "{{thompson_nome_latina}}",
-                        borderColor: [colors[1]],
+                        borderColor: [bcolors[1]],
                         backgroundColor: [colors[1]],
                         borderWidth: 1,
                         borderRadius: 20,
@@ -480,7 +497,7 @@
                     {
                         data: [{{soma_thompson_mundo}}],
                         label: "{{thompson_nome_mundo}}",
-                        borderColor: [colors[2]],
+                        borderColor: [bcolors[2]],
                         backgroundColor: [colors[2]],
                         borderWidth: 1,
                         borderRadius: 20,
@@ -490,7 +507,7 @@
                     {
                         data: [{{soma_scopus_brasil}}],
                         label: "{{scopus_nome_brasil}}",
-                        borderColor: [colors[3]],
+                        borderColor: [bcolors[3]],
                         backgroundColor: [colors[3]],
                         borderWidth: 1,
                         borderRadius: 20,
@@ -499,7 +516,7 @@
                     {
                         data: [{{soma_scopus_latina}}],
                         label: "{{scopus_nome_latina}}",
-                        borderColor: [colors[4]],
+                        borderColor: [bcolors[4]],
                         backgroundColor: [colors[4]],
                         borderWidth: 1,
                         borderRadius: 20,
@@ -508,7 +525,7 @@
                     {
                         data: [{{soma_scopus_mundo}}],
                         label: "{{scopus_nome_mundo}}",
-                        borderColor: [colors[5]],
+                        borderColor: [bcolors[5]],
                         backgroundColor: [colors[5]],
                         borderWidth: 1,
                         borderRadius: 20,
