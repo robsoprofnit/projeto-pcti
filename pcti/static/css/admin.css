@@ -1108,6 +1108,7 @@ pre code {
   .col-md-5 {
     flex: 0 0 41.6666666667%;
     max-width: 41.6666666667%;
+    border: 1px #808080;
   }
 
   .col-md-6 {
