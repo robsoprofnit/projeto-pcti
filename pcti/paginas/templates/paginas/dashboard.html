@@ -124,47 +124,47 @@
                 <div class="row my-5">
                     <div class="col-md-5">
                         <h4 style="text-align: center">Recursos Aplicados</h4>
+                        <canvas id="recurso_aplicado"></canvas>
                         <h5 style="text-align:justify">
                             Dispêndios dos governos estaduais em ciência e tecnologia (C&T)
                             por atividade
                         </h5>
-                        <canvas id="recurso_aplicado"></canvas>
                     </div>
                     <div class="col-md-5">
                         <h4 style="text-align: center">Recursos Humanos</h4>
+                        <canvas id="rh"></canvas>
                         <h5 style="text-align: justify">
                             Total de pessoas envolvidas em pesquisa e desenvolvimento (P&D)
                             (pesquisadores + pessoal de apoio), em número de pessoas, por setor institucional
                         </h5>
-                        <canvas id="rh"></canvas>
                     </div>
                     <div class="col-md-5">
                         <h4 style="text-align: center">Bolsa Formação</h4>
-                        <h5 style="text-align: justify">CNPq - Total de bolsas/ano concedidas no país e no exterior</h5>
                         <canvas id="bolsas"></canvas>
+                        <h5 style="text-align: justify">CNPq - Total de bolsas/ano concedidas no país e no exterior</h5>
                     </div>
                     <div class="col-md-5">
                         <h4 style="text-align: center">Produção Científica</h4>
+                        <canvas id="prodcien"></canvas>
                         <h5 style="text-align: justify">
                             Número de artigos brasileiros indexados pela Scopus e percentual em
                             relação ao mundo
                         </h5>
-                        <canvas id="prodcien"></canvas>
                     </div>
                     <div class="col-md-5">
                         <h4 style="text-align: center">Patentes</h4>
+                        <canvas id="patentes"></canvas>
                         <h5 style="text-align: justify">
                             Pedidos de patentes depositados no Instituto Nacional da
                             Propriedade Industrial (INPI), segundo tipos de patentes
                         </h5>
-                        <canvas id="patentes"></canvas>
                     </div>
                     <div class="col-md-5">
                         <h4 style="text-align: center">Inovação</h4>
+                        <canvas id="inovacao"></canvas>
                         <h5 style="text-align: justify">
                             Total de empresas e empresas que implementaram inovações de produto e/ou processo, segundo as atividades selecionadas da indústria, do setor de eletricidade e gás e dos serviços
                         </h5>
-                        <canvas id="inovacao"></canvas>
                     </div>
                 </div>
             </div>
@@ -273,43 +273,58 @@
         new Chart(recurso_aplicado, {
             type: "bar",
             data: {
-              datasets: [
-                  {% for resposta in recurso_aplicado %}
-                      {
-                      align: "start",
-                      data: [{{resposta.resposta}}],
-                      label: "{{resposta.id_variavel.nome|safe}}",
-                      borderColor: [colors[{{ forloop.counter0 }}]],
-                      backgroundColor: [colors[{{ forloop.counter0 }}]],
-                      },
-                  {% endfor %}
-              ],
-              labels: [
-                {% for ano in recurso_aplicado_anos %}{{ano}}{% endfor %}
+                datasets: [
+                    {% for resposta in recurso_aplicado %}
+                        {
+                            align: "start",
+                            data: [{{resposta.resposta}}],
+                            label: "{{resposta.id_variavel.nome|safe}}",
+                            borderColor: [colors[{{ forloop.counter0 }}]],
+                            backgroundColor: [colors[{{ forloop.counter0 }}]],
+                        },
+                    {% endfor %}
+                ],
+                labels: [
+                    {% for ano in recurso_aplicado_anos %}{{ano}}{% endfor %}
                 ],
             },
-          }
-        );
+            options: {
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        align: 'start',
+                    }
+                }
+            },
+        });
           
         new Chart(rh, {
             type: "bar",
             data: {
-              datasets: [
-                  {% for resposta in rh %}
-                      {
-                      align: "start",
-                      data: [{{resposta.resposta}}],
-                      label: "{{resposta.id_variavel.nome|safe}}",
-                      borderColor: [colors[{{ forloop.counter0 }}]],
-                      backgroundColor: [colors[{{ forloop.counter0 }}]],
-                      },
-                  {% endfor %}
-              ],
-              labels: [
-                {% for ano in rh_anos %}                      {{ano}}{% endfor %}
-               ],
-            }
-          });
+                datasets: [
+                    {% for resposta in rh %}
+                        {
+                            align: "start",
+                            data: [{{resposta.resposta}}],
+                            label: "{{resposta.id_variavel.nome|safe}}",
+                            borderColor: [colors[{{ forloop.counter0 }}]],
+                            backgroundColor: [colors[{{ forloop.counter0 }}]],
+                        },
+                    {% endfor %}
+                ],
+                labels: [
+                    {% for ano in rh_anos %}                      {{ano}}{% endfor %}
+                ],
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        align: 'start',
+                    }
+                }
+            },
+        });
 
           new Chart(bolsas, {
             type: "bar",
@@ -331,7 +346,15 @@
               labels: [
                 {% for ano in bolsas_anos %}                      {{ano}}{% endfor %}
                ],
-            }
+            },
+              options: {
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        align: 'start',
+                    }
+                }
+            },
           });
 
           new Chart(patentes, {
@@ -352,8 +375,15 @@
                 {% for ano in patentes_anos %}                      {{ano}}{% endfor %}
                 ],
             },
-          }
-        );
+          options: {
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        align: 'start',
+                    }
+                }
+            },
+          });
 
         new Chart(inovacao, {
             type: "bar",
@@ -387,7 +417,15 @@
               labels: [
                 {% for ano in inovacao_anos %}                      {{ano}}{% endfor %}
                ],
-            }
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        align: 'start',
+                    }
+                }
+            },
           });
 
           new Chart(prodcien, {
@@ -435,7 +473,15 @@
               labels: [
                 {% for ano in prod_cienc_anos %}{{ano}}{% endfor %}
                ],
-            }
+            },
+              options: {
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        align: 'start',
+                    }
+                }
+            },
           });
         
           
