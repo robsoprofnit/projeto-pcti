@@ -116,6 +116,9 @@
                 </div>-->
                 <h2>Instituição: {{ instituicao_selecionada }}</h2>
                 <h3>Ano: {{ ano_selecionado }}</h3>
+                <a id="add-link" href="{% url 'export-to-csv' %}">
+                    <div class="add-div">Exportar dados para arquivo CSV</div>
+                </a>
             </div>
         {% endblock %}
         <!-- charts -->
