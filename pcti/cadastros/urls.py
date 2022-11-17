@@ -36,4 +36,6 @@ urlpatterns = [
     path('listar/dimensao/', DimensaoList.as_view(), name='listar-dimensao'),
     path('listar/instituicao/', InstituicaoList.as_view(), name='listar-instituicao'),
     path('listar/responsavel/', ResponsavelList.as_view(), name='listar-responsavel'),
+
+    path('export/', export_to_csv, name='export-to-csv'),
 ]

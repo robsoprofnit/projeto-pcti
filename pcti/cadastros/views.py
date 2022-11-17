@@ -12,6 +12,9 @@ from .forms import RepostaForm
 from django.contrib import messages
 from django.shortcuts import redirect
 
+import csv
+from django.http import HttpResponse
+
 
 # Create your views here.
 
@@ -455,3 +458,28 @@ class ResponsavelList(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
     model = Responsavel_instituicao
     template_name = 'cadastros/listas/responsavel.html'
+
+
+# Generate Text File List
+def export_to_csv(request):
+    response = HttpResponse(
+        content_type='text/csv',
+        headers={'Content-Disposition': 'attachment; filename="somefilename.csv"'},
+    )
+
+    # Create a csv writer
+    writer = csv.writer(response)
+
+    # Designate the model
+    respostas = Respostas.objects.all()
+
+    # Add columns headings to the csv file
+    writer.writerow(['id_ano_base', 'id_pessoa_juridica', 'id_dimensao', 'id_indicador', 'id_variavel', 'id_relatorio',
+                     'resposta'])
+
+    # Loop thu and output
+    for resposta in respostas:
+        writer.writerow([resposta.id_ano_base, resposta.id_pessoa_juridica, resposta.id_dimensao, resposta.id_indicador,
+                         resposta.id_variavel, resposta.id_relatorio, resposta.resposta])
+
+    return response
