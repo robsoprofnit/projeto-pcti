@@ -464,11 +464,11 @@ class ResponsavelList(LoginRequiredMixin, ListView):
 def export_to_csv(request):
     response = HttpResponse(
         content_type='text/csv',
-        headers={'Content-Disposition': 'attachment; filename="somefilename.csv"'},
+        headers={'Content-Disposition': 'attachment; filename="picti_data.csv"'},
     )
 
     # Create a csv writer
-    writer = csv.writer(response)
+    writer = csv.writer(response, delimiter=';')
 
     # Designate the model
     respostas = Respostas.objects.all()
@@ -477,7 +477,7 @@ def export_to_csv(request):
     writer.writerow(['id_ano_base', 'id_pessoa_juridica', 'id_dimensao', 'id_indicador', 'id_variavel', 'id_relatorio',
                      'resposta'])
 
-    # Loop thu and output
+    # Loop through and output
     for resposta in respostas:
         writer.writerow([resposta.id_ano_base, resposta.id_pessoa_juridica, resposta.id_dimensao, resposta.id_indicador,
                          resposta.id_variavel, resposta.id_relatorio, resposta.resposta])
