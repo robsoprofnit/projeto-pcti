@@ -64,72 +64,68 @@
                         {% endblock %}
 
                         <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'inicio' %}">
-                                <i class="fa fa-home" aria-hidden="true"></i>
-                                Início
-                            </a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'inicio' %}">
+                                    <i class="fa fa-home" aria-hidden="true"></i>
+                                    Início
+                                </a>
+                            </li>
 
-                        {% if request.user.is_authenticated %}
-                        <li class="nav-item ">
-                            <a class="nav-link" href="{% url 'manager' %}">
-                                <i class="fas fa-tasks" aria-hidden="true"></i>
-                                Gestão
-                            </a>
-                        </li>
-                        {% endif %}
+                            {% if request.user.is_authenticated %}
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{% url 'manager' %}">
+                                    <i class="fas fa-tasks" aria-hidden="true"></i>
+                                    Gestão
+                                </a>
+                            </li>
+                            {% endif %}
 
-                        <li class="nav-item ">
-                            <a class="nav-link" href="{% url 'sobre' %}">
-                                <i class="fa fa-info-circle" aria-hidden="true"></i>
-                                Sobre
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="#">
-                                <i class="fa fa-question-circle" aria-hidden="true"></i>
-                                Ajuda
-                            </a>
-                        </li>
-                    </ul>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{% url 'sobre' %}">
+                                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                    Sobre
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="#">
+                                    <i class="fa fa-question-circle" aria-hidden="true"></i>
+                                    Ajuda
+                                </a>
+                            </li>
+                        </ul>
 
-                    <ul class="navbar-nav">
+                        <ul class="navbar-nav">
 
-                        {% if request.user.is_authenticated %}
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdownMenuLink"
-                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-user me-2" aria-hidden="true"></i>
-                                <span id="username">{{ request.user }}</span>
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="{% url 'atualizar-dados' %}">Meus Dados</a></li>
-                                <li><a class="dropdown-item" href="#">Alterar Senha</a></li>
-                                <li><a class="dropdown-item" href="{% url 'logout' %}">Sair</a></li>
-                            </ul>
-                        </li>
-                        {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'registrar' %}">
-                                <i class="fa fa-user-plus" aria-hidden="true"></i>
-                                Registrar
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="{% url 'login' %}">
-                                <i class="fa fa-sign-in" aria-hidden="true"></i>
-                                Login
-                            </a>
-                        </li>
-                        {% endif %}
-
-                    </ul>
-                
-
-
+                            {% if request.user.is_authenticated %}
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdownMenuLink"
+                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-user me-2" aria-hidden="true"></i>
+                                        <span id="username">{{ request.user }}</span>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" href="{% url 'atualizar-dados' %}">Meus Dados</a></li>
+                                        <li><a class="dropdown-item" href="#">Alterar Senha</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'logout' %}">Sair</a></li>
+                                    </ul>
+                                </li>
+                            {% else %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'registrar' %}">
+                                        <i class="fa fa-user-plus" aria-hidden="true"></i>
+                                        Registrar
+                                    </a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="{% url 'login' %}">
+                                        <i class="fa fa-sign-in" aria-hidden="true"></i>
+                                        Login
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
                 </div>
-            </div>
             </nav>
         {% endblock %}
     </div>
