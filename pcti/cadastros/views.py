@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.utils.datetime_safe import datetime
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 from django.urls import reverse_lazy, reverse
@@ -14,6 +15,7 @@ from django.shortcuts import redirect
 
 import csv
 from django.http import HttpResponse
+from paginas.views import dashboard
 
 
 # Create your views here.
@@ -462,9 +464,10 @@ class ResponsavelList(LoginRequiredMixin, ListView):
 
 # Generate Text File List
 def export_to_csv(request):
+    filename = "{}-picti-export.csv".format(datetime.now().replace(microsecond=0).isoformat())
     response = HttpResponse(
         content_type='text/csv',
-        headers={'Content-Disposition': 'attachment; filename="picti_data.csv"'},
+        headers={'Content-Disposition': 'attachment; filename="{}"'.format(filename)},
     )
 
     # Create a csv writer
@@ -472,6 +475,9 @@ def export_to_csv(request):
 
     # Designate the model
     respostas = Respostas.objects.all()
+
+    # Filter model
+    # filter = dashboard(request.GET, queryset=respostas).qs
 
     # Add columns headings to the csv file
     writer.writerow(['id_ano_base', 'id_pessoa_juridica', 'id_dimensao', 'id_indicador', 'id_variavel', 'id_relatorio',
