@@ -93,3 +93,11 @@
     margin-left: -15rem;
   }
 }
+
+.col-md-5 {
+  border: 1px solid #808080;
+  border-radius: 10px;
+  background-color: #FFFFFF;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
