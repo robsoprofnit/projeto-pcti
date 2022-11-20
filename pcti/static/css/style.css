@@ -27,14 +27,6 @@
 
 #wrapper {
   overflow-x: hidden;
-  background-image: linear-gradient(
-    to right,
-    #bae6f3,
-    #c2e7f5,
-    #cbebf7,
-    #d4f7f8,
-    #ddfaf8
-  );
 }
 
 #sidebar-wrapper {
