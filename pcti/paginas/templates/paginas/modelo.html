@@ -37,17 +37,27 @@
     {% block styles %}
         <link href="{% static 'css/style.css' %}" rel="stylesheet">
     {% endblock %}
+
 </head>
-<body>
-    {% block menutopo %}
-        {% include 'paginas/navbar.html' %}
-    {% endblock %}
-    <div class="d-flex flex-column" id="wrapper">
-        <br/>
-        {% block conteudo %}
-            Conteúdo da página
+<body class="d-flex flex-column h-100">
+    <header>
+        {% block menutopo %}
+            {% include 'paginas/navbar.html' %}
         {% endblock %}
-    </div>
+    </header>
+    <main class="flex-shrink-0">
+        <div class="d-flex flex-column" id="wrapper">
+            <br/>
+            {% block conteudo %}
+                Conteúdo da página
+            {% endblock %}
+        </div>
+    </main>
+    <footer class="text-center mt-auto mb-auto bg-light">
+        {% block footer %}
+            <p class="text-muted">&copy; 2022 Projeto de mestrado PROFNIT/UNIFAP</p>
+        {% endblock %}
+    </footer>
 
     <!-- /#page-content-wrapper -->
 
