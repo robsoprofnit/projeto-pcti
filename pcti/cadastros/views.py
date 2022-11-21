@@ -464,6 +464,10 @@ class ResponsavelList(LoginRequiredMixin, ListView):
 
 # Generate Text File List
 def export_to_csv(request):
+    context = {}
+    ano = Ano_base.objects.first()
+    instituicao = Pessoa_juridica.objects.get(id=1)
+
     filename = "{}-picti-export.csv".format(datetime.now().replace(microsecond=0).isoformat())
     response = HttpResponse(
         content_type='text/csv',
@@ -474,7 +478,10 @@ def export_to_csv(request):
     writer = csv.writer(response, delimiter=';')
 
     # Designate the model
-    respostas = Respostas.objects.all()
+    respostas = Respostas.objects.filter(
+        id_ano_base=ano,
+        id_pessoa_juridica=instituicao,
+    )
 
     # Filter model
     # filter = dashboard(request.GET, queryset=respostas).qs
