@@ -477,6 +477,12 @@ def export_to_csv(request):
     # Create a csv writer
     writer = csv.writer(response, delimiter=';')
 
+    if request.method == "POST":
+        ano_id = request.POST.get("ano")
+        instituicao_id = request.POST.get("instituicao")
+        if ano and instituicao:
+            ano = Ano_base.objects.get(pk=ano_id)
+            instituicao = Pessoa_juridica.objects.get(pk=instituicao_id)
     # Designate the model
     respostas = Respostas.objects.filter(
         id_ano_base=ano,
