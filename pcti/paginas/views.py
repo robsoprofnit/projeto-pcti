@@ -1,4 +1,3 @@
-from tkinter import E
 from django.views.generic import TemplateView, ListView
 from .service import generate_dashboard_info
 from cadastros.models import Respostas
