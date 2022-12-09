@@ -17,6 +17,10 @@
   background-color: var(--main-bg-color);
 }
 
+.secondary-bg {
+  background-color: var(--second-bg-color);
+}
+
 .rounded-full {
   border-radius: 100%;
 }
